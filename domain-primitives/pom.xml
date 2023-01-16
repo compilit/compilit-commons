@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>compilit-framework</artifactId>
+    <groupId>com.compilit</groupId>
+    <version>${revision}</version>
+  </parent>
+
+  <artifactId>domain-primitives</artifactId>
+  <version>${revision}</version>
+
+  <name>Compilit domain primitives</name>
+  <description>A small package that takes away some boilerplate code when creating your own domain primitives.</description>
+  <url>https://github.com/compilit-org/compilit-domain-primitives</url>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>com.compilit</groupId>
+      <artifactId>validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.compilit</groupId>
+      <artifactId>core-api</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>

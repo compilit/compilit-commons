@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>compilit-framework</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>json-patch</artifactId>
+    <version>${revision}</version>
+
+    <name>Compilit JSON-patch</name>
+    <description>An implementation RFC 6902 from the IETF. It allows for fine-grained management of the actual allowed patch operations on an entity.
+        Instead of just blindly applying the entire json patch, it enables you to register specific allowed operations for a resource.
+    </description>
+    <url>https://github.com/compilit/compilit-json-patch</url>
+
+    <properties>
+        <jakarta.json-api.version>2.1.1</jakarta.json-api.version>
+        <json-patch.version>1.13</json-patch.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.json</groupId>
+            <artifactId>jakarta.json-api</artifactId>
+            <version>${jakarta.json-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.java-json-tools</groupId>
+            <artifactId>json-patch</artifactId>
+            <version>${json-patch.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.compilit</groupId>
+            <artifactId>core-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>
