@@ -1,14 +1,16 @@
 package com.compilit.validation.predicates;
 
+import static com.compilit.validation.api.Definitions.defineThatIt;
+import static com.compilit.validation.api.Verifications.verifyThat;
+import static com.compilit.validation.predicates.ObjectPredicate.contains;
+import static com.compilit.validation.predicates.ObjectPredicate.isA;
+import static com.compilit.validation.predicates.ObjectPredicate.isAn;
+import static com.compilit.validation.predicates.ObjectPredicate.isNotNull;
+
+import java.util.ArrayList;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import testutil.TestObject;
-
-import java.util.ArrayList;
-
-import static com.compilit.validation.api.Definitions.defineThatIt;
-import static com.compilit.validation.api.Verifications.verifyThat;
-import static com.compilit.validation.predicates.ObjectPredicate.*;
 
 
 class ObjectPredicateTests {
@@ -41,10 +43,16 @@ class ObjectPredicateTests {
     var otherObject = new TestObject();
     var rule = defineThatIt(isA(TestObject.class).where(TestObject::hasValues)).otherwiseReport(failureMessage);
     var rule2 = defineThatIt(isA(TestObject.class).where(TestObject::hasValues)).otherwiseReport(failureMessage);
-    Assertions.assertThat(verifyThat(actualObject).compliesWith(rule).and(rule2).orElseReturn(otherObject)).isEqualTo(otherObject);
-    Assertions.assertThat(verifyThat(actualObject).compliesWith(rule).and(rule2).orElseReturn(otherObject)).isNotEqualTo(actualObject);
-    Assertions.assertThat(verifyThat(actualObject).compliesWith(rule).and(rule2).orElseReturn(x -> otherObject)).isNotEqualTo(actualObject);
-    Assertions.assertThat(verifyThat(actualObject).compliesWith(rule).and(rule2).orElseReturn(TestObject::new).getMessage()).contains(failureMessage);
+    Assertions.assertThat(verifyThat(actualObject).compliesWith(rule).and(rule2).orElseReturn(otherObject))
+              .isEqualTo(otherObject);
+    Assertions.assertThat(verifyThat(actualObject).compliesWith(rule).and(rule2).orElseReturn(otherObject))
+              .isNotEqualTo(actualObject);
+    Assertions.assertThat(verifyThat(actualObject).compliesWith(rule).and(rule2).orElseReturn(x -> otherObject))
+              .isNotEqualTo(actualObject);
+    Assertions.assertThat(verifyThat(actualObject).compliesWith(rule)
+                                                  .and(rule2)
+                                                  .orElseReturn(TestObject::new)
+                                                  .getMessage()).contains(failureMessage);
   }
 
   @Test
@@ -80,7 +88,7 @@ class ObjectPredicateTests {
     var list = new ArrayList<String>();
     list.add(value);
     var rule = defineThatIt(contains(value)).otherwiseReport("failure");
-    Assertions.assertThat(verifyThat((Object)list).compliesWith(rule).validate()).isTrue();
+    Assertions.assertThat(verifyThat((Object) list).compliesWith(rule).validate()).isTrue();
   }
 
   @Test
@@ -89,6 +97,6 @@ class ObjectPredicateTests {
     var list = new ArrayList<String>();
     list.add(value);
     var rule = defineThatIt(contains(list)).otherwiseReport("failure");
-    Assertions.assertThat(verifyThat((Object)list).compliesWith(rule).validate()).isTrue();
+    Assertions.assertThat(verifyThat((Object) list).compliesWith(rule).validate()).isTrue();
   }
 }

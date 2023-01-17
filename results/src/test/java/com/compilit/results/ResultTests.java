@@ -5,39 +5,39 @@ import static com.compilit.results.testutil.TestValue.TEST_MESSAGE;
 import com.compilit.results.assertions.ResultAssertions;
 import com.compilit.results.testutil.TestValue;
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
 class ResultTests {
+
   @Test
   void resultOf_SuccessfulRunnable_shouldReturnSuccessResult() {
     var result = Result.resultOf(() -> System.out.println(TestValue.TEST_CONTENT));
     ResultAssertions.assertThat(result).isValidSuccessResult()
-            .isEmpty();
+                    .isEmpty();
   }
 
   @Test
   void resultOf_ExceptionalRunnable_shouldReturnSuccessResult() {
     var result = Result.resultOf(() -> System.out.println(TestValue.TEST_CONTENT));
     ResultAssertions.assertThat(result).isValidSuccessResult()
-            .isEmpty();
+                    .isEmpty();
   }
 
   @Test
   void resultOf_SuccessfulPredicate_shouldReturnSuccessResult() {
     var result = Result.resultOf(x -> true, null);
     ResultAssertions.assertThat(result).isValidSuccessResult()
-            .isEmpty();
+                    .isEmpty();
   }
 
   @Test
   void resultOf_UnsuccessfulPredicate_shouldReturnUnprocessableResult() {
     var result = Result.resultOf(x -> false, null);
     ResultAssertions.assertThat(result).isValidUnsuccessfulResult()
-            .isEmpty();
+                    .isEmpty();
   }
 
   @Test
@@ -59,8 +59,8 @@ class ResultTests {
     Supplier<String> supplier = () -> TestValue.TEST_CONTENT;
     var result = Result.resultOf(supplier);
     ResultAssertions.assertThat(result)
-            .isValidSuccessResult()
-            .containsContent(TestValue.TEST_CONTENT);
+                    .isValidSuccessResult()
+                    .containsContent(TestValue.TEST_CONTENT);
   }
 
   @Test
@@ -105,7 +105,7 @@ class ResultTests {
     var result = Result.success(TestValue.TEST_CONTENT);
     var actual = Result.<Integer>transform(result);
     ResultAssertions.assertThat(actual).isEmpty()
-            .isValidSuccessResult();
+                    .isValidSuccessResult();
   }
 
   @Test
@@ -119,7 +119,7 @@ class ResultTests {
     var actual = Result.combine(resultOne).with(resultTwo).and(resultThree).merge();
 
     ResultAssertions.assertThat(actual).isValidSuccessResult()
-            .hasContent();
+                    .hasContent();
     Assertions.assertThat(actual.getContents(x -> x.orElse(new ArrayList<>())).size()).isEqualTo(3);
   }
 
@@ -134,7 +134,7 @@ class ResultTests {
     var actual = Result.combine(resultOne).with(resultTwo).and(resultThree).merge();
 
     ResultAssertions.assertThat(actual).isValidUnsuccessfulResult()
-            .isEmpty();
+                    .isEmpty();
   }
 
   @Test
@@ -148,7 +148,7 @@ class ResultTests {
     var actual = Result.combine(resultOne).with(resultTwo).and(resultThree).sum();
 
     ResultAssertions.assertThat(actual).isValidSuccessResult()
-            .isEmpty();
+                    .isEmpty();
   }
 
   @Test
@@ -182,7 +182,7 @@ class ResultTests {
     var actual = Result.combine(resultOne).with(resultTwo).and(resultThree).sum();
 
     ResultAssertions.assertThat(actual).isValidUnsuccessfulResult()
-            .isEmpty();
+                    .isEmpty();
   }
 
 }

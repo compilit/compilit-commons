@@ -1,10 +1,10 @@
 package com.compilit.validation.api;
 
+import static testutil.TestValue.TEST_CONTENT;
+
 import com.compilit.validation.predicates.StringPredicate;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static testutil.TestValue.TEST_CONTENT;
 
 class VerificationsTests {
 

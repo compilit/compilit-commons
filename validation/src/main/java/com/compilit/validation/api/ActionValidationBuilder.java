@@ -32,7 +32,8 @@ public interface ActionValidationBuilder<T> {
   ReturningValidationBuilder<T> andThen(Consumer<T> consumer);
 
   /**
-   * Same as validate(); but returns a custom object in the form of a function to operate on the tested value and return another.
+   * Same as validate(); but returns a custom object in the form of a function to operate on the tested value and return
+   * another.
    *
    * @param function the function that should be performed after successful validation.
    * @param <R>      the return value of the function.

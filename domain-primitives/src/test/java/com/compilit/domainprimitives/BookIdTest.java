@@ -9,9 +9,9 @@ public class BookIdTest {
 
   @ParameterizedTest
   @ValueSource(strings = {
-      "1234567890:abcde",
-      "9999999999:defga",
-      "0000000000:pihsa"
+    "1234567890:abcde",
+    "9999999999:defga",
+    "0000000000:pihsa"
   })
   void ctor_validBookId_shouldNotThrowException(String value) {
     Assertions.assertThatNoException().isThrownBy(() -> new BookId(value));
@@ -19,9 +19,9 @@ public class BookIdTest {
 
   @ParameterizedTest
   @ValueSource(strings = {
-      "123456789:abcde",
-      "someweirdId:123455",
-      ""
+    "123456789:abcde",
+    "someweirdId:123455",
+    ""
   })
   void ctor_invalidBookId_shouldThrowException(String value) {
     Assertions.assertThatThrownBy(() -> new BookId(value))

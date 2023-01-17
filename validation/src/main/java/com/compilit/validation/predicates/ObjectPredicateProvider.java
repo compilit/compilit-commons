@@ -23,8 +23,8 @@ public interface ObjectPredicateProvider<T> {
   }
 
   /**
-   * @param clazz the class of the object to validate. This is only a compiler flag to be able to treat T as
-   *              its instance.
+   * @param clazz the class of the object to validate. This is only a compiler flag to be able to treat T as its
+   *              instance.
    * @param <T>   the type upon which the validations are tested.
    * @return GenericPredicateRule to continue adding rules.
    */
@@ -33,8 +33,8 @@ public interface ObjectPredicateProvider<T> {
   }
 
   /**
-   * @param clazz the class of the object to validate. This is only a compiler flag to be able to treat T as
-   *              its instance.
+   * @param clazz the class of the object to validate. This is only a compiler flag to be able to treat T as its
+   *              instance.
    * @param <T>   the type upon which the validations are tested.
    * @return GenericPredicateRule to continue adding rules.
    */
@@ -65,6 +65,10 @@ public interface ObjectPredicateProvider<T> {
 
   default Predicate<T> contains(Object value, Object... values) {
     return ObjectPredicate.contains(value, values);
+  }
+
+  default Predicate<T> containsOnly(Object value, Object... values) {
+    return ObjectPredicate.containsOnly(value, values);
   }
 
   default Predicate<T> doesNotContain(Object value, Object... values) {

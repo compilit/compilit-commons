@@ -3,7 +3,7 @@ package com.compilit.validation.predicates;
 import java.util.function.Predicate;
 
 final class NumberConstraintAppender<T extends Number>
-        implements ConstraintAppender<T, Predicate<T>> {
+  implements ConstraintAppender<T, Predicate<T>> {
 
   private final T first;
 
@@ -12,8 +12,7 @@ final class NumberConstraintAppender<T extends Number>
   }
 
   /**
-   * @param second second of the constraints. Can be either the high constraint or the low
-   *               constraint.
+   * @param second second of the constraints. Can be either the high constraint or the low constraint.
    * @return Predicate to continue adding rules.
    */
   @Override

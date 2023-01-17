@@ -1,7 +1,6 @@
 package com.compilit.validation.api;
 
 import com.compilit.core.api.validation.Rule;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -103,8 +102,8 @@ class Subject<T> implements Validator {
     for (final var biRuleDefinition : dualInputRuleDefinitions) {
       if (!biRuleDefinition.test(value, argument)) {
         stringBuilder.append(BROKEN_RULE_PREFIX)
-                .append(biRuleDefinition.getMessage())
-                .append("\n");
+                     .append(biRuleDefinition.getMessage())
+                     .append("\n");
         isValid = false;
       }
     }

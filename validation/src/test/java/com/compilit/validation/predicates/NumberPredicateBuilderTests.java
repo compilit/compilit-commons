@@ -1,13 +1,18 @@
 package com.compilit.validation.predicates;
 
+import static com.compilit.validation.api.Definitions.defineThatIt;
+import static com.compilit.validation.api.Verifications.verifyThat;
+import static com.compilit.validation.predicates.NumberPredicate.isAnIntegerBetween;
+import static com.compilit.validation.predicates.NumberPredicate.isAnIntegerContaining;
+import static com.compilit.validation.predicates.NumberPredicate.isAnIntegerEqualTo;
+import static com.compilit.validation.predicates.NumberPredicate.isAnIntegerNotContaining;
+import static com.compilit.validation.predicates.NumberPredicate.isAnIntegerNotEqualTo;
+import static com.compilit.validation.predicates.NumberPredicate.isAnIntegerWithAmountOfDigits;
+import static com.compilit.validation.predicates.NumberPredicate.isNotNull;
+
 import com.compilit.validation.api.Verifications;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static com.compilit.validation.api.Definitions.defineThatIt;
-import static com.compilit.validation.api.Verifications.verifyThat;
-import static com.compilit.validation.predicates.NumberPredicate.*;
-import static com.compilit.validation.predicates.ObjectPredicate.contains;
 
 class NumberPredicateBuilderTests {
 
@@ -23,8 +28,8 @@ class NumberPredicateBuilderTests {
     var rule5 = defineThatIt(isAnIntegerNotContaining(43, 123)).otherwiseReport("failure");
     var rule6 = defineThatIt(isNotNull()).otherwiseReport("failure");
     var rule7 = defineThatIt(isAnIntegerEqualTo(2)
-            .and(isAnIntegerEqualTo(2)
-                    .and(isAnIntegerEqualTo(2)))).otherwiseReport("failure");
+                               .and(isAnIntegerEqualTo(2)
+                                      .and(isAnIntegerEqualTo(2)))).otherwiseReport("failure");
     var rule8 = defineThatIt(isAnIntegerNotEqualTo(1)).otherwiseReport("failure");
     var rule9 = defineThatIt(isAnIntegerWithAmountOfDigits(1)).otherwiseReport("failure");
     Assertions.assertThat(verifyThat(value).compliesWith(rule0).validate()).isTrue();
@@ -50,8 +55,8 @@ class NumberPredicateBuilderTests {
     var rule5 = defineThatIt(isAnIntegerNotContaining(2, 2)).otherwiseReport("failure");
     var rule6 = defineThatIt(isNotNull()).otherwiseReport("failure");
     var rule7 = defineThatIt(isAnIntegerEqualTo(2)
-            .and(isAnIntegerEqualTo(2)
-                    .and(isAnIntegerEqualTo(1)))).otherwiseReport("failure");
+                               .and(isAnIntegerEqualTo(2)
+                                      .and(isAnIntegerEqualTo(1)))).otherwiseReport("failure");
     var rule8 = defineThatIt(isAnIntegerNotEqualTo(2)).otherwiseReport("failure");
     var rule9 = defineThatIt(isAnIntegerWithAmountOfDigits(10)).otherwiseReport("failure");
     Assertions.assertThat(verifyThat(value).compliesWith(rule0).validate()).isFalse();
@@ -70,16 +75,18 @@ class NumberPredicateBuilderTests {
   void validate_dualInputTests() {
     var value = 123456789;
     var rule1 = defineThatIt(isAnIntegerContaining(1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 23, 789)).otherwiseReport("failure");
-    var rule2 = defineThatIt(isAnIntegerContaining(10,
-            11,
-            22,
-            33,
-            44,
-            55,
-            66,
-            77,
-            88,
-            9999)).otherwiseReport("failure");
+    var rule2 = defineThatIt(isAnIntegerContaining(
+      10,
+      11,
+      22,
+      33,
+      44,
+      55,
+      66,
+      77,
+      88,
+      9999
+    )).otherwiseReport("failure");
     Assertions.assertThat(verifyThat(value).compliesWith(rule1).validate()).isTrue();
     Assertions.assertThat(verifyThat(value).compliesWith(rule2).validate()).isFalse();
   }

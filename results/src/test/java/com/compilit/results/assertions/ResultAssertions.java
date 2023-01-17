@@ -1,8 +1,8 @@
 package com.compilit.results.assertions;
 
+import com.compilit.results.Result;
 import com.compilit.results.ResultStatus;
 import org.assertj.core.api.AbstractAssert;
-import com.compilit.results.Result;
 
 public class ResultAssertions<T> extends AbstractAssert<ResultAssertions<T>, Result<T>> {
 
@@ -37,10 +37,6 @@ public class ResultAssertions<T> extends AbstractAssert<ResultAssertions<T>, Res
       failWithMessage("Expected Result to be UNAUTHORIZED");
     }
     return this;
-  }
-
-  public static <T> ResultAssertions<T> assertThat(Result<T> actual) {
-    return new ResultAssertions<>(actual);
   }
 
   public ResultAssertions<T> isValidSuccessResult() {
@@ -79,9 +75,11 @@ public class ResultAssertions<T> extends AbstractAssert<ResultAssertions<T>, Res
       failWithMessage("Expected Result to have content but was empty");
     }
     if (!actual.getContents().get().equals(content)) {
-      failWithMessage("Expected Result to have content equal to %s but was %s",
-              content,
-              actual.getContents());
+      failWithMessage(
+        "Expected Result to have content equal to %s but was %s",
+        content,
+        actual.getContents()
+      );
     }
     return this;
   }
@@ -95,11 +93,17 @@ public class ResultAssertions<T> extends AbstractAssert<ResultAssertions<T>, Res
 
   public ResultAssertions<T> containsMessage(String message) {
     if (!actual.getMessage().equals(message)) {
-      failWithMessage("Expected Result to have a message equal to %s but was %s",
-              message,
-              actual.getMessage());
+      failWithMessage(
+        "Expected Result to have a message equal to %s but was %s",
+        message,
+        actual.getMessage()
+      );
     }
     return this;
+  }
+
+  public static <T> ResultAssertions<T> assertThat(Result<T> actual) {
+    return new ResultAssertions<>(actual);
   }
 
 }

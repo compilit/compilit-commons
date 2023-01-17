@@ -1,5 +1,16 @@
 package com.compilit.validation.predicates;
 
+import static com.compilit.validation.api.Definitions.defineThatIt;
+import static com.compilit.validation.api.Verifications.verifyThat;
+import static com.compilit.validation.predicates.DecimalNumberPredicate.isADecimalNumberBetween;
+import static com.compilit.validation.predicates.DecimalNumberPredicate.isADecimalNumberContaining;
+import static com.compilit.validation.predicates.DecimalNumberPredicate.isADecimalNumberContainingOnly;
+import static com.compilit.validation.predicates.DecimalNumberPredicate.isADecimalNumberEqualTo;
+import static com.compilit.validation.predicates.DecimalNumberPredicate.isADecimalNumberNotContaining;
+import static com.compilit.validation.predicates.DecimalNumberPredicate.isADecimalNumberNotEqualTo;
+import static com.compilit.validation.predicates.DecimalNumberPredicate.isNotNull;
+import static com.compilit.validation.predicates.DecimalNumberPredicate.isNull;
+
 import com.compilit.core.api.validation.Rule;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
@@ -7,10 +18,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import static com.compilit.validation.api.Definitions.defineThatIt;
-import static com.compilit.validation.api.Verifications.verifyThat;
-import static com.compilit.validation.predicates.DecimalNumberPredicate.*;
 
 class DecimalNumberPredicateBuilderTests {
 
@@ -58,28 +65,32 @@ class DecimalNumberPredicateBuilderTests {
   @Test
   void validate_dualInputTests() {
     var value = .123456789;
-    var rule1 = defineThatIt(isADecimalNumberContaining(1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            12,
-            23,
-            789)).otherwiseReport("I am error");
-    var rule2 = defineThatIt(isADecimalNumberContaining(10,
-            11,
-            22,
-            33,
-            44,
-            55,
-            66,
-            77,
-            88,
-            9999)).otherwiseReport("I am error");
+    var rule1 = defineThatIt(isADecimalNumberContaining(
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12,
+      23,
+      789
+    )).otherwiseReport("I am error");
+    var rule2 = defineThatIt(isADecimalNumberContaining(
+      10,
+      11,
+      22,
+      33,
+      44,
+      55,
+      66,
+      77,
+      88,
+      9999
+    )).otherwiseReport("I am error");
     Assertions.assertThat(verifyThat(value).compliesWith(rule1).validate()).isTrue();
     Assertions.assertThat(verifyThat(value).compliesWith(rule2).validate()).isFalse();
   }

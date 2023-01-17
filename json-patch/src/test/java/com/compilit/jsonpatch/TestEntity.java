@@ -1,34 +1,37 @@
 package com.compilit.jsonpatch;
 
+import com.compilit.core.api.annotations.Patchable;
 import jakarta.json.JsonPatch.Operation;
 import java.util.List;
 
 class TestEntity implements PatchableEntity {
-    @Patchable(allow = Operation.REPLACE)
-    private String testField;
 
-    @Patchable(allow = {Operation.ADD, Operation.REMOVE})
-    private List<String> testCollection;
+  @Patchable(allow = Operation.REPLACE)
+  private String testField;
 
-    public TestEntity() {}
-    public TestEntity(String testField, List<String> testCollection) {
-        this.testField = testField;
-        this.testCollection = testCollection;
-    }
+  @Patchable(allow = {Operation.ADD, Operation.REMOVE})
+  private List<String> testCollection;
 
-    public String getTestField() {
-        return testField;
-    }
+  public TestEntity() {}
 
-    public void setTestField(String testField) {
-        this.testField = testField;
-    }
+  public TestEntity(String testField, List<String> testCollection) {
+    this.testField = testField;
+    this.testCollection = testCollection;
+  }
 
-    public List<String> getTestCollection() {
-        return testCollection;
-    }
+  public String getTestField() {
+    return testField;
+  }
 
-    public void setTestCollection(List<String> testCollection) {
-        this.testCollection = testCollection;
-    }
+  public void setTestField(String testField) {
+    this.testField = testField;
+  }
+
+  public List<String> getTestCollection() {
+    return testCollection;
+  }
+
+  public void setTestCollection(List<String> testCollection) {
+    this.testCollection = testCollection;
+  }
 }

@@ -1,15 +1,25 @@
 package com.compilit.validation.predicates;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+import static com.compilit.validation.api.Definitions.defineThatIt;
+import static com.compilit.validation.api.Verifications.verifyThat;
+import static com.compilit.validation.predicates.CollectionPredicate.isACollectionContaining;
+import static com.compilit.validation.predicates.CollectionPredicate.isACollectionContainingAll;
+import static com.compilit.validation.predicates.CollectionPredicate.isACollectionNotContaining;
+import static com.compilit.validation.predicates.CollectionPredicate.isACollectionNotContainingAll;
+import static com.compilit.validation.predicates.CollectionPredicate.isAListContaining;
+import static com.compilit.validation.predicates.CollectionPredicate.isAListContainingAll;
+import static com.compilit.validation.predicates.CollectionPredicate.isAListNotContaining;
+import static com.compilit.validation.predicates.CollectionPredicate.isAListNotContainingAll;
+import static com.compilit.validation.predicates.CollectionPredicate.isAnEmptyCollectionOf;
+import static com.compilit.validation.predicates.CollectionPredicate.isAnEmptyList;
+import static com.compilit.validation.predicates.CollectionPredicate.isNotAnEmptyCollection;
+import static com.compilit.validation.predicates.CollectionPredicate.isNotAnEmptyList;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import static com.compilit.validation.api.Definitions.defineThatIt;
-import static com.compilit.validation.api.Verifications.verifyThat;
-import static com.compilit.validation.predicates.CollectionPredicate.*;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class CollectionPredicateTests {
 

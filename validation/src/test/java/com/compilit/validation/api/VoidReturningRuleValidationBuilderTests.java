@@ -28,7 +28,8 @@ class VoidReturningRuleValidationBuilderTests extends AbstractTestWithContext {
   void orElseThrow_invalid_shouldReturnVoid() {
     var subject = new Subject<>(new RuleDefinition<>(x -> false, FAIL_MESSAGE), "test");
     var validator = new VoidRuleValidatorBuilder<>(subject, super::interact);
-    Assertions.assertThatThrownBy(() -> validator.orElseThrow(RuntimeException::new)).isInstanceOf(RuntimeException.class);
+    Assertions.assertThatThrownBy(() -> validator.orElseThrow(RuntimeException::new))
+              .isInstanceOf(RuntimeException.class);
     Assertions.assertThat(hasBeenInteractedWith()).isFalse();
   }
 

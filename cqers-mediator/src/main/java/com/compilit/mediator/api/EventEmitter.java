@@ -1,8 +1,8 @@
 package com.compilit.mediator.api;
 
 /**
- * EventEmitter are the main interactors to emit Events from. Events are 'fire and forget'
- * notifications from actions that have already occurred.
+ * EventEmitter are the main interactors to emit Events from. Events are 'fire and forget' notifications from actions
+ * that have already occurred.
  *
  * @see Event
  */

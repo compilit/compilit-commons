@@ -2,13 +2,10 @@ package com.compilit.domainprimitives.testutil;
 
 import static com.compilit.validation.api.Definitions.defineThatIt;
 import static com.compilit.validation.predicates.ObjectPredicate.isA;
-import static com.compilit.validation.predicates.StringPredicate.isNotNull;
 import static com.compilit.validation.predicates.StringPredicate.isNotNullEmptyOrBlank;
 
 import com.compilit.core.api.validation.Rule;
-import java.util.Objects;
 import com.compilit.domainprimitives.DomainPrimitive;
-import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class BookId extends DomainPrimitive<String> {

@@ -4,7 +4,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-final class ReturningRuleValidationBuilder<T, R> extends AbstractLoggingValidator<T> implements ReturningValidationBuilder<R> {
+final class ReturningRuleValidationBuilder<T, R> extends AbstractLoggingValidator<T>
+  implements ReturningValidationBuilder<R> {
 
   private final Supplier<R> supplier;
 

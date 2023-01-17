@@ -1,2 +1,3 @@
 # compilit-core
-The core package for all Compilit libraries and frameworks
+
+The core package containing the shared APIs and basic functionality for all Compilit libraries

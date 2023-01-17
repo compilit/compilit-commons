@@ -1,7 +1,6 @@
 package com.compilit.validation.api;
 
 import com.compilit.core.api.validation.Rule;
-
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 

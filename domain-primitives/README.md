@@ -1,17 +1,21 @@
 # compilit-domain-primitives
+
 A simple package containing a base class that enables you to create domain primitives.
-It enables you to avoid the use of possibly unvalidated primitive values in your domain entities. Essentially a domain primitive cannot exist if its related business logic fails.
+It enables you to avoid the use of possibly unvalidated primitive values in your domain entities. Essentially a domain
+primitive cannot exist if its related business logic fails.
 Something like this should be the heart of every domain entity out there.
 
 # Installation
 
 Get this dependency with the latest version
+
 ```xml
     <dependency>
       <artifactId>compilit-domain-primitives</artifactId>
       <groupId>com.compilit</groupId>
     </dependency>
 ```
+
 # Usage
 
 To best explain the usage of a valid domain primitive I'll create a little user story.
@@ -23,6 +27,7 @@ To best explain the usage of a valid domain primitive I'll create a little user 
 *BookId format: {10-digit-number}:{5-letter-code}
 
 Let's first write some tests:
+
 ```java
 public class BookIdTest {
 
@@ -51,6 +56,7 @@ public class BookIdTest {
 ```
 
 And now I'll implement this domain primitive:
+
 ```java
 public class BookId extends DomainPrimitive<String> {
 
@@ -73,8 +79,11 @@ public class BookId extends DomainPrimitive<String> {
 
 }
 ```
+
 ### Tip
-The compilit-validation package works really nice to define and validate the business rules related to domain primitives. Here is a little example based on the previous one:
+
+The compilit-validation package works really nice to define and validate the business rules related to domain
+primitives. Here is a little example based on the previous one:
 
 ```java
 public class BookId extends DomainPrimitive<String> {

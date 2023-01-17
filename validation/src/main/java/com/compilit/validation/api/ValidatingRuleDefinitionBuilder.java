@@ -1,10 +1,9 @@
 package com.compilit.validation.api;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class ValidatingRuleDefinitionBuilder<T> implements ValidatingRuleBuilder {
 

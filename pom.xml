@@ -1,30 +1,234 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.compilit</groupId>
   <artifactId>compilit-framework</artifactId>
-  <version>${revision}</version>
-<!--  <version>${revision}${sha1}${changelist}</version>-->
-  <packaging>pom</packaging>
 
-  <name>Compilit framework pom</name>
-  <description>The framework consists of several useful implementations of often needed techniques and technologies</description>
-  <url>https://github.com/compilit/compilit-framework</url>
+  <build>
 
+    <plugins>
+
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <reuseForks>false</reuseForks>
+        </configuration>
+        <!-- 2.22.0+ Needed for Junit 5 Maven integration -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-surefire-plugin.version}</version>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>deploy</goal>
+            </goals>
+            <id>default-deploy</id>
+            <phase>deploy</phase>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-deploy-plugin.version}</version>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+          <localCheckout>true</localCheckout>
+          <mavenExecutorId>forked-path</mavenExecutorId>
+          <pushChanges>false</pushChanges>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <groupId>org.apache.maven.scm</groupId>
+            <version>${maven-scm-provider-gitexe.version}</version>
+          </dependency>
+        </dependencies>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-release-plugin.version}</version>
+      </plugin>
+
+      <plugin>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <configuration>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+          <serverId>ossrh</serverId>
+        </configuration>
+        <extensions>true</extensions>
+        <groupId>org.sonatype.plugins</groupId>
+        <version>${nexus-staging-maven-plugin.version}</version>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <id>attach-sources</id>
+          </execution>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <id>attach-javadoc</id>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-source-plugin.version}</version>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <id>attach-javadoc</id>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-javadoc-plugin.version}</version>
+      </plugin>
+
+    </plugins>
+
+  </build>
+  <dependencies>
+    <!-- test dependencies -->
+    <dependency>
+      <artifactId>assertj-core</artifactId>
+      <groupId>org.assertj</groupId>
+      <scope>test</scope>
+      <version>${assertj.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>mockito-core</artifactId>
+      <groupId>org.mockito</groupId>
+      <scope>test</scope>
+      <version>4.11.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Java extensions -->
+    <dependency>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <groupId>jakarta.annotation</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+    </dependency>
+
+  </dependencies>
+  <dependencyManagement>
+
+    <dependencies>
+
+      <dependency>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${spring-boot-dependencies.version}</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>core-api</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>functions</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>cryptography</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>domain-primitives</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>results</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>json-patch</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>cqers-mediator</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>validation</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>jakarta.json-api</artifactId>
+        <groupId>jakarta.json</groupId>
+        <version>${jakarta.json-api.version}</version>
+      </dependency>
+
+    </dependencies>
+
+  </dependencyManagement>
+  <!--  <version>${revision}${sha1}${changelist}</version>-->
+  <description>The framework consists of several useful implementations of often needed techniques and technologies
+  </description>
+
+  <developers>
+    <developer>
+      <email>harvey.rabbit@protonmail.com</email>
+      <id>harveytherabbit</id>
+      <name>Bastiën Bonsel</name>
+    </developer>
+  </developers>
   <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
     <repository>
       <id>ossrh</id>
       <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
+  <groupId>com.compilit</groupId>
 
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://github.com/compilit/compilit-framework/blob/main/LICENSE</url>
+    </license>
+  </licenses>
+
+  <modelVersion>4.0.0</modelVersion>
   <modules>
     <module>core-api</module>
     <module>domain-primitives</module>
@@ -35,288 +239,47 @@
     <module>results</module>
     <module>functions</module>
   </modules>
-  <properties>
-    <revision>0.1.0</revision>
-    <jdk.version>17</jdk.version>
-    <maven.compiler.source>${jdk.version}</maven.compiler.source>
-    <maven.compiler.target>${jdk.version}</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-    <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
-    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-    <maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
-    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
-    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-    <maven-sonar-plugin.version>3.9.1.2184</maven-sonar-plugin.version>
-    <jacoco.version>0.8.6</jacoco.version>
+  <name>Compilit framework pom</name>
 
-    <junit.jupiter.version>5.8.2</junit.jupiter.version>
-    <assertj.version>3.23.1</assertj.version>
-    <mockito.version>4.0.0</mockito.version>
-
-    <spring-boot-dependencies.version>3.0.1</spring-boot-dependencies.version>
-
-    <commons-lang3.version>3.12.0</commons-lang3.version>
-  </properties>
-
-  <licenses>
-    <license>
-      <name>MIT</name>
-      <url>https://github.com/compilit/compilit-framework/blob/main/LICENSE</url>
-    </license>
-  </licenses>
-
-  <developers>
-    <developer>
-      <id>harveytherabbit</id>
-      <name>Bastiën Bonsel</name>
-      <email>harvey.rabbit@protonmail.com</email>
-    </developer>
-  </developers>
-
-  <scm>
-    <connection>scm:git@github.com:compilit/compilit-framework.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-framework.git</developerConnection>
-    <url>https://github.com/compilit/compilit-framework</url>
-  </scm>
-
-  <dependencies>
-    <!-- test dependencies -->
-    <dependency>
-      <artifactId>assertj-core</artifactId>
-      <groupId>org.assertj</groupId>
-      <scope>test</scope>
-      <version>${assertj.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>4.11.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>junit-jupiter</artifactId>
-      <groupId>org.junit.jupiter</groupId>
-      <scope>test</scope>
-      <version>${junit.jupiter.version}</version>
-    </dependency>
-    <dependency>
-      <artifactId>junit-jupiter-params</artifactId>
-      <groupId>org.junit.jupiter</groupId>
-      <scope>test</scope>
-      <version>${junit.jupiter.version}</version>
-    </dependency>
-
-    <!-- Java extensions -->
-    <dependency>
-      <artifactId>jakarta.annotation-api</artifactId>
-      <groupId>jakarta.annotation</groupId>
-    </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-
-  </dependencies>
-
-  <dependencyManagement>
-
-    <dependencies>
-
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring-boot-dependencies.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>com.compilit</groupId>
-        <artifactId>core-api</artifactId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.compilit</groupId>
-        <artifactId>functions</artifactId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.compilit</groupId>
-        <artifactId>cryptography</artifactId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.compilit</groupId>
-        <artifactId>domain-primitives</artifactId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.compilit</groupId>
-        <artifactId>results</artifactId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.compilit</groupId>
-        <artifactId>json-patch</artifactId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.compilit</groupId>
-        <artifactId>cqers-mediator</artifactId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.compilit</groupId>
-        <artifactId>validation</artifactId>
-        <version>${revision}</version>
-      </dependency>
-
-    </dependencies>
-
-  </dependencyManagement>
-
-  <build>
-
-    <plugins>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <!-- 2.22.0+ Needed for Junit 5 Maven integration -->
-        <version>${maven-surefire-plugin.version}</version>
-        <configuration>
-          <reuseForks>false</reuseForks>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>${maven-deploy-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>default-deploy</id>
-            <phase>deploy</phase>
-            <goals>
-              <goal>deploy</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>${maven-release-plugin.version}</version>
-        <configuration>
-          <localCheckout>true</localCheckout>
-          <pushChanges>false</pushChanges>
-          <mavenExecutorId>forked-path</mavenExecutorId>
-          <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.maven.scm</groupId>
-            <artifactId>maven-scm-provider-gitexe</artifactId>
-            <version>${maven-scm-provider-gitexe.version}</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>${nexus-staging-maven-plugin.version}</version>
-        <extensions>true</extensions>
-        <configuration>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>true</autoReleaseAfterClose>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>${maven-source-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>attach-javadoc</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>${maven-javadoc-plugin.version}</version>
-        <configuration>
-          <encoding>UTF-8</encoding>
-        </configuration>
-        <executions>
-          <execution>
-            <id>attach-javadoc</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-    </plugins>
-
-  </build>
+  <packaging>pom</packaging>
 
   <profiles>
 
     <profile>
-      <id>report-code-quality</id>
       <build>
         <plugins>
           <plugin>
-            <groupId>org.sonarsource.scanner.maven</groupId>
             <artifactId>sonar-maven-plugin</artifactId>
+            <groupId>org.sonarsource.scanner.maven</groupId>
             <version>${maven-sonar-plugin.version}</version>
           </plugin>
           <plugin>
-            <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>${jacoco.version}</version>
             <executions>
               <execution>
-                <id>prepare-agent</id>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
+                <id>prepare-agent</id>
               </execution>
               <execution>
-                <id>report</id>
                 <goals>
                   <goal>report</goal>
                 </goals>
+                <id>report</id>
                 <phase>test</phase>
               </execution>
             </executions>
+            <groupId>org.jacoco</groupId>
+            <version>${jacoco.version}</version>
           </plugin>
         </plugins>
       </build>
+      <id>report-code-quality</id>
     </profile>
 
     <profile>
-      <id>release-sign-artifacts</id>
       <activation>
         <property>
           <name>performRelease</name>
@@ -326,26 +289,66 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>${maven-gpg-plugin.version}</version>
             <executions>
               <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
                 <configuration>
                   <keyname>${gpg.keyname}</keyname>
                   <passphraseServerId>${gpg.keyname}</passphraseServerId>
                 </configuration>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
               </execution>
             </executions>
+            <groupId>org.apache.maven.plugins</groupId>
+            <version>${maven-gpg-plugin.version}</version>
           </plugin>
         </plugins>
       </build>
+      <id>release-sign-artifacts</id>
     </profile>
 
   </profiles>
+
+  <properties>
+    <assertj.version>3.24.1</assertj.version>
+    <commons-lang3.version>3.12.0</commons-lang3.version>
+    <jacoco.version>0.8.6</jacoco.version>
+    <jdk.version>17</jdk.version>
+    <junit.jupiter.version>5.9.2</junit.jupiter.version>
+
+    <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+    <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
+    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+    <maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
+    <maven-sonar-plugin.version>3.9.1.2184</maven-sonar-plugin.version>
+    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
+    <maven.compiler.source>${jdk.version}</maven.compiler.source>
+    <maven.compiler.target>${jdk.version}</maven.compiler.target>
+
+    <mockito.version>4.0.0</mockito.version>
+    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <revision>0.1.0</revision>
+
+    <jakarta.json-api.version>2.1.1</jakarta.json-api.version>
+
+    <spring-boot-dependencies.version>3.0.1</spring-boot-dependencies.version>
+  </properties>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/compilit-framework.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-framework.git</developerConnection>
+    <url>https://github.com/compilit/compilit-framework</url>
+  </scm>
+
+  <url>https://github.com/compilit/compilit-framework</url>
+
+  <version>${revision}</version>
 </project>

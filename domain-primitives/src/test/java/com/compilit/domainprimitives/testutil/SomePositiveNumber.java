@@ -4,13 +4,13 @@ import com.compilit.domainprimitives.DomainPrimitive;
 
 public class SomePositiveNumber extends DomainPrimitive<Integer> {
 
-    public SomePositiveNumber(Integer value) {
-        super(value, SomePositiveNumber.class);
-    }
+  public SomePositiveNumber(Integer value) {
+    super(value, SomePositiveNumber.class);
+  }
 
-    @Override
-    protected boolean isValid(Integer value) {
-        return value >= 0;
-    }
+  @Override
+  protected boolean isValid(Integer value) {
+    return value >= 0;
+  }
 
 }

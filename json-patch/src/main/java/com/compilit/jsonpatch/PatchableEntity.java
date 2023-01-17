@@ -14,53 +14,55 @@ import java.util.List;
  */
 public interface PatchableEntity {
 
-    /**
-     * Default instance of PrePatchValidator which is used for the validation.
-     */
-    PrePatchValidator PATCH_VALIDATOR_INSTANCE = new PrePatchValidator();
-    /**
-     * Default instance of the ObjectMapper. It is used to deserialize the JsonPatch object in order to validate it.
-     */
-    ObjectMapper OBJECT_MAPPER_INSTANCE = new ObjectMapper();
+  /**
+   * Default instance of PrePatchValidator which is used for the validation.
+   */
+  PrePatchValidator PATCH_VALIDATOR_INSTANCE = new PrePatchValidator();
+  /**
+   * Default instance of the ObjectMapper. It is used to deserialize the JsonPatch object in order to validate it.
+   */
+  ObjectMapper OBJECT_MAPPER_INSTANCE = new ObjectMapper();
 
-    /**
-     * Apply the JsonPatch upon this instance of the PatchableEntity
-     * @param patch the actual patch definition contains all desired operations on this entity
-     * @return this as a PatchableEntity
-     * @throws JsonPatchException which needs to lead to a rollback of this transaction
-     */
-    default PatchableEntity apply(JsonPatch patch) throws JsonPatchException {
-        return apply(patch, getClass());
-    }
+  /**
+   * Apply the JsonPatch upon this instance of the PatchableEntity
+   *
+   * @param patch the actual patch definition contains all desired operations on this entity
+   * @return this as a PatchableEntity
+   * @throws JsonPatchException which needs to lead to a rollback of this transaction
+   */
+  default PatchableEntity apply(JsonPatch patch) throws JsonPatchException {
+    return apply(patch, getClass());
+  }
 
-    /**
-     * Apply the JsonPatch upon this instance of the PatchableEntity and specify the return type
-     * @param patch the actual patch definition contains all desired operations on this entity
-     * @param entityClass the underlying class of this PatchableEntity
-     * @param <T> the actual return type
-     * @return a PatchableEntity cast to the specified entityClass
-     * @throws JsonPatchException which needs to lead to a rollback of this transaction
-     */
-    default <T extends PatchableEntity> T apply(JsonPatch patch, Class<T> entityClass) throws JsonPatchException {
-        try {
-            var objectMapper = getObjectMapper();
-            String jsonPatchDTOSx = getObjectMapper().writeValueAsString(patch);
-            var mapType = new TypeReference<List<JsonPatchDTO>>() {};
-            List<JsonPatchDTO> jsonPatchDTOS = objectMapper.readValue(jsonPatchDTOSx, mapType);
-            PATCH_VALIDATOR_INSTANCE.validate(jsonPatchDTOS, this);
-            JsonNode patched = patch.apply(objectMapper.convertValue(this, JsonNode.class));
-            return objectMapper.treeToValue(patched, entityClass);
-        } catch (JsonProcessingException e) {
-            throw new JsonPatchException(e.getMessage());
-        }
+  /**
+   * Apply the JsonPatch upon this instance of the PatchableEntity and specify the return type
+   *
+   * @param patch       the actual patch definition contains all desired operations on this entity
+   * @param entityClass the underlying class of this PatchableEntity
+   * @param <T>         the actual return type
+   * @return a PatchableEntity cast to the specified entityClass
+   * @throws JsonPatchException which needs to lead to a rollback of this transaction
+   */
+  default <T extends PatchableEntity> T apply(JsonPatch patch, Class<T> entityClass) throws JsonPatchException {
+    try {
+      var objectMapper = getObjectMapper();
+      String jsonPatchDTOSx = getObjectMapper().writeValueAsString(patch);
+      var mapType = new TypeReference<List<JsonPatchDTO>>() {};
+      List<JsonPatchDTO> jsonPatchDTOS = objectMapper.readValue(jsonPatchDTOSx, mapType);
+      PATCH_VALIDATOR_INSTANCE.validate(jsonPatchDTOS, this);
+      JsonNode patched = patch.apply(objectMapper.convertValue(this, JsonNode.class));
+      return objectMapper.treeToValue(patched, entityClass);
+    } catch (JsonProcessingException e) {
+      throw new JsonPatchException(e.getMessage());
     }
+  }
 
-    /**
-     * @return the default ObjectMapper or your custom ObjectMapper when overridden.
-     */
-    @JsonIgnore
-    default ObjectMapper getObjectMapper() {
-        return OBJECT_MAPPER_INSTANCE;
-    }
+  /**
+   * @return the default ObjectMapper or your custom ObjectMapper when overridden.
+   */
+  @JsonIgnore
+  default ObjectMapper getObjectMapper() {
+    return OBJECT_MAPPER_INSTANCE;
+  }
 
 }

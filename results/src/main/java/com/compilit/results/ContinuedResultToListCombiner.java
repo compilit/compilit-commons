@@ -17,15 +17,15 @@ final class ContinuedResultToListCombiner<T> extends AbstractResultCombiner<T> i
   public Result<List<T>> merge() {
     var finalMessage = prepareMessage();
     return isSuccessful
-            ? Result.success(resultList)
-            : Result.unprocessable(finalMessage);
+           ? Result.success(resultList)
+           : Result.unprocessable(finalMessage);
   }
 
   public Result<T> sum() {
     var finalMessage = prepareMessage();
     return isSuccessful
-            ? Result.success()
-            : Result.unprocessable(finalMessage);
+           ? Result.success()
+           : Result.unprocessable(finalMessage);
   }
 
   private String prepareMessage() {

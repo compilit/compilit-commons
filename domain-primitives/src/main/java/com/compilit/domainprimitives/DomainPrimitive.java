@@ -2,8 +2,6 @@ package com.compilit.domainprimitives;
 
 import static com.compilit.validation.api.Verifications.verifyThat;
 
-import com.compilit.core.api.cryptography.Cryptographer;
-import com.compilit.core.api.security.User;
 import com.compilit.core.api.validation.Rule;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +15,9 @@ public abstract class DomainPrimitive<T> {
   private final List<Rule<T>> rules = new ArrayList<>();
 
   /**
-   * @param value the value of the domain primitive.
+   * @param value          the value of the domain primitive.
    * @param extendingClass the class that extends DomainPrimitive. Used to resolve the name.
-   * @param rules the rules you wish to define for the given value
+   * @param rules          the rules you wish to define for the given value
    */
   @SafeVarargs
   protected DomainPrimitive(T value, Class<?> extendingClass, Rule<T>... rules) {
@@ -28,7 +26,7 @@ public abstract class DomainPrimitive<T> {
 
   /**
    * @param value the value of the domain primitive
-   * @param name the actual name of the domain primitive. Usually the name of the extending class.
+   * @param name  the actual name of the domain primitive. Usually the name of the extending class.
    */
   @SafeVarargs
   protected DomainPrimitive(T value, String name, Rule<T>... rules) {
@@ -55,14 +53,6 @@ public abstract class DomainPrimitive<T> {
     }
   }
 
-  public T getValue() {
-    return value;
-  }
-
-  public String getName() {
-    return name;
-  }
-
   @Override
   public String toString() {
     return value.toString();
@@ -73,22 +63,23 @@ public abstract class DomainPrimitive<T> {
     return Objects.hash(value);
   }
 
-  public String getEncryptedValue(User user, Cryptographer cryptographer) {
-    return cryptographer.encrypt(String.valueOf(value), user);
+  public T getValue() {
+    return value;
   }
 
-  public String gerDecryptedValue(User user, Cryptographer cryptographer) {
-    return cryptographer.decrypt(String.valueOf(value), user);
+  public String getName() {
+    return name;
   }
 
   protected boolean isValid(T value) {
-     validateByRules(value);
-     return true;
+    validateByRules(value);
+    return true;
   }
 
   protected void validateByRules(T value) {
-    if (rules.isEmpty())
+    if (rules.isEmpty()) {
       throw new DomainPrimitiveException(getName(), value, "No rules were registered");
+    }
     verifyThat(getValue())
       .compliesWith(rules)
       .orElseThrow(message -> {

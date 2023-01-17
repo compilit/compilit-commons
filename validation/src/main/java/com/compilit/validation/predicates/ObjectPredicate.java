@@ -18,6 +18,11 @@ public class ObjectPredicate<T> implements Predicate<T>, PredicateAppender<T> {
     predicates.add(predicate);
   }
 
+  @Override
+  public boolean test(T value) {
+    return predicates.stream().allMatch(x -> x.test(value));
+  }
+
   /**
    * @param clazz the class of the object to validate. This is only a compiler flag to be able to treat T as its
    *              instance.
@@ -119,6 +124,20 @@ public class ObjectPredicate<T> implements Predicate<T>, PredicateAppender<T> {
     return new ObjectPredicate<>(itIsACollectionContainingOnlyAllowedValues.or(itContainsOnly(allowedValues)));
   }
 
+  /**
+   * @param value  the value of which you wish to check if it is not contained in the value under test.
+   * @param values the optional remaining values of which you wish to check if it is not contained in the value under
+   *               test.
+   * @param <T>    the type of the object under test.
+   * @return a predicate to continue adding predicates or to start your evaluation.
+   * @see ObjectPredicate#contains
+   */
+  public static <T> Predicate<T> doesNotContain(Object value, Object... values) {
+    Predicate<T> predicate = x -> true;
+    predicate = predicate.and(contains(value, values).negate());
+    return new ObjectPredicate<>(predicate);
+  }
+
   private static <T> Predicate<T> itContainsOnly(List<Object> allowedValues) {
     return input -> {
       var containsOnlyAllowedCharacters = true;
@@ -136,28 +155,11 @@ public class ObjectPredicate<T> implements Predicate<T>, PredicateAppender<T> {
   }
 
   private static <T> char[] getInputCharacters(T input) {
-    if (input instanceof Double) {
+    if (input instanceof Number) {
       return input.toString().replace(".", "").toCharArray();
-    } else return  input.toString().toCharArray();
-  }
-
-  /**
-   * @param value  the value of which you wish to check if it is not contained in the value under test.
-   * @param values the optional remaining values of which you wish to check if it is not contained in the value under
-   *               test.
-   * @param <T>    the type of the object under test.
-   * @return a predicate to continue adding predicates or to start your evaluation.
-   * @see ObjectPredicate#contains
-   */
-  public static <T> Predicate<T> doesNotContain(Object value, Object... values) {
-    Predicate<T> predicate = x -> true;
-    predicate = predicate.and(contains(value, values).negate());
-    return new ObjectPredicate<>(predicate);
-  }
-
-  @Override
-  public boolean test(T value) {
-    return predicates.stream().allMatch(x -> x.test(value));
+    } else {
+      return input.toString().toCharArray();
+    }
   }
 
   private static <T> Predicate<T> collectionContains(List<Object> allowedValues) {

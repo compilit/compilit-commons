@@ -1,14 +1,14 @@
 # compilit-json-patch
 
-An extended implementation RFC 6902 from the IETF (also see https://github.com/java-json-tools/json-patch 
-& https://jsonpatch.com/). It allows for fine-grained management of the actual allowed patch operations on an entity. 
+An extended implementation RFC 6902 from the IETF (also see https://github.com/java-json-tools/json-patch
+& https://jsonpatch.com/). It allows for fine-grained management of the actual allowed patch operations on an entity.
 To me, it seems to be rather dangerous to just accept any patch operation. Especially since some fields might be open to
 change from within your application, but should not be able to be mutated by an external client.
 
 This version relies on some external stuff to truly comply with the RFC. Namely, if a patch (batch)
 fails, it should be rolled back. This is no issue when performing a single Patch. However, when
-applying a list of Patches, you should always use Spring @Transactional or a comparable annotation
-to make sure that you get all or nothing. 
+applying a list of Patches, you should always use Spring @Transactional or a comparable functionality
+to make sure that you get all or nothing.
 
 ### Setup
 
@@ -22,21 +22,21 @@ specify which operations are allowed. Here is an example:
 
 ```java
 
-import com.compilit.jsonpatch.Patchable;
+import com.compilit.core.api.annotations.Patchable;
 import jakarta.json.JsonPatch.Operation;
 
 class ExampleEntity implements PatchableEntity {
 
-    @Patchable(allow = {Operation.REMOVE, Operation.REPLACE})
-    private String myPatchableField;
+  @Patchable(allow = {Operation.REMOVE, Operation.REPLACE})
+  private String myPatchableField;
 
-    public void setMyPatchableField(String newValue) {
-        this.myPatchableField = newValue;
-    }
+  public void setMyPatchableField(String newValue) {
+    this.myPatchableField = newValue;
+  }
 
-    public String getMyPatchableField() {
-        return this.myPatchableField;
-    }
+  public String getMyPatchableField() {
+    return this.myPatchableField;
+  }
 }
 ```
 
@@ -94,6 +94,7 @@ be at /animals/0. To add to the end of an array, use a hyphen (-) rather than an
 /animals/-.
 
 ### Custom ObjectMapper
+
 The library uses a default ObjectMapper to deserialize the original JsonPatch in order to validate it.
 When sending complex objects into the patch operation, for example objects containing Dates. One
 might want to consider adding their own configured ObjectMapper.

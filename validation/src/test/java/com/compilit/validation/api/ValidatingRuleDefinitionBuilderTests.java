@@ -21,7 +21,7 @@ class ValidatingRuleDefinitionBuilderTests {
 
     @Test
     void otherwiseReport_validInput_shouldReturnTrue() {
-      var underTest = new ValidatingRuleDefinitionBuilder.WithDualInput<>("test","test", (x, y) -> true);
+      var underTest = new ValidatingRuleDefinitionBuilder.WithDualInput<>("test", "test", (x, y) -> true);
       Assertions.assertThat(underTest.otherwiseReport("test")).isTrue();
     }
 

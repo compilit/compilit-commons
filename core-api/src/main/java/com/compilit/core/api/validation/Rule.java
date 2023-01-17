@@ -11,6 +11,7 @@ public interface Rule<T> extends Predicate<T> {
   String getMessage();
 
   interface WithDualInput<T> extends BiPredicate<T, Object> {
+
     /**
      * @return the message containing information about the validation. Default to 'Nothing to report'.
      */

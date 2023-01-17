@@ -3,18 +3,16 @@ package com.compilit.functions;
 import java.util.function.Predicate;
 
 /**
- * These functions are used to apply fuzzy matching to Strings. Meaning that the values need to
- * partially match conform the given percentage. It does this in three ways:
- * 1. It will check if there are sequences of characters matching between the two values.
- * 2. It will check if the total amount of matching characters.
- * 3. It will check the length of both values.
- * All of these checks have to match for at least the given match percentage,
- * or 80%, which is the default.
+ * These functions are used to apply fuzzy matching to Strings. Meaning that the values need to partially match conform
+ * the given percentage. It does this in three ways: 1. It will check if there are sequences of characters matching
+ * between the two values. 2. It will check if the total amount of matching characters. 3. It will check the length of
+ * both values. All of these checks have to match for at least the given match percentage, or 80%, which is the
+ * default.
  */
 public final class FuzzyMatchers {
 
   static final float MAX_PERCENTAGE = 100;
-  static final float DEFAULT_MATCHING_PERCENTAGE = 80;
+  static final float DEFAULT_MINIMAL_MATCHING_PERCENTAGE = 80;
 
   private FuzzyMatchers() {}
 
@@ -22,8 +20,7 @@ public final class FuzzyMatchers {
    * Case-sensitive fuzzy matching
    *
    * @param otherValue the second value to try to match
-   * @return a Predicate that returns true if both values match for at least 80% (the default
-   * matching percentage)
+   * @return a Predicate that returns true if both values match for at least 80% (the default matching percentage)
    */
   public static Predicate<String> fuzzyMatches(String otherValue) {
     return value -> fuzzyMatches(value, otherValue);
@@ -33,8 +30,7 @@ public final class FuzzyMatchers {
    * Case-insensitive fuzzy matching
    *
    * @param otherValue the second value to try to match
-   * @return a Predicate that returns true if both values match for at least 80% (the default
-   * matching percentage)
+   * @return a Predicate that returns true if both values match for at least 80% (the default matching percentage)
    */
   public static Predicate<String> fuzzyMatchesIgnoreCase(String otherValue) {
     return value -> fuzzyMatchesIgnoreCase(value, otherValue);
@@ -44,12 +40,11 @@ public final class FuzzyMatchers {
    * Case-sensitive fuzzy matching
    *
    * @param otherValue         the second value to try to match
-   * @param matchingPercentage the desired matching percentage between the two values
-   * @return a Predicate that returns true if both values match for at least the given matching
-   * percentage
+   * @param minimalMatchingPercentage the desired matching percentage between the two values
+   * @return a Predicate that returns true if both values match for at least the given matching percentage
    */
-  public static Predicate<String> fuzzyMatches(String otherValue, float matchingPercentage) {
-    return value -> fuzzyMatches(value, otherValue, matchingPercentage);
+  public static Predicate<String> fuzzyMatches(String otherValue, float minimalMatchingPercentage) {
+    return value -> fuzzyMatches(value, otherValue, minimalMatchingPercentage);
   }
 
   /**
@@ -60,7 +55,7 @@ public final class FuzzyMatchers {
    * @return true if both values match for at least 80% (the default matching percentage)
    */
   public static boolean fuzzyMatches(String value, String otherValue) {
-    return fuzzyMatches(value, otherValue, DEFAULT_MATCHING_PERCENTAGE);
+    return fuzzyMatches(value, otherValue, DEFAULT_MINIMAL_MATCHING_PERCENTAGE);
   }
 
 
@@ -72,7 +67,7 @@ public final class FuzzyMatchers {
    * @return true if both values match for at least 80% (the default matching percentage)
    */
   public static boolean fuzzyMatchesIgnoreCase(String value, String otherValue) {
-    return fuzzyMatchesIgnoreCase(value, otherValue, DEFAULT_MATCHING_PERCENTAGE);
+    return fuzzyMatchesIgnoreCase(value, otherValue, DEFAULT_MINIMAL_MATCHING_PERCENTAGE);
   }
 
   /**
@@ -80,21 +75,23 @@ public final class FuzzyMatchers {
    *
    * @param value              the first value to try to match
    * @param otherValue         the second value to try to match
-   * @param matchingPercentage the desired matching percentage between the two values
+   * @param minimalMatchingPercentage the desired matching percentage between the two values
    * @return true if both values match for at least the given matching percentage
    */
   public static boolean fuzzyMatchesIgnoreCase(
     String value,
     String otherValue,
-    float matchingPercentage
+    float minimalMatchingPercentage
   ) {
-    if (bothValuesAreNullOrEmpty(value, otherValue))
+    if (bothValuesAreNullOrEmpty(value, otherValue)) {
       return true;
-    if (oneValueIsNullOrEmpty(value, otherValue))
+    }
+    if (oneValueIsNullOrEmpty(value, otherValue)) {
       return false;
+    }
     value = value.toLowerCase();
     otherValue = otherValue.toLowerCase();
-    return fuzzyMatches(value, otherValue, matchingPercentage);
+    return fuzzyMatches(value, otherValue, minimalMatchingPercentage);
   }
 
   /**
@@ -102,37 +99,29 @@ public final class FuzzyMatchers {
    *
    * @param value              the first value to try to match
    * @param otherValue         the second value to try to match
-   * @param matchingPercentage the desired matching percentage between the two values
+   * @param minimalMatchingPercentage the desired matching percentage between the two values
    * @return true if both values match for at least the given matching percentage
    */
   public static boolean fuzzyMatches(
     String value,
     String otherValue,
-    float matchingPercentage
+    float minimalMatchingPercentage
   ) {
-    if (matchingPercentage > MAX_PERCENTAGE || matchingPercentage < 0) {
+    if (minimalMatchingPercentage > MAX_PERCENTAGE || minimalMatchingPercentage < 0) {
       throw new MatcherInputException("Matching percentage cannot be below 0 nor exceed 100");
     }
-    if (bothValuesAreNullOrEmpty(value, otherValue))
+    if (bothValuesAreNullOrEmpty(value, otherValue)) {
       return true;
-    if (oneValueIsNullOrEmpty(value, otherValue))
+    }
+    if (oneValueIsNullOrEmpty(value, otherValue)) {
       return false;
+    }
     float lengthMatchPercentage = getLengthMatchPercentage(value, otherValue);
     float charMatchPercentage = getCharMatchPercentage(value, otherValue);
     float charSequenceMatchPercentage = getCharSequenceMatchPercentage(value, otherValue);
-    return charSequenceMatchPercentage >= matchingPercentage
-      && charMatchPercentage >= matchingPercentage
-      && lengthMatchPercentage >= matchingPercentage;
-  }
-
-  private static boolean oneValueIsNullOrEmpty(String value, String otherValue) {
-    return (value == null || otherValue == null)
-      || (value.isEmpty() || otherValue.isEmpty());
-  }
-
-  private static boolean bothValuesAreNullOrEmpty(String value, String otherValue) {
-    return (value == null && otherValue == null)
-      || ((value != null && value.isEmpty()) && (otherValue != null && otherValue.isEmpty()));
+    return charSequenceMatchPercentage >= minimalMatchingPercentage
+      && charMatchPercentage >= minimalMatchingPercentage
+      && lengthMatchPercentage >= minimalMatchingPercentage;
   }
 
   /**
@@ -198,6 +187,16 @@ public final class FuzzyMatchers {
       lengthMatchPercentage -= multiply(percentageDivider, difference);
     }
     return lengthMatchPercentage;
+  }
+
+  private static boolean oneValueIsNullOrEmpty(String value, String otherValue) {
+    return (value == null || otherValue == null)
+      || (value.isEmpty() || otherValue.isEmpty());
+  }
+
+  private static boolean bothValuesAreNullOrEmpty(String value, String otherValue) {
+    return (value == null && otherValue == null)
+      || ((value != null && value.isEmpty()) && (otherValue != null && otherValue.isEmpty()));
   }
 
   private static float multiply(float percentageDivider, int difference) {

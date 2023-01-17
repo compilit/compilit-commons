@@ -46,8 +46,8 @@ abstract class AbstractResult<T> implements Result<T> {
     if (obj instanceof Result) {
       var result = (Result) obj;
       return resultStatus.equals(result.getResultStatus())
-          && getMessage().equals(result.getMessage())
-          && getContents().equals(getContents());
+        && getMessage().equals(result.getMessage())
+        && getContents().equals(getContents());
     }
     return false;
   }

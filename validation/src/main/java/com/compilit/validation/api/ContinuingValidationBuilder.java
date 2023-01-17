@@ -3,7 +3,8 @@ package com.compilit.validation.api;
 import com.compilit.core.api.validation.Rule;
 import java.util.function.Consumer;
 
-public interface ContinuingValidationBuilder<T> extends ActionValidationBuilder<T>, ReturningValidationBuilder<T>, LoggingValidator, Validator {
+public interface ContinuingValidationBuilder<T>
+  extends ActionValidationBuilder<T>, ReturningValidationBuilder<T>, LoggingValidator, Validator {
 
   /**
    * Connect your current predicate to another one.

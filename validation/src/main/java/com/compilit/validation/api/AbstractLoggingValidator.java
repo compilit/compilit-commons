@@ -24,8 +24,9 @@ abstract class AbstractLoggingValidator<T> implements LoggingValidator, Validato
     if (!isValid) {
       logger.error(subject.getMessage());
     }
-    if (isValid)
+    if (isValid) {
       subject.processIntermediateActions();
+    }
     return isValid;
   }
 

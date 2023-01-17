@@ -1,12 +1,11 @@
 package com.compilit.validation.api;
 
+import static com.compilit.validation.api.Subject.DEFAULT_MESSAGE;
+
 import com.compilit.core.api.validation.Rule;
+import java.util.ArrayList;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static com.compilit.validation.api.Subject.DEFAULT_MESSAGE;
 
 class ContinuingPredicateValidatorTests {
 
@@ -81,7 +80,8 @@ class ContinuingPredicateValidatorTests {
   void orElseThrow_invalid_shouldThrowException() {
     var subject = new Subject<>(new RuleDefinition<>(x -> false, "failure"), "test");
     var validation = new ContinuingRuleValidationBuilder<>(subject).andThen(() -> false);
-    Assertions.assertThatThrownBy(() -> validation.orElseThrow(RuntimeException::new)).isInstanceOf(RuntimeException.class);
+    Assertions.assertThatThrownBy(() -> validation.orElseThrow(RuntimeException::new))
+              .isInstanceOf(RuntimeException.class);
   }
 
   @Test

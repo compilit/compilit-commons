@@ -1,9 +1,8 @@
 package com.compilit.mediator.api;
 
 /**
- * A QueryDispatcher is a dedicated interface for sending Queries to the Mediator. A Mediator should
- * never be interacted with directly because you could never truly know that your code complies with
- * CQERS.
+ * A QueryDispatcher is a dedicated interface for sending Queries to the Mediator. A Mediator should never be interacted
+ * with directly because you could never truly know that your code complies with CQERS.
  *
  * @see Query
  */

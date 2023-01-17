@@ -6,8 +6,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.compilit</groupId>
       <artifactId>core-api</artifactId>
+      <groupId>com.compilit</groupId>
     </dependency>
     <dependency>
       <artifactId>spring-context</artifactId>

@@ -9,10 +9,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.compilit.results.assertions.ResultAssertions;
 import com.compilit.results.testutil.TestValue;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 public class ResultInterfaceTests {
@@ -45,14 +43,14 @@ public class ResultInterfaceTests {
   void getResultStatus_shouldReturnResultStatus() {
     assertThat(Result.success().getResultStatus()).isEqualTo(ResultStatus.SUCCESS);
     assertThat(Result.errorOccurred(TEST_MESSAGE).getResultStatus())
-              .isEqualTo(ResultStatus.ERROR_OCCURRED);
+      .isEqualTo(ResultStatus.ERROR_OCCURRED);
     assertThat(Result.success().getResultStatus())
-              .isEqualTo(ResultStatus.SUCCESS);
+      .isEqualTo(ResultStatus.SUCCESS);
     assertThat(Result.notFound().getResultStatus()).isEqualTo(ResultStatus.NOT_FOUND);
     assertThat(Result.unauthorized().getResultStatus())
-              .isEqualTo(ResultStatus.UNAUTHORIZED);
+      .isEqualTo(ResultStatus.UNAUTHORIZED);
     assertThat(Result.unprocessable().getResultStatus())
-              .isEqualTo(ResultStatus.UNPROCESSABLE);
+      .isEqualTo(ResultStatus.UNPROCESSABLE);
   }
 
   @Test
@@ -196,7 +194,7 @@ public class ResultInterfaceTests {
   void getContentsOrElseThrow_nullContents_shouldThrowException() {
     var errorResult = Result.errorOccurred(TEST_MESSAGE);
     assertThatThrownBy(errorResult::getContentsOrElseThrow).isInstanceOf(
-        ErrorOccurredException.class);
+      ErrorOccurredException.class);
   }
 
   @Test
@@ -209,7 +207,7 @@ public class ResultInterfaceTests {
   void getContentsOrElseThrow$Exception_nullContents_shouldThrowException() {
     var errorResult = Result.errorOccurred(TEST_MESSAGE);
     assertThatThrownBy(() -> errorResult.getContentsOrElseThrow(RuntimeException::new))
-        .isInstanceOf(RuntimeException.class);
+      .isInstanceOf(RuntimeException.class);
   }
 
   @Test

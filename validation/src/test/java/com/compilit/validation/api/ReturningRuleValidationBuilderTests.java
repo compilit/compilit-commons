@@ -1,13 +1,12 @@
 package com.compilit.validation.api;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
-
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 class ReturningRuleValidationBuilderTests {
 
@@ -30,7 +29,8 @@ class ReturningRuleValidationBuilderTests {
   void orElseThrow_invalidInput_shouldThrowGivenAException() {
     var subject = new Subject<>(new RuleDefinition<>(x -> false, "fail"), VALUE);
     var validator = new ReturningRuleValidationBuilder<>(subject, () -> VALUE);
-    Assertions.assertThatThrownBy(() -> validator.orElseThrow(RuntimeException::new)).isInstanceOf(RuntimeException.class);
+    Assertions.assertThatThrownBy(() -> validator.orElseThrow(RuntimeException::new))
+              .isInstanceOf(RuntimeException.class);
   }
 
 

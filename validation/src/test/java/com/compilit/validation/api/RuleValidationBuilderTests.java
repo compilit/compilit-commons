@@ -1,12 +1,11 @@
 package com.compilit.validation.api;
 
+import static testutil.TestValue.TEST_CONTENT;
+
 import com.compilit.core.api.validation.Rule;
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static testutil.TestValue.TEST_CONTENT;
 
 class RuleValidationBuilderTests {
 
@@ -14,14 +13,14 @@ class RuleValidationBuilderTests {
   void compliesWith_validInput_shouldReturnValidator() {
     var rule = new RuleDefinition<String>(x -> true, TEST_CONTENT);
     Assertions.assertThat(Verifications.verifyThat(TEST_CONTENT).compliesWith(rule))
-            .isInstanceOf(ContinuingValidationBuilder.class);
+              .isInstanceOf(ContinuingValidationBuilder.class);
   }
 
   @Test
   void compliesWith_invalidInput_shouldReturnValidator() {
     var rule = new RuleDefinition<String>(x -> false, TEST_CONTENT);
     Assertions.assertThat(Verifications.verifyThat(TEST_CONTENT).compliesWith(rule))
-            .isInstanceOf(ContinuingValidationBuilder.class);
+              .isInstanceOf(ContinuingValidationBuilder.class);
   }
 
   @Test
@@ -31,7 +30,7 @@ class RuleValidationBuilderTests {
     Rule<String> rule3 = new RuleDefinition<>(x -> true, TEST_CONTENT);
     var rules = List.of(rule1, rule2, rule3);
     Assertions.assertThat(Verifications.verifyThat(TEST_CONTENT).compliesWith(rules))
-            .isInstanceOf(ContinuingValidationBuilder.class);
+              .isInstanceOf(ContinuingValidationBuilder.class);
   }
 
   @Test
@@ -41,7 +40,7 @@ class RuleValidationBuilderTests {
     Rule<String> rule3 = new RuleDefinition<>(x -> true, TEST_CONTENT);
     var rules = List.of(rule1, rule2, rule3);
     Assertions.assertThat(Verifications.verifyThat(TEST_CONTENT).compliesWith(rules))
-            .isInstanceOf(ContinuingValidationBuilder.class);
+              .isInstanceOf(ContinuingValidationBuilder.class);
   }
 
 }

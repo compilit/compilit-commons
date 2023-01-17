@@ -11,7 +11,6 @@ public class CollectionPredicate {
 
   /**
    * @param clazz a compiler flag to tell the compiler what kind of items should be in the collection.
-   *
    * @return a predicate to continue adding predicates or to start the evaluation.
    */
   @SuppressWarnings("unused")
@@ -20,8 +19,7 @@ public class CollectionPredicate {
   }
 
   /**
-   * @param clazz a compiler flag to tell the compiler what kind of items should be in the
-   *              .
+   * @param clazz a compiler flag to tell the compiler what kind of items should be in the .
    * @return a predicate to continue adding predicates or to start the evaluation.
    */
   @SuppressWarnings("unused")
@@ -31,7 +29,6 @@ public class CollectionPredicate {
 
   /**
    * @param clazz a compiler flag to tell the compiler what kind of items should be in the list.
-   *
    * @return a predicate to continue adding predicates or to start the evaluation.
    */
   @SuppressWarnings("unused")
@@ -41,7 +38,6 @@ public class CollectionPredicate {
 
   /**
    * @param clazz a compiler flag to tell the compiler what kind of items should be in the list.
-   *
    * @return a predicate to continue adding predicates or to start the evaluation.
    */
   @SuppressWarnings("unused")
@@ -54,7 +50,7 @@ public class CollectionPredicate {
    * @return a predicate to continue adding predicates or to start the evaluation.
    */
   public static <T> Predicate<Collection<T>> isACollectionContaining(T entry) {
-     return x -> x.contains(entry);
+    return x -> x.contains(entry);
   }
 
   /**
@@ -82,32 +78,28 @@ public class CollectionPredicate {
   }
 
   /**
-   *
-   * @param  collection collection to be checked for containment in this collection
+   * @param collection collection to be checked for containment in this collection
    */
   public static <T> Predicate<Collection<T>> isACollectionContainingAll(Collection<T> collection) {
     return x -> x.containsAll(collection);
   }
 
   /**
-   *
-   * @param  collection collection to be checked for containment in this collection
+   * @param collection collection to be checked for containment in this collection
    */
   public static <T> Predicate<Collection<T>> isACollectionNotContainingAll(Collection<T> collection) {
     return isACollectionContainingAll(collection).negate();
   }
 
   /**
-   *
-   * @param  list list to be checked for containment in this collection
+   * @param list list to be checked for containment in this collection
    */
   public static <T> Predicate<List<T>> isAListContainingAll(List<T> list) {
     return x -> x.containsAll(list);
   }
 
   /**
-   *
-   * @param  list list to be checked for containment in this collection
+   * @param list list to be checked for containment in this collection
    */
   public static <T> Predicate<List<T>> isAListNotContainingAll(List<T> list) {
     return isAListContainingAll(list).negate();

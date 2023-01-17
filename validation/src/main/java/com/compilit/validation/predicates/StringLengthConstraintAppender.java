@@ -3,7 +3,7 @@ package com.compilit.validation.predicates;
 import java.util.function.Predicate;
 
 final class StringLengthConstraintAppender
-        implements ConstraintAppender<Integer, Predicate<String>> {
+  implements ConstraintAppender<Integer, Predicate<String>> {
 
   private final int first;
 

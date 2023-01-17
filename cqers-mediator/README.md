@@ -23,7 +23,8 @@ initial configuration is a bit easier/less verbose.
 
 # Installation
 
-First make sure you are in fact using Spring as your IOC supplier. This project depends on a provided spring-context dependency
+First make sure you are in fact using Spring as your IOC supplier. This project depends on a provided spring-context
+dependency
 Get this dependency with the latest version.
 
 ```xml

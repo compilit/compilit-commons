@@ -2,31 +2,32 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>domain-primitives</artifactId>
+
+  <dependencies>
+
+    <dependency>
+      <artifactId>validation</artifactId>
+      <groupId>com.compilit</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>core-api</artifactId>
+      <groupId>com.compilit</groupId>
+    </dependency>
+  </dependencies>
+
+  <description>A small package that takes away some boilerplate code when creating your own domain primitives.
+  </description>
   <modelVersion>4.0.0</modelVersion>
 
+  <name>Compilit domain primitives</name>
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
-
-  <artifactId>domain-primitives</artifactId>
-  <version>${revision}</version>
-
-  <name>Compilit domain primitives</name>
-  <description>A small package that takes away some boilerplate code when creating your own domain primitives.</description>
   <url>https://github.com/compilit-org/compilit-domain-primitives</url>
 
-  <dependencies>
-
-    <dependency>
-      <groupId>com.compilit</groupId>
-      <artifactId>validation</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.compilit</groupId>
-      <artifactId>core-api</artifactId>
-    </dependency>
-  </dependencies>
+  <version>${revision}</version>
 
 </project>

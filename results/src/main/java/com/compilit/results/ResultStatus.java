@@ -14,7 +14,8 @@ public enum ResultStatus {
    */
   UNAUTHORIZED,
   /**
-   * Generic status for all unsuccessful results with 'not found' issues as root cause. Indicates a non-existent resource.
+   * Generic status for all unsuccessful results with 'not found' issues as root cause. Indicates a non-existent
+   * resource.
    */
   NOT_FOUND,
   /**

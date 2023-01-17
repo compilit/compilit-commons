@@ -48,6 +48,7 @@ public final class DomainPrimitiveTests {
     var domainPrimitive = new TestDomainPrimitive<>(TestValue.TEST_CONTENT);
     assertEquals(domainPrimitive.getValue(), TestValue.TEST_CONTENT);
   }
+
   @Test
   void getName_shouldReturnNameOfClass() {
     var domainPrimitive = new DomainPrimitive(TestValue.TEST_CONTENT, DomainPrimitive.class) {
