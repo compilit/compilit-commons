@@ -1,4 +1,4 @@
-# compilit-json-patch
+# json-patch
 
 An extended implementation RFC 6902 from the IETF (also see https://github.com/java-json-tools/json-patch
 & https://jsonpatch.com/). It allows for fine-grained management of the actual allowed patch operations on an entity.

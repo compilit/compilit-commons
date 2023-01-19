@@ -154,6 +154,11 @@
         <version>${revision}</version>
       </dependency>
       <dependency>
+        <artifactId>aop-logging</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
         <artifactId>functions</artifactId>
         <groupId>com.compilit</groupId>
         <version>${revision}</version>
@@ -224,7 +229,7 @@
   <licenses>
     <license>
       <name>MIT</name>
-      <url>https://github.com/compilit/compilit-framework/blob/main/LICENSE</url>
+      <url>https://github.com/compilit-framework/compilit-framework/blob/main/LICENSE</url>
     </license>
   </licenses>
 
@@ -238,6 +243,7 @@
     <module>validation</module>
     <module>results</module>
     <module>functions</module>
+    <module>aop-logging</module>
   </modules>
 
   <name>Compilit framework pom</name>
@@ -345,10 +351,10 @@
   <scm>
     <connection>scm:git@github.com:compilit/compilit-framework.git</connection>
     <developerConnection>scm:git@github.com:compilit/compilit-framework.git</developerConnection>
-    <url>https://github.com/compilit/compilit-framework</url>
+    <url>https://github.com/compilit-framework/compilit-framework</url>
   </scm>
 
-  <url>https://github.com/compilit/compilit-framework</url>
+  <url>https://github.com/compilit-framework/compilit-framework</url>
 
   <version>${revision}</version>
 </project>

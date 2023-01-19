@@ -10,6 +10,10 @@
       <groupId>com.compilit</groupId>
     </dependency>
     <dependency>
+      <groupId>com.compilit</groupId>
+      <artifactId>functions</artifactId>
+    </dependency>
+    <dependency>
       <artifactId>spring-context</artifactId>
       <groupId>org.springframework</groupId>
       <scope>provided</scope>
@@ -24,5 +28,6 @@
   </parent>
 
   <version>${revision}</version>
-
+  <url>https://github.com/compilit-framework/cqers-mediator</url>
+  <description>An implementations of the mediator pattern while applying CQRS with added Events</description>
 </project>

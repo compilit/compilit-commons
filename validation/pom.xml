@@ -20,7 +20,7 @@
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
-  <url>https://github.com/compilit/compilit-validation</url>
+  <url>https://github.com/compilit-framework/validation</url>
 
   <version>${revision}</version>
 

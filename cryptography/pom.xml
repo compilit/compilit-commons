@@ -28,4 +28,6 @@
   </parent>
 
   <version>1.0.0</version>
+  <url>https://github.com/compilit-framework/cryptography</url>
+  <description>A package which provides an intuitive and simple API for encryption/decryption</description>
 </project>

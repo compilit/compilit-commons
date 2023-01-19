@@ -33,12 +33,23 @@ public class MediatorConfiguration {
   }
 
   @Bean
+  AnnotationBasedEventHandler annotationBasedEventHandler(EventHandlerProvider eventEmitter, GenericApplicationContext genericApplicationContext) {
+    logger.info("Registered AnnotationBasedEventHandler");
+    var x = new AnnotationBasedEventHandler(eventEmitter);
+    x.resolveEventHandlers(genericApplicationContext);
+    return x;
+  }
+
+  @Bean
   Mediator createMediator(
     CommandHandlerProvider commandHandlerProvider,
     QueryHandlerProvider queryHandlerProvider,
-    EventHandlerProvider eventHandlerProvider
+    EventHandlerProvider eventHandlerProvider,
+    AnnotationBasedEventHandler annotationBasedEventHandler
   ) {
-    return new RequestMediator(commandHandlerProvider, queryHandlerProvider, eventHandlerProvider);
+    return new RequestMediator(commandHandlerProvider, queryHandlerProvider, eventHandlerProvider,
+                               annotationBasedEventHandler
+    );
   }
 
   @Bean

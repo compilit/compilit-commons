@@ -19,4 +19,6 @@
   </parent>
 
   <version>${revision}</version>
+  <url>https://github.com/compilit-framework/functions</url>
+  <description>A package providing some useful but simple functions for dealing with null values, exceptions and fuzzy matching</description>
 </project>

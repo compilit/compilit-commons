@@ -38,6 +38,6 @@
     <json-patch.version>1.13</json-patch.version>
   </properties>
 
-  <url>https://github.com/compilit/compilit-json-patch</url>
+  <url>https://github.com/compilit-framework/json-patch</url>
   <version>${revision}</version>
 </project>

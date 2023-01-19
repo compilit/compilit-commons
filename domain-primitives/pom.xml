@@ -5,7 +5,6 @@
   <artifactId>domain-primitives</artifactId>
 
   <dependencies>
-
     <dependency>
       <artifactId>validation</artifactId>
       <groupId>com.compilit</groupId>
@@ -26,7 +25,7 @@
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
-  <url>https://github.com/compilit-org/compilit-domain-primitives</url>
+  <url>https://github.com/compilit-framework/domain-primitives</url>
 
   <version>${revision}</version>
 

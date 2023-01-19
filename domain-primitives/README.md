@@ -1,4 +1,4 @@
-# compilit-domain-primitives
+# domain-primitives
 
 A simple package containing a base class that enables you to create domain primitives.
 It enables you to avoid the use of possibly unvalidated primitive values in your domain entities. Essentially a domain
@@ -11,7 +11,7 @@ Get this dependency with the latest version
 
 ```xml
     <dependency>
-      <artifactId>compilit-domain-primitives</artifactId>
+      <artifactId>domain-primitives</artifactId>
       <groupId>com.compilit</groupId>
     </dependency>
 ```
@@ -82,7 +82,7 @@ public class BookId extends DomainPrimitive<String> {
 
 ### Tip
 
-The compilit-validation package works really nice to define and validate the business rules related to domain
+The validation package works really nice to define and validate the business rules related to domain
 primitives. Here is a little example based on the previous one:
 
 ```java

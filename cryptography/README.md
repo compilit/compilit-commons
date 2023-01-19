@@ -2,7 +2,18 @@
 
 With this package you can easily apply encryption and decryption of values using AES.
 
-### Usage
+# Installation
+
+Get this dependency with the latest version
+
+```xml
+    <dependency>
+      <artifactId>cryptography</artifactId>
+      <groupId>com.compilit</groupId>
+    </dependency>
+```
+
+# Usage
 
 If you don't have any special requirements as far as encryption key-length and iteration count, the easiest way to get
 started is just to add an import to your Spring configuration:

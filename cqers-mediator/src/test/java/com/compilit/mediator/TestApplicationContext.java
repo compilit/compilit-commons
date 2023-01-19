@@ -13,9 +13,19 @@ public class TestApplicationContext {
   public static GenericApplicationContext registerCqersModule(GenericApplicationContext genericApplicationContext) {
     Objects.requireNonNull(genericApplicationContext, IOC_CONTAINER_NOT_AVAILABLE);
     registerHandlerProviders(genericApplicationContext);
+    registerAnnotationBasedEventHandler(genericApplicationContext.getBean(EventHandlerProvider.class), genericApplicationContext);
     registerMediator(genericApplicationContext);
     registerDispatchers(genericApplicationContext);
     return genericApplicationContext;
+  }
+
+  private static void registerAnnotationBasedEventHandler(EventHandlerProvider eventHandlerProvider, GenericApplicationContext genericApplicationContext) {
+    var x = new AnnotationBasedEventHandler(eventHandlerProvider);
+    x.resolveEventHandlers(genericApplicationContext);
+    genericApplicationContext.registerBean(
+      AnnotationBasedEventHandler.class,
+      () -> x
+    );
   }
 
   private static void registerDispatchers(GenericApplicationContext genericApplicationContext) {
@@ -38,12 +48,14 @@ public class TestApplicationContext {
     var commandHandlerProvider = genericApplicationContext.getBean(CommandHandlerProvider.class);
     var queryHandlerProvider = genericApplicationContext.getBean(QueryHandlerProvider.class);
     var eventHandlerProvider = genericApplicationContext.getBean(EventHandlerProvider.class);
+    var annotationBasedEventHandler = genericApplicationContext.getBean(AnnotationBasedEventHandler.class);
     genericApplicationContext.registerBean(
       Mediator.class,
       () -> new RequestMediator(
         commandHandlerProvider,
         queryHandlerProvider,
-        eventHandlerProvider
+        eventHandlerProvider,
+        annotationBasedEventHandler
       )
     );
   }

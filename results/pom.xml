@@ -22,7 +22,7 @@
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
-  <url>https://github.com/compilit/compilit-results</url>
+  <url>https://github.com/compilit-framework/results</url>
 
   <version>${revision}</version>
 
