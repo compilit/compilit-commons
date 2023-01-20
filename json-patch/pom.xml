@@ -6,17 +6,7 @@
 
   <dependencies>
     <dependency>
-      <artifactId>jakarta.json-api</artifactId>
-      <groupId>jakarta.json</groupId>
-      <version>${jakarta.json-api.version}</version>
-    </dependency>
-    <dependency>
-      <artifactId>json-patch</artifactId>
-      <groupId>com.github.java-json-tools</groupId>
-      <version>${json-patch.version}</version>
-    </dependency>
-    <dependency>
-      <artifactId>core-api</artifactId>
+      <artifactId>json-patch-api</artifactId>
       <groupId>com.compilit</groupId>
     </dependency>
   </dependencies>
@@ -34,9 +24,6 @@
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
-  <properties>
-    <json-patch.version>1.13</json-patch.version>
-  </properties>
 
   <url>https://github.com/compilit-framework/json-patch</url>
   <version>${revision}</version>

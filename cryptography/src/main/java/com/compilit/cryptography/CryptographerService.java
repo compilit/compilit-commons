@@ -1,13 +1,11 @@
 package com.compilit.cryptography;
 
-import com.compilit.core.api.cryptography.Cryptographer;
+import com.compilit.cryptography.api.Cryptographer;
 import javax.crypto.SecretKey;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * A basic implementation of the Cryptographer interface
  */
-@Slf4j
 class CryptographerService implements Cryptographer {
 
   private final int keyLength;

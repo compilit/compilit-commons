@@ -11,7 +11,7 @@ import static com.compilit.functions.FunctionResultGuards.orNull;
 import static com.compilit.functions.FunctionResultGuards.orNullOnException;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.compilit.core.api.functions.ThrowingSupplier;
+import com.compilit.functions.api.ThrowingSupplier;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 

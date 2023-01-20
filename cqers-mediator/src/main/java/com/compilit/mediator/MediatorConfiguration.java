@@ -32,39 +32,40 @@ public class MediatorConfiguration {
     return new EventHandlerProvider(genericApplicationContext);
   }
 
-  @Bean
-  AnnotationBasedEventHandler annotationBasedEventHandler(EventHandlerProvider eventEmitter, GenericApplicationContext genericApplicationContext) {
-    logger.info("Registered AnnotationBasedEventHandler");
-    var x = new AnnotationBasedEventHandler(eventEmitter);
-    x.resolveEventHandlers(genericApplicationContext);
-    return x;
-  }
+//  @Bean
+//  AnnotationBasedEventHandler annotationBasedEventHandler(EventHandlerProvider eventEmitter,
+//                                                          GenericApplicationContext genericApplicationContext) {
+//    logger.info("Registered AnnotationBasedEventHandler");
+//    var x = new AnnotationBasedEventHandler(eventEmitter);
+//    x.resolveEventHandlers(genericApplicationContext);
+//    return x;
+//  }
 
   @Bean
   Mediator createMediator(
     CommandHandlerProvider commandHandlerProvider,
     QueryHandlerProvider queryHandlerProvider,
-    EventHandlerProvider eventHandlerProvider,
-    AnnotationBasedEventHandler annotationBasedEventHandler
+    EventHandlerProvider eventHandlerProvider
+//    AnnotationBasedEventHandler annotationBasedEventHandler
   ) {
-    return new RequestMediator(commandHandlerProvider, queryHandlerProvider, eventHandlerProvider,
-                               annotationBasedEventHandler
+    return new RequestMediator(commandHandlerProvider, queryHandlerProvider, eventHandlerProvider
+//                               annotationBasedEventHandler
     );
   }
 
   @Bean
   CommandDispatcher createCommandDispatcher(Mediator mediator) {
-    return new CommandDispatcherImpl(mediator);
+    return new MediatingCommandDispatcher(mediator);
   }
 
   @Bean
   QueryDispatcher createQueryDispatcher(Mediator mediator) {
-    return new QueryDispatcherImpl(mediator);
+    return new MediatingQueryDispatcher(mediator);
   }
 
   @Bean
   EventEmitter createEventEmitter(Mediator mediator) {
-    return new EventEmitterImpl(mediator);
+    return new MediatingEventEmitter(mediator);
   }
 
 }

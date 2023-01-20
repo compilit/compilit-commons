@@ -1,9 +1,9 @@
 package com.compilit.cryptography;
 
-import static com.compilit.core.api.cryptography.CryptographyDefaults.ITERATION_COUNT;
-import static com.compilit.core.api.cryptography.CryptographyDefaults.KEY_LENGTH;
+import static com.compilit.cryptography.api.CryptographyDefaults.ITERATION_COUNT;
+import static com.compilit.cryptography.api.CryptographyDefaults.KEY_LENGTH;
 
-import com.compilit.core.api.cryptography.Cryptographer;
+import com.compilit.cryptography.api.Cryptographer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -5,20 +5,33 @@
   <artifactId>cqers-mediator</artifactId>
 
   <dependencies>
+
     <dependency>
-      <artifactId>core-api</artifactId>
+      <artifactId>cqers-mediator-api</artifactId>
       <groupId>com.compilit</groupId>
     </dependency>
     <dependency>
-      <groupId>com.compilit</groupId>
       <artifactId>functions</artifactId>
+      <groupId>com.compilit</groupId>
     </dependency>
     <dependency>
       <artifactId>spring-context</artifactId>
       <groupId>org.springframework</groupId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+  <name>Compilit CQ(E)RS mediator</name>
+  <description>An implementations of the mediator pattern while applying CQRS with added Events</description>
+
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -26,8 +39,6 @@
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
-
-  <version>${revision}</version>
   <url>https://github.com/compilit-framework/cqers-mediator</url>
-  <description>An implementations of the mediator pattern while applying CQRS with added Events</description>
+  <version>${revision}</version>
 </project>

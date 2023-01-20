@@ -10,7 +10,7 @@ import static com.compilit.functions.FunctionGuards.orRuntimeException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.compilit.core.api.functions.ThrowingSupplier;
+import com.compilit.functions.api.ThrowingSupplier;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 

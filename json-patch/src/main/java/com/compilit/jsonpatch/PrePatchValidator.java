@@ -2,7 +2,7 @@ package com.compilit.jsonpatch;
 
 import static com.compilit.jsonpatch.ExceptionMessages.patchException;
 
-import com.compilit.core.api.annotations.Patchable;
+import com.compilit.jsonpatch.api.Patchable;
 import com.github.fge.jsonpatch.JsonPatchException;
 import jakarta.json.JsonPatch.Operation;
 import java.lang.reflect.Field;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
-final class PrePatchValidator {
+final class PrePatchValidatable {
 
   private final Map<String, Field> patchableFieldMap = new HashMap<>();
 

@@ -9,10 +9,7 @@
       <artifactId>validation</artifactId>
       <groupId>com.compilit</groupId>
     </dependency>
-    <dependency>
-      <artifactId>core-api</artifactId>
-      <groupId>com.compilit</groupId>
-    </dependency>
+
   </dependencies>
 
   <description>A small package that takes away some boilerplate code when creating your own domain primitives.

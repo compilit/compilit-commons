@@ -5,7 +5,7 @@ import com.compilit.mediator.api.EventHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-final class EventHandlerWrapper {
+final class EventHandlerWrapper implements Provider<List<EventHandler<Event>>> {
 
   private final List<EventHandler<Event>> handlers = new ArrayList<>();
 
@@ -13,8 +13,8 @@ final class EventHandlerWrapper {
     this.handlers.addAll(handlers);
   }
 
-  public List<EventHandler<Event>> provideHandler() {
+  @Override
+  public List<EventHandler<Event>> provide() {
     return handlers;
   }
-
 }

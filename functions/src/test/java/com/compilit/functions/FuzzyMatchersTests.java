@@ -25,7 +25,9 @@ public class FuzzyMatchersTests {
 
   @ParameterizedTest
   @MethodSource("validTestCasesCustomMinimalMatchingPercentage")
-  void fuzzyMatchesPredicate_matches_shouldReturnTrue(String value, String otherValue, float minimalMatchingPercentage) {
+  void fuzzyMatchesPredicate_matches_shouldReturnTrue(String value,
+                                                      String otherValue,
+                                                      float minimalMatchingPercentage) {
     assertThat(FuzzyMatchers.fuzzyMatches(value, minimalMatchingPercentage).test(otherValue)).isTrue();
   }
 

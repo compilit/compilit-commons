@@ -13,18 +13,22 @@ public class TestApplicationContext {
   public static GenericApplicationContext registerCqersModule(GenericApplicationContext genericApplicationContext) {
     Objects.requireNonNull(genericApplicationContext, IOC_CONTAINER_NOT_AVAILABLE);
     registerHandlerProviders(genericApplicationContext);
-    registerAnnotationBasedEventHandler(genericApplicationContext.getBean(EventHandlerProvider.class), genericApplicationContext);
+    registerAnnotationBasedEventHandler(
+      genericApplicationContext.getBean(EventHandlerProvider.class),
+      genericApplicationContext
+    );
     registerMediator(genericApplicationContext);
     registerDispatchers(genericApplicationContext);
     return genericApplicationContext;
   }
 
-  private static void registerAnnotationBasedEventHandler(EventHandlerProvider eventHandlerProvider, GenericApplicationContext genericApplicationContext) {
-    var x = new AnnotationBasedEventHandler(eventHandlerProvider);
-    x.resolveEventHandlers(genericApplicationContext);
+  private static void registerAnnotationBasedEventHandler(EventHandlerProvider eventHandlerProvider,
+                                                          GenericApplicationContext genericApplicationContext) {
+    var annotationBasedEventHandler = new AnnotationBasedEventHandler(eventHandlerProvider);
+    annotationBasedEventHandler.resolveEventHandlers(genericApplicationContext);
     genericApplicationContext.registerBean(
       AnnotationBasedEventHandler.class,
-      () -> x
+      () -> annotationBasedEventHandler
     );
   }
 
@@ -32,15 +36,15 @@ public class TestApplicationContext {
     var mediator = genericApplicationContext.getBean(Mediator.class);
     genericApplicationContext.registerBean(
       CommandDispatcher.class,
-      () -> new CommandDispatcherImpl(mediator)
+      () -> new MediatingCommandDispatcher(mediator)
     );
     genericApplicationContext.registerBean(
       QueryDispatcher.class,
-      () -> new QueryDispatcherImpl(mediator)
+      () -> new MediatingQueryDispatcher(mediator)
     );
     genericApplicationContext.registerBean(
       EventEmitter.class,
-      () -> new EventEmitterImpl(mediator)
+      () -> new MediatingEventEmitter(mediator)
     );
   }
 

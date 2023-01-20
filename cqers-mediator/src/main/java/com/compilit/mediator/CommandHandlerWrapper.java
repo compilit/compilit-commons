@@ -3,16 +3,16 @@ package com.compilit.mediator;
 import com.compilit.mediator.api.Command;
 import com.compilit.mediator.api.CommandHandler;
 
-final class CommandHandlerWrapper {
+final class CommandHandlerWrapper<C extends Command<R>, R> implements Provider<CommandHandler<C, R>> {
 
   private final CommandHandler<?, ?> handler;
 
-  public <C extends Command<R>, R> CommandHandlerWrapper(CommandHandler<C, R> handler) {
+  public CommandHandlerWrapper(CommandHandler<C, R> handler) {
     this.handler = handler;
   }
 
-  public <C extends Command<R>, R> CommandHandler<C, R> provideHandler() {
+  @Override
+  public CommandHandler<C, R> provide() {
     return (CommandHandler<C, R>) handler;
   }
-
 }

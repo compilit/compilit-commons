@@ -574,22 +574,13 @@ public interface Result<T> {
   }
 
   private Supplier<RuntimeException> resolveExceptionSupplier() {
-    Supplier<RuntimeException> exceptionSupplier = RuntimeException::new;
-    switch (getResultStatus()) {
-      case UNPROCESSABLE:
-        exceptionSupplier = () -> new UnprocessableException(getMessage());
-        break;
-      case UNAUTHORIZED:
-        exceptionSupplier = () -> new UnauthorizedException(getMessage());
-        break;
-      case NOT_FOUND:
-        exceptionSupplier = () -> new NotFoundException(getMessage());
-        break;
-      case ERROR_OCCURRED:
-        exceptionSupplier = () -> new ErrorOccurredException(getMessage());
-        break;
-    }
-    return exceptionSupplier;
+    return switch (getResultStatus()) {
+      case UNPROCESSABLE -> () -> new UnprocessableException(getMessage());
+      case UNAUTHORIZED -> () -> new UnauthorizedException(getMessage());
+      case NOT_FOUND -> () -> new NotFoundException(getMessage());
+      case ERROR_OCCURRED -> () -> new ErrorOccurredException(getMessage());
+      default -> RuntimeException::new;
+    };
   }
 
   private static <T> Result<T> resultOf(ResultStatus resultStatus, String message) {
@@ -597,18 +588,13 @@ public interface Result<T> {
   }
 
   private static <T> Result<T> resultOf(ResultStatus resultStatus, String message, T content) {
-    switch (resultStatus) {
-      case SUCCESS:
-        return Result.success(content);
-      case UNAUTHORIZED:
-        return Result.unauthorized(message);
-      case NOT_FOUND:
-        return Result.notFound(message);
-      case ERROR_OCCURRED:
-        return Result.errorOccurred(message);
-      default:
-        return Result.unprocessable(message);
-    }
+    return switch (resultStatus) {
+      case SUCCESS -> Result.success(content);
+      case UNAUTHORIZED -> Result.unauthorized(message);
+      case NOT_FOUND -> Result.notFound(message);
+      case ERROR_OCCURRED -> Result.errorOccurred(message);
+      default -> Result.unprocessable(message);
+    };
   }
 
 }

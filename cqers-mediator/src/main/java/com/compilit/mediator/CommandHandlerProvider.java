@@ -2,38 +2,36 @@ package com.compilit.mediator;
 
 import com.compilit.mediator.api.Command;
 import com.compilit.mediator.api.CommandHandler;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.List;
 import org.springframework.context.support.GenericApplicationContext;
 
 
 final class CommandHandlerProvider extends AbstractHandlerProvider {
 
-  private final Map<String, CommandHandlerWrapper> commandHandlerMap = new HashMap<>();
-
   public CommandHandlerProvider(GenericApplicationContext genericApplicationContext) {
     super(genericApplicationContext);
   }
 
-  public <R> CommandHandler<Command<R>, R> getCommandHandler(Command<R> requestClass) {
-    try {
-      var hash = getHashFor(requestClass);
-      if (!commandHandlerMap.containsKey(hash)) {
-        var handler = findCommandHandler(requestClass);
-        commandHandlerMap.put(hash, new CommandHandlerWrapper(handler));
-      }
-      return commandHandlerMap.get(hash).provideHandler();
-    } catch (Exception exception) {
-      throw new MediatorException(exception.getMessage());
+  public <R> CommandHandler<Command<R>, R> getCommandHandler(Command<R> command) {
+    var id = getIdFor(command);
+    if (!handlerCache.containsKey(id)) {
+      var handler = findCommandHandler(command);
+      handlerCache.put(id, new CommandHandlerWrapper<>(handler));
     }
+    return (CommandHandler<Command<R>, R>) handlerCache.get(id).provide();
   }
 
-  private <T extends Command<R>, R> CommandHandler<T, R> findCommandHandler(T requestClass) {
-    var atomicReference = new AtomicReference<CommandHandler<T, R>>();
-    setAtomicReference(atomicReference, CommandHandler.class, requestClass);
-    makeSureAtomicReferenceIsNotNull(atomicReference, requestClass.getClass().getName());
-    return atomicReference.get();
+  private <T extends Command<R>, R> CommandHandler<T, R> findCommandHandler(T command) {
+    var requestClass = command.getClass();
+    var requestName = requestClass.getName();
+    var handlerClass = CommandHandler.class;
+    List<CommandHandler> handlers = (List<CommandHandler>) findMatchingHandlers(
+      requestClass,
+      handlerClass
+    );
+    assertValidResult(handlers, requestName);
+    return handlers.get(FIRST_ENTRY);
   }
+
 
 }

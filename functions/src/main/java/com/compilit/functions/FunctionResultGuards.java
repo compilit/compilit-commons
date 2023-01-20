@@ -1,8 +1,8 @@
 package com.compilit.functions;
 
-import com.compilit.core.api.functions.ThrowingFunction;
-import com.compilit.core.api.functions.ThrowingRunnable;
-import com.compilit.core.api.functions.ThrowingSupplier;
+import com.compilit.functions.api.ThrowingFunction;
+import com.compilit.functions.api.ThrowingRunnable;
+import com.compilit.functions.api.ThrowingSupplier;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;

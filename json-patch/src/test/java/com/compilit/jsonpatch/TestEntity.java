@@ -1,6 +1,6 @@
 package com.compilit.jsonpatch;
 
-import com.compilit.core.api.annotations.Patchable;
+import com.compilit.jsonpatch.api.Patchable;
 import jakarta.json.JsonPatch.Operation;
 import java.util.List;
 

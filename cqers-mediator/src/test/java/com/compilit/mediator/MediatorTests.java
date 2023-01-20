@@ -39,7 +39,7 @@ class MediatorTests {
     context.registerBean(
       TestCommandHandler.class.getName(),
       CommandHandler.class,
-      () -> new TestCommandHandler()
+      TestCommandHandler::new
     );
     TestApplicationContext.registerCqersModule(context);
     var commandDispatcher = context.getBean(CommandDispatcher.class);
@@ -168,15 +168,6 @@ class MediatorTests {
     commandDispatcher.dispatch(new TestCommand());
     eventEmitter.emit(new TestEvent());
     AssertionsForClassTypes.assertThat(SideEffectContext.isInvoked(5)).isTrue();
-  }
-
-  @Test
-  void emit_annotationBased_shouldBeHandledByAnnotationBasedEventHandler() {
-    context.refresh();
-    context.registerBean("1", CommandHandler.class, TestCommandHandler::new);
-    TestApplicationContext.registerCqersModule(context);
-    var commandDispatcher = context.getBean(CommandDispatcher.class);
-    commandDispatcher.dispatch(new TestCommand());
   }
 
 }

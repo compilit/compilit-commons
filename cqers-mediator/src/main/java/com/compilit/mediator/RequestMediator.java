@@ -14,25 +14,26 @@ final class RequestMediator implements Mediator {
   private final CommandHandlerProvider commandHandlerProvider;
   private final QueryHandlerProvider queryHandlerProvider;
   private final EventHandlerProvider eventHandlerProvider;
-  private final AnnotationBasedEventHandler annotationBasedEventHandler;
+//  private final AnnotationBasedEventHandler annotationBasedEventHandler;
 
   public RequestMediator(
     CommandHandlerProvider commandHandlerProvider,
     QueryHandlerProvider queryHandlerProvider,
-    EventHandlerProvider eventHandlerProvider,
-    AnnotationBasedEventHandler annotationBasedEventHandler) {
+    EventHandlerProvider eventHandlerProvider
+    /*AnnotationBasedEventHandler annotationBasedEventHandler*/) {
     this.commandHandlerProvider = commandHandlerProvider;
     this.queryHandlerProvider = queryHandlerProvider;
     this.eventHandlerProvider = eventHandlerProvider;
-    this.annotationBasedEventHandler = annotationBasedEventHandler;
+//    this.annotationBasedEventHandler = annotationBasedEventHandler;
   }
 
   @Override
   public <T extends Command<R>, R> R mediateCommand(T command) {
-
     CommandHandler<Command<R>, R> handler = commandHandlerProvider.getCommandHandler(command);
-    annotationBasedEventHandler.preHandle(handler, command);
-    return handler.handle(command);
+//    annotationBasedEventHandler.preHandle(handler, command);
+    var result = handler.handle(command);
+//    annotationBasedEventHandler.postHandle(handler, command);
+    return result;
   }
 
   @Override

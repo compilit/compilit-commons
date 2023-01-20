@@ -15,9 +15,9 @@ import java.util.List;
 public interface PatchableEntity {
 
   /**
-   * Default instance of PrePatchValidator which is used for the validation.
+   * Default instance of PrePatchValidatable which is used for the validation.
    */
-  PrePatchValidator PATCH_VALIDATOR_INSTANCE = new PrePatchValidator();
+  PrePatchValidatable PATCH_VALIDATOR_INSTANCE = new PrePatchValidatable();
   /**
    * Default instance of the ObjectMapper. It is used to deserialize the JsonPatch object in order to validate it.
    */

@@ -119,10 +119,10 @@
       <version>4.11.0</version>
     </dependency>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>${junit.jupiter.version}</version>
+      <groupId>org.junit.jupiter</groupId>
       <scope>test</scope>
+      <version>${junit.jupiter.version}</version>
     </dependency>
 
     <!-- Java extensions -->
@@ -130,11 +130,12 @@
       <artifactId>jakarta.annotation-api</artifactId>
       <groupId>jakarta.annotation</groupId>
     </dependency>
-    <dependency>
-      <artifactId>lombok</artifactId>
-      <groupId>org.projectlombok</groupId>
-    </dependency>
 
+    <!--third party dependencies -->
+    <dependency>
+      <artifactId>commons-lang3</artifactId>
+      <groupId>org.apache.commons</groupId>
+    </dependency>
   </dependencies>
   <dependencyManagement>
 
@@ -149,26 +150,6 @@
       </dependency>
 
       <dependency>
-        <artifactId>core-api</artifactId>
-        <groupId>com.compilit</groupId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <artifactId>aop-logging</artifactId>
-        <groupId>com.compilit</groupId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <artifactId>functions</artifactId>
-        <groupId>com.compilit</groupId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <artifactId>cryptography</artifactId>
-        <groupId>com.compilit</groupId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
         <artifactId>domain-primitives</artifactId>
         <groupId>com.compilit</groupId>
         <version>${revision}</version>
@@ -179,7 +160,47 @@
         <version>${revision}</version>
       </dependency>
       <dependency>
+        <artifactId>logging-api</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>logging-aop</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>functions-api</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>functions</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>cryptography-api</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>cryptography</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>json-patch-api</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
         <artifactId>json-patch</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>cqers-mediator-api</artifactId>
         <groupId>com.compilit</groupId>
         <version>${revision}</version>
       </dependency>
@@ -189,17 +210,21 @@
         <version>${revision}</version>
       </dependency>
       <dependency>
+        <artifactId>validation-api</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
         <artifactId>validation</artifactId>
         <groupId>com.compilit</groupId>
         <version>${revision}</version>
       </dependency>
-
+<!--third party dependencies -->
       <dependency>
-        <artifactId>jakarta.json-api</artifactId>
-        <groupId>jakarta.json</groupId>
-        <version>${jakarta.json-api.version}</version>
+        <artifactId>commons-lang3</artifactId>
+        <groupId>org.apache.commons</groupId>
+        <version>${commons-lang3.version}</version>
       </dependency>
-
     </dependencies>
 
   </dependencyManagement>
@@ -235,15 +260,21 @@
 
   <modelVersion>4.0.0</modelVersion>
   <modules>
-    <module>core-api</module>
-    <module>domain-primitives</module>
-    <module>cryptography</module>
-    <module>json-patch</module>
-    <module>cqers-mediator</module>
-    <module>validation</module>
     <module>results</module>
+    <module>domain-primitives</module>
+    <module>cryptography-api</module>
+    <module>cryptography</module>
+    <module>json-patch-api</module>
+    <module>json-patch</module>
+    <module>cqers-mediator-api</module>
+    <module>cqers-mediator</module>
+    <module>validation-api</module>
+    <module>validation</module>
+    <module>functions-api</module>
     <module>functions</module>
-    <module>aop-logging</module>
+    <module>logging-api</module>
+    <module>logging-aspects</module>
+    <module>cqers-mediator-events</module>
   </modules>
 
   <name>Compilit framework pom</name>
@@ -323,9 +354,10 @@
     <assertj.version>3.24.1</assertj.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
     <jacoco.version>0.8.6</jacoco.version>
+    <jakarta.json-api.version>2.1.1</jakarta.json-api.version>
     <jdk.version>17</jdk.version>
-    <junit.jupiter.version>5.9.2</junit.jupiter.version>
 
+    <junit.jupiter.version>5.9.2</junit.jupiter.version>
     <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
     <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
     <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
@@ -335,15 +367,14 @@
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
     <maven.compiler.source>${jdk.version}</maven.compiler.source>
-    <maven.compiler.target>${jdk.version}</maven.compiler.target>
 
+    <maven.compiler.target>${jdk.version}</maven.compiler.target>
     <mockito.version>4.0.0</mockito.version>
     <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <revision>0.1.0</revision>
-
-    <jakarta.json-api.version>2.1.1</jakarta.json-api.version>
 
     <spring-boot-dependencies.version>3.0.1</spring-boot-dependencies.version>
   </properties>

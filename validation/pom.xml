@@ -5,9 +5,14 @@
   <artifactId>validation</artifactId>
 
   <dependencies>
+
     <dependency>
-      <artifactId>core-api</artifactId>
+      <artifactId>validation-api</artifactId>
       <groupId>com.compilit</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>slf4j-api</artifactId>
+      <groupId>org.slf4j</groupId>
     </dependency>
   </dependencies>
 
