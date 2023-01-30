@@ -20,7 +20,7 @@ public class EmittableAspect {
   public EmittableAspect(EventEmitter eventEmitter) {this.eventEmitter = eventEmitter;}
 
   @Before(value = "@annotation(annotation)")
-  public void onExcecution(JoinPoint joinPoint, OnExecution annotation) {
+  public void onExecution(JoinPoint joinPoint, OnExecution annotation) {
     emitEvent(joinPoint);
   }
 

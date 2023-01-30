@@ -1,6 +1,7 @@
 package com.compilit.results;
 
 import static com.compilit.results.testutil.TestValue.TEST_MESSAGE;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.compilit.results.assertions.ResultAssertions;
 import com.compilit.results.testutil.TestValue;
@@ -13,91 +14,12 @@ import org.junit.jupiter.api.Test;
 class ResultTests {
 
   @Test
-  void resultOf_SuccessfulRunnable_shouldReturnSuccessResult() {
-    var result = Result.resultOf(() -> System.out.println(TestValue.TEST_CONTENT));
-    ResultAssertions.assertThat(result).isValidSuccessResult()
-                    .isEmpty();
-  }
-
-  @Test
-  void resultOf_ExceptionalRunnable_shouldReturnSuccessResult() {
-    var result = Result.resultOf(() -> System.out.println(TestValue.TEST_CONTENT));
-    ResultAssertions.assertThat(result).isValidSuccessResult()
-                    .isEmpty();
-  }
-
-  @Test
-  void resultOf_SuccessfulPredicate_shouldReturnSuccessResult() {
-    var result = Result.resultOf(x -> true, null);
-    ResultAssertions.assertThat(result).isValidSuccessResult()
-                    .isEmpty();
-  }
-
-  @Test
-  void resultOf_UnsuccessfulPredicate_shouldReturnUnprocessableResult() {
-    var result = Result.resultOf(x -> false, null);
-    ResultAssertions.assertThat(result).isValidUnsuccessfulResult()
-                    .isEmpty();
-  }
-
-  @Test
-  void resultOf_ExceptionalPredicate_shouldReturnErrorOccurredResult() {
-    var exception = new RuntimeException(TestValue.TEST_CONTENT);
-    var throwingPredicate = new Predicate<String>() {
-      @Override
-      public boolean test(String s) {
-        throw exception;
-      }
-    };
-    var message = exception.getMessage();
-    var result = Result.resultOf(throwingPredicate, null);
-    ResultAssertions.assertThat(result).isValidUnsuccessfulResult().containsMessage(message);
-  }
-
-  @Test
-  void resultOf_SuccessfulSupplier_shouldReturnSuccessResult() {
-    Supplier<String> supplier = () -> TestValue.TEST_CONTENT;
-    var result = Result.resultOf(supplier);
-    ResultAssertions.assertThat(result)
-                    .isValidSuccessResult()
-                    .containsContent(TestValue.TEST_CONTENT);
-  }
-
-  @Test
-  void resultOf_UnsuccessfulSupplier_shouldReturnErrorOccurredResult() {
-    var exception = new RuntimeException(TestValue.TEST_CONTENT);
-    var Supplier = new Supplier<String>() {
-      @Override
-      public String get() {
-        throw exception;
-      }
-    };
-    var message = exception.getMessage();
-    var result = Result.resultOf(Supplier);
-    ResultAssertions.assertThat(result).isValidUnsuccessfulResult().containsMessage(message);
-  }
-
-  @Test
-  void resultOf_UnsuccessfulRunnable_shouldReturnErrorOccurredResult() {
-    var exception = new RuntimeException(TestValue.TEST_CONTENT);
-    var Runnable = new Runnable() {
-      @Override
-      public void run() {
-        throw exception;
-      }
-    };
-    var message = exception.getMessage();
-    var result = Result.resultOf(Runnable);
-    ResultAssertions.assertThat(result).isValidUnsuccessfulResult().containsMessage(message);
-  }
-
-  @Test
   void fromResult_shouldReturnEmptyResultWithCorrectStatus() {
     var result = Result.success("test");
-    Assertions.assertThat(result.isEmpty()).isFalse();
+    assertThat(result.isEmpty()).isFalse();
     var actual = Result.<Integer>transform(result);
-    Assertions.assertThat(actual.isEmpty()).isTrue();
-    Assertions.assertThat(actual.isSuccessful()).isTrue();
+    assertThat(actual.isEmpty()).isTrue();
+    assertThat(actual.isSuccessful()).isTrue();
   }
 
   @Test
@@ -116,11 +38,11 @@ class ResultTests {
     var resultOne = Result.success(contentsOne);
     var resultTwo = Result.success(contentsTwo);
     var resultThree = Result.success(contentsThree);
-    var actual = Result.combine(resultOne).with(resultTwo).and(resultThree).merge();
+    var actual = Result.merge(resultOne, resultTwo, resultThree);
 
     ResultAssertions.assertThat(actual).isValidSuccessResult()
                     .hasContent();
-    Assertions.assertThat(actual.getContents(x -> x.orElse(new ArrayList<>())).size()).isEqualTo(3);
+    assertThat(actual.getContents(x -> x.orElse(new ArrayList<>())).size()).isEqualTo(3);
   }
 
   @Test
@@ -131,7 +53,34 @@ class ResultTests {
     var resultOne = Result.<String>errorOccurred(contentsOne);
     var resultTwo = Result.success(contentsTwo);
     var resultThree = Result.success(contentsThree);
-    var actual = Result.combine(resultOne).with(resultTwo).and(resultThree).merge();
+    var actual = Result.merge(resultOne, resultTwo, resultThree);
+
+    ResultAssertions.assertThat(actual).isValidUnsuccessfulResult()
+                    .isEmpty();
+  }
+
+  @Test
+  void mergeWith_success_shouldCombineMultipleResults() {
+    var contentsOne = TestValue.TEST_CONTENT + 1;
+    var contentsTwo = TestValue.TEST_CONTENT + 2;
+    var contentsThree = TestValue.TEST_CONTENT + 3;
+    var resultOne = Result.<String>success(contentsOne);
+    var resultTwo = Result.success(contentsTwo);
+    var resultThree = Result.success(contentsThree);
+    var actual = resultOne.mergeWith(resultTwo, resultThree);
+
+    assertThat(actual.isSuccessful()).isTrue();
+  }
+
+  @Test
+  void mergeWith_errorOccurred_shouldCombineMultipleResults() {
+    var contentsOne = TestValue.TEST_CONTENT + 1;
+    var contentsTwo = TestValue.TEST_CONTENT + 2;
+    var contentsThree = TestValue.TEST_CONTENT + 3;
+    var resultOne = Result.<String>errorOccurred(contentsOne);
+    var resultTwo = Result.success(contentsTwo);
+    var resultThree = Result.success(contentsThree);
+    var actual = resultOne.mergeWith(resultTwo, resultThree);
 
     ResultAssertions.assertThat(actual).isValidUnsuccessfulResult()
                     .isEmpty();
@@ -145,7 +94,7 @@ class ResultTests {
     var resultOne = Result.success(contentsOne);
     var resultTwo = Result.success(contentsTwo);
     var resultThree = Result.success(contentsThree);
-    var actual = Result.combine(resultOne).with(resultTwo).and(resultThree).sum();
+    var actual = Result.sum(resultOne, resultTwo, resultThree);
 
     ResultAssertions.assertThat(actual).isValidSuccessResult()
                     .isEmpty();
@@ -179,7 +128,7 @@ class ResultTests {
     var resultOne = Result.<String>errorOccurred(contentsOne);
     var resultTwo = Result.success(contentsTwo);
     var resultThree = Result.success(contentsThree);
-    var actual = Result.combine(resultOne).with(resultTwo).and(resultThree).sum();
+    var actual = Result.sum(resultOne, resultTwo, resultThree);
 
     ResultAssertions.assertThat(actual).isValidUnsuccessfulResult()
                     .isEmpty();

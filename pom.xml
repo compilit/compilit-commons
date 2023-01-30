@@ -275,6 +275,7 @@
     <module>logging-api</module>
     <module>logging-aspects</module>
     <module>cqers-mediator-events</module>
+    <module>cqers-mediator-spring</module>
   </modules>
 
   <name>Compilit framework pom</name>

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 
 @Configuration
-public class MediatorConfiguration {
+class MediatorConfiguration {
 
   private static final Logger logger = LoggerFactory.getLogger(MediatorConfiguration.class);
 

@@ -13,24 +13,24 @@ public class TestApplicationContext {
   public static GenericApplicationContext registerCqersModule(GenericApplicationContext genericApplicationContext) {
     Objects.requireNonNull(genericApplicationContext, IOC_CONTAINER_NOT_AVAILABLE);
     registerHandlerProviders(genericApplicationContext);
-    registerAnnotationBasedEventHandler(
-      genericApplicationContext.getBean(EventHandlerProvider.class),
-      genericApplicationContext
-    );
+//    registerAnnotationBasedEventHandler(
+//      genericApplicationContext.getBean(EventHandlerProvider.class),
+//      genericApplicationContext
+//    );
     registerMediator(genericApplicationContext);
     registerDispatchers(genericApplicationContext);
     return genericApplicationContext;
   }
 
-  private static void registerAnnotationBasedEventHandler(EventHandlerProvider eventHandlerProvider,
-                                                          GenericApplicationContext genericApplicationContext) {
-    var annotationBasedEventHandler = new AnnotationBasedEventHandler(eventHandlerProvider);
-    annotationBasedEventHandler.resolveEventHandlers(genericApplicationContext);
-    genericApplicationContext.registerBean(
-      AnnotationBasedEventHandler.class,
-      () -> annotationBasedEventHandler
-    );
-  }
+//  private static void registerAnnotationBasedEventHandler(EventHandlerProvider eventHandlerProvider,
+//                                                          GenericApplicationContext genericApplicationContext) {
+//    var annotationBasedEventHandler = new AnnotationBasedEventHandler(eventHandlerProvider);
+//    annotationBasedEventHandler.resolveEventHandlers(genericApplicationContext);
+//    genericApplicationContext.registerBean(
+//      AnnotationBasedEventHandler.class,
+//      () -> annotationBasedEventHandler
+//    );
+//  }
 
   private static void registerDispatchers(GenericApplicationContext genericApplicationContext) {
     var mediator = genericApplicationContext.getBean(Mediator.class);
@@ -52,14 +52,14 @@ public class TestApplicationContext {
     var commandHandlerProvider = genericApplicationContext.getBean(CommandHandlerProvider.class);
     var queryHandlerProvider = genericApplicationContext.getBean(QueryHandlerProvider.class);
     var eventHandlerProvider = genericApplicationContext.getBean(EventHandlerProvider.class);
-    var annotationBasedEventHandler = genericApplicationContext.getBean(AnnotationBasedEventHandler.class);
+//    var annotationBasedEventHandler = genericApplicationContext.getBean(AnnotationBasedEventHandler.class);
     genericApplicationContext.registerBean(
       Mediator.class,
       () -> new RequestMediator(
         commandHandlerProvider,
         queryHandlerProvider,
-        eventHandlerProvider,
-        annotationBasedEventHandler
+        eventHandlerProvider
+//        annotationBasedEventHandler
       )
     );
   }

@@ -5,14 +5,13 @@ import com.compilit.mediator.api.CommandHandler;
 import java.util.List;
 import org.springframework.context.support.GenericApplicationContext;
 
-
 final class CommandHandlerProvider extends AbstractHandlerProvider {
 
-  public CommandHandlerProvider(GenericApplicationContext genericApplicationContext) {
+  CommandHandlerProvider(GenericApplicationContext genericApplicationContext) {
     super(genericApplicationContext);
   }
 
-  public <R> CommandHandler<Command<R>, R> getCommandHandler(Command<R> command) {
+  <R> CommandHandler<Command<R>, R> getCommandHandler(Command<R> command) {
     var id = getIdFor(command);
     if (!handlerCache.containsKey(id)) {
       var handler = findCommandHandler(command);

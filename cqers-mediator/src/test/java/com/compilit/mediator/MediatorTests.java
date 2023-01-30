@@ -167,7 +167,7 @@ class MediatorTests {
     commandDispatcher.dispatch(new TestSimpleCommand());
     commandDispatcher.dispatch(new TestCommand());
     eventEmitter.emit(new TestEvent());
-    AssertionsForClassTypes.assertThat(SideEffectContext.isInvoked(5)).isTrue();
+    AssertionsForClassTypes.assertThat(SideEffectContext.isInvoked(4)).isTrue();
   }
 
 }

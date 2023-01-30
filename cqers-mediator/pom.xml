@@ -15,11 +15,6 @@
       <groupId>com.compilit</groupId>
     </dependency>
     <dependency>
-      <artifactId>spring-context</artifactId>
-      <groupId>org.springframework</groupId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>

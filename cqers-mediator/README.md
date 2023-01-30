@@ -30,19 +30,19 @@ Get this dependency with the latest version.
 ```xml
 
 <dependency>
-  <artifactId>spring-mediator</artifactId>
+  <artifactId>cqers-mediator</artifactId>
   <groupId>com.compilit</groupId>
 </dependency>
 ```
 
-Then add an import annotation to your project by annotating a managed bean class with @Import(
-MediatorConfiguration.class).
+Then add the EnableMediator annotation to your project:
 
 ```Java
 
+import com.compilit.mediator.EnableMediator;
 import com.compilit.mediator.MediatorConfiguration;
 
-@Import(MediatorConfiguration.class)
+@EnableMediator
 @SpringBootApplication
 public class Launcher {
 
