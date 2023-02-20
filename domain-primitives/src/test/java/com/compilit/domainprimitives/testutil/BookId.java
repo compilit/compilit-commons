@@ -1,10 +1,10 @@
 package com.compilit.domainprimitives.testutil;
 
-import static com.compilit.validation.api.Definitions.defineThatIt;
-import static com.compilit.validation.predicates.ObjectPredicate.isA;
-import static com.compilit.validation.predicates.StringPredicate.isNotNullEmptyOrBlank;
+import static com.compilit.validation.Definitions.defineThatIt;
+import static com.compilit.validation.api.predicates.ObjectPredicate.isA;
+import static com.compilit.validation.api.predicates.StringPredicate.isNotNullEmptyOrBlank;
 
-import com.compilit.core.api.validation.Rule;
+import com.compilit.validation.api.Rule;
 import com.compilit.domainprimitives.DomainPrimitive;
 import java.util.function.Predicate;
 

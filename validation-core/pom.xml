@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>validation-core</artifactId>
+
+  <dependencies>
+
+    <dependency>
+      <artifactId>validation-api</artifactId>
+      <groupId>com.compilit</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>slf4j-api</artifactId>
+      <groupId>org.slf4j</groupId>
+    </dependency>
+  </dependencies>
+
+  <description>A small package that enables validation of (business) rules through a fluent API.</description>
+  <modelVersion>4.0.0</modelVersion>
+
+  <name>Compilit - validation</name>
+  <parent>
+    <artifactId>compilit-framework</artifactId>
+    <groupId>com.compilit</groupId>
+    <version>0.1.0</version>
+  </parent>
+  <url>https://github.com/compilit-framework/validation</url>
+
+  <version>0.1.0</version>
+
+</project>

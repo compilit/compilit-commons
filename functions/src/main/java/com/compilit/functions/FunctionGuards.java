@@ -1,8 +1,8 @@
 package com.compilit.functions;
 
-import com.compilit.core.api.functions.ThrowingFunction;
-import com.compilit.core.api.functions.ThrowingRunnable;
-import com.compilit.core.api.functions.ThrowingSupplier;
+import com.compilit.functions.api.ThrowingFunction;
+import com.compilit.functions.api.ThrowingRunnable;
+import com.compilit.functions.api.ThrowingSupplier;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -29,8 +29,8 @@ public final class FunctionGuards {
    * @param <E>              the checked exception
    * @return either the wanted value as a String or the given default value
    */
-  public static <T, E extends Exception> Supplier<T> orNullOnException(ThrowingSupplier<T, E> throwingSupplier) {
-    return orDefaultOnException(throwingSupplier, null);
+  public static <T, E extends Exception> Supplier<T> orNull(ThrowingSupplier<T, E> throwingSupplier) {
+    return orDefault(throwingSupplier, null);
   }
 
   /**
@@ -49,8 +49,8 @@ public final class FunctionGuards {
    * @param <O>      the return type
    * @return either the result of the supplier value or null
    */
-  public static <I, O, E extends Exception> Function<I, O> orNullOnException(ThrowingFunction<I, O, E> function) {
-    return orDefaultOnException(function, null);
+  public static <I, O, E extends Exception> Function<I, O> orNull(ThrowingFunction<I, O, E> function) {
+    return orDefault(function, null);
   }
 
 
@@ -79,7 +79,7 @@ public final class FunctionGuards {
    * @param <T>          the return type
    * @return either the result of the supplier or the given default value
    */
-  public static <T, E extends Exception> Supplier<T> orDefaultOnException(
+  public static <T, E extends Exception> Supplier<T> orDefault(
     ThrowingSupplier<T, E> supplier,
     T defaultValue
   ) {
@@ -97,7 +97,7 @@ public final class FunctionGuards {
    * @param <O>      the return type
    * @return either result of the function or the given default value
    */
-  public static <I, O, E extends Exception> Function<I, O> orDefaultOnException(
+  public static <I, O, E extends Exception> Function<I, O> orDefault(
     ThrowingFunction<I, O, E> function,
     O defaultValue
   ) {

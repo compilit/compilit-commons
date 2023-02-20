@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.compilit</groupId>
+    <artifactId>compilit-framework</artifactId>
+    <version>0.1.0</version>
+  </parent>
+
+  <artifactId>cqers-mediator-spring</artifactId>
+  <version>0.1.0</version>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.compilit</groupId>
+      <artifactId>cqers-mediator-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.compilit</groupId>
+      <artifactId>cqers-mediator-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.compilit</groupId>
+      <artifactId>cqers-mediator-core</artifactId>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Spring dependencies -->
+    <dependency>
+      <artifactId>spring-context</artifactId>
+      <groupId>org.springframework</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>

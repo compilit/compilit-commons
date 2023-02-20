@@ -39,7 +39,7 @@ public final class FuzzyMatchers {
   /**
    * Case-sensitive fuzzy matching
    *
-   * @param otherValue         the second value to try to match
+   * @param otherValue                the second value to try to match
    * @param minimalMatchingPercentage the desired matching percentage between the two values
    * @return a Predicate that returns true if both values match for at least the given matching percentage
    */
@@ -73,8 +73,8 @@ public final class FuzzyMatchers {
   /**
    * Case-insensitive fuzzy matching
    *
-   * @param value              the first value to try to match
-   * @param otherValue         the second value to try to match
+   * @param value                     the first value to try to match
+   * @param otherValue                the second value to try to match
    * @param minimalMatchingPercentage the desired matching percentage between the two values
    * @return true if both values match for at least the given matching percentage
    */
@@ -97,8 +97,8 @@ public final class FuzzyMatchers {
   /**
    * Case-sensitive fuzzy matching
    *
-   * @param value              the first value to try to match
-   * @param otherValue         the second value to try to match
+   * @param value                     the first value to try to match
+   * @param otherValue                the second value to try to match
    * @param minimalMatchingPercentage the desired matching percentage between the two values
    * @return true if both values match for at least the given matching percentage
    */

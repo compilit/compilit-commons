@@ -1,4 +1,4 @@
-# compilit-basic-functions
+# basic-functions
 
 An assortment of convenience functions which can be useful in any sort of larger project.
 

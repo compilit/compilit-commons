@@ -1,8 +1,8 @@
 package com.compilit.domainprimitives;
 
-import static com.compilit.validation.api.Verifications.verifyThat;
+import static com.compilit.validation.Verifications.verifyThat;
 
-import com.compilit.core.api.validation.Rule;
+import com.compilit.validation.api.Rule;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

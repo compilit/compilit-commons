@@ -6,17 +6,22 @@
 
   <dependencies>
     <dependency>
-      <artifactId>core-api</artifactId>
       <groupId>com.compilit</groupId>
+      <artifactId>functions-api</artifactId>
     </dependency>
   </dependencies>
 
+  <description>A package providing some useful but simple functions for dealing with null values, exceptions and fuzzy
+    matching
+  </description>
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>${revision}</version>
+    <version>0.1.0</version>
   </parent>
-
-  <version>${revision}</version>
+  <name>Compilit - functions</name>
+  <url>https://github.com/compilit-framework/functions</url>
+  <version>0.1.0</version>
 </project>

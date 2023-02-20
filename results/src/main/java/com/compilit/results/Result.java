@@ -1,7 +1,9 @@
 package com.compilit.results;
 
+import com.compilit.functions.FunctionResultGuards;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -70,87 +72,9 @@ public interface Result<T> {
   }
 
   /**
-   * throw an UnauthorizedException with the result message if the result was unsuccessful. Otherwise, return the
-   * result.
-   *
-   * @return a successful result
-   */
-  default Result<T> orElseThrowUnauthorizedException() {
-    return orElseThrow(() -> new UnauthorizedException(getMessage()));
-  }
-
-  /**
-   * throw an NotFoundException with the result message if the result was unsuccessful. Otherwise, return the result.
-   *
-   * @return a successful result
-   */
-  default Result<T> orElseThrowNotFoundException() {
-    return orElseThrow(() -> new NotFoundException(getMessage()));
-  }
-
-  /**
-   * throw an UnprocessableException with the result message if the result was unsuccessful. Otherwise, return the
-   * result.
-   *
-   * @return a successful result
-   */
-  default Result<T> orElseThrowUnprocessableException() {
-    return orElseThrow(() -> new UnprocessableException(getMessage()));
-  }
-
-  /**
-   * throw an ErrorOccurredException with the result message if the result was unsuccessful. Otherwise, return the
-   * result.
-   *
-   * @return a successful result
-   */
-  default Result<T> orElseThrowErrorOccurredException() {
-    return orElseThrow(() -> new ErrorOccurredException(getMessage()));
-  }
-
-  /**
-   * throw an UnauthorizedException with the result message if the result was unsuccessful. Otherwise, return the
-   * result.
-   *
-   * @return the result contents
-   */
-  default T getContentsOrElseThrowUnauthorizedException() {
-    return getContentsOrElseThrow(() -> new UnauthorizedException(getMessage()));
-  }
-
-  /**
-   * throw an NotFoundException with the result message if the result was unsuccessful. Otherwise, return the result.
-   *
-   * @return the result contents
-   */
-  default T getContentsOrElseThrowNotFoundException() {
-    return getContentsOrElseThrow(() -> new NotFoundException(getMessage()));
-  }
-
-  /**
-   * throw an UnprocessableException with the result message if the result was unsuccessful. Otherwise, return the
-   * result.
-   *
-   * @return the result contents
-   */
-  default T getContentsOrElseThrowUnprocessableException() {
-    return getContentsOrElseThrow(() -> new UnprocessableException(getMessage()));
-  }
-
-  /**
-   * throw an ErrorOccurredException with the result message if the result was unsuccessful. Otherwise, return the
-   * result.
-   *
-   * @return the result contents
-   */
-  default T getContentsOrElseThrowErrorOccurredException() {
-    return getContentsOrElseThrow(() -> new ErrorOccurredException(getMessage()));
-  }
-
-  /**
    * @return the contents of the result or throw a NoContentsException with the result message.
    */
-  default <E extends RuntimeException> T getContentsOrElseThrow() {
+  default T getContentsOrElseThrow() {
     return getContents().orElseThrow(resolveExceptionSupplier());
   }
 
@@ -303,7 +227,7 @@ public interface Result<T> {
    */
   default Result<T> orElse(Supplier<Result<T>> supplier) {
     if (isUnsuccessful()) {
-      return supplier.get();
+      return FunctionResultGuards.orDefault(supplier, errorOccurred(Messages.UNSUCCESSFUL_RESULT));
     }
     return this;
   }
@@ -312,7 +236,7 @@ public interface Result<T> {
    * If the result was successful and has contents, performs the given consumer on the contents, otherwise does
    * nothing.
    *
-   * @param consumer the action to be performed, if the result was successful and has contents
+   * @param consumer the action to be performed on the contents, if the result was successful and has contents
    */
   default void onSuccess(Consumer<? super T> consumer) {
     if (isSuccessfulWithContents()) {
@@ -322,16 +246,16 @@ public interface Result<T> {
 
   /**
    * If the result was successful and has contents, performs the given consumer on the contents, otherwise performs the
-   * given empty-based action.
+   * given runnable.
    *
-   * @param action      the action to be performed, if a value is present
-   * @param emptyAction the empty-based action to be performed, if no value is present
+   * @param consumer      the consumer to be performed on the contents, if a value is present
+   * @param runnable the runnable to be performed, if no value is present
    */
-  default void onSuccessOrElse(Consumer<? super T> action, Runnable emptyAction) {
+  default void onSuccessOrElse(Consumer<? super T> consumer, Runnable runnable) {
     if (isSuccessfulWithContents()) {
-      action.accept(getContents().get());
+      consumer.accept(getContents().get());
     } else {
-      emptyAction.run();
+      runnable.run();
     }
   }
 
@@ -466,6 +390,9 @@ public interface Result<T> {
   static <T> Result<T> resultOf(Supplier<T> supplier) {
     try {
       var result = supplier.get();
+      //todo: check if this works for both successful and failed results
+      if (result instanceof Result<?> r)
+        return Result.transform(r);
       return Result.success(result);
     } catch (NotFoundException notFoundException) {
       return Result.notFound(notFoundException.getMessage());
@@ -546,15 +473,42 @@ public interface Result<T> {
   }
 
   /**
-   * @param <T>    the content type of the result.
-   * @param result the result you wish to combine/merge/sum with others.
-   * @return ResultCombiner to chain the next result.
+   * Merge the current result with other results and get a list of all contents of the passed results if all results were successful. Returns a SuccessResult if, and
+   * only if all other results were successful. In case of a summed up unsuccessful result, the message will contain the
+   * error message of each underlying unsuccessful result
+
+   * @param result  the result you wish to sum with others.
+   * @param results the additional results you wish to sum with others.
+   * @return Result containing a List of T.
    */
-  static <T> ResultCombiner<T> combine(Result<T> result) {
-    return new ResultToListCombiner<>(result);
+  default Result<List<T>> mergeWith(Result<T> result, Result<T>... results) {
+    var resultList = new ArrayList<Result<T>>();
+    resultList.add(this);
+    resultList.addAll(Arrays.asList(results));
+    ContinuedResultCombiner<T> resultCombiner = getContinuedResultCombiner(result, resultList);
+    return resultCombiner.merge();
   }
 
   /**
+   * Get a list of all contents of the passed results if all results were successful. Returns a SuccessResult if, and
+   * only if all other results were successful. In case of a summed up unsuccessful result, the message will contain the
+   * error message of each underlying unsuccessful result
+   * @param <T>     the content type of the result.
+   * @param result  the result you wish to sum with others.
+   * @param results the additional results you wish to sum with others.
+   * @return Result containing a List of T.
+   */
+  @SafeVarargs
+  static <T> Result<List<T>> merge(Result<T> result, Result<T>... results) {
+    ContinuedResultCombiner<T> resultCombiner = getContinuedResultCombiner(result, results);
+    return resultCombiner.merge();
+  }
+
+  /**
+   * Get the combined result without contents of all passed results. Returns a SuccessResult if, and only if all other
+   * results were successful. In case of a summed up unsuccessful result, the message will contain the error message of
+   * each underlying unsuccessful result
+   *
    * @param <T>     the content type of the result.
    * @param result  the result you wish to sum with others.
    * @param results the additional results you wish to sum with others.
@@ -562,34 +516,36 @@ public interface Result<T> {
    */
   @SafeVarargs
   static <T> Result<T> sum(Result<T> result, Result<T>... results) {
-    var resultList = new ArrayList<Result<T>>();
-    if (results != null && results.length > 0) {
-      resultList.addAll(Arrays.asList(results));
-    }
+    ContinuedResultCombiner<T> resultCombiner = getContinuedResultCombiner(result, results);
+    return resultCombiner.sum();
+  }
+
+  private static <T> ContinuedResultCombiner<T> getContinuedResultCombiner(Result<T> result, Result<T>[] results) {
+    return getContinuedResultCombiner(result, Arrays.asList(results));
+  }
+
+  private static <T> ContinuedResultCombiner<T> getContinuedResultCombiner(Result<T> result, List<Result<T>> results) {
+    var resultList = new ArrayList<>(results);
     var resultCombiner = Result.combine(Result.<T>success()).with(result);
     for (var r : resultList) {
       resultCombiner.and(r);
     }
-    return resultCombiner.sum();
+    return resultCombiner;
   }
 
+  private static <T> ResultCombiner<T> combine(Result<T> result) {
+    return new ResultToListCombiner<>(result);
+  }
+
+
   private Supplier<RuntimeException> resolveExceptionSupplier() {
-    Supplier<RuntimeException> exceptionSupplier = RuntimeException::new;
-    switch (getResultStatus()) {
-      case UNPROCESSABLE:
-        exceptionSupplier = () -> new UnprocessableException(getMessage());
-        break;
-      case UNAUTHORIZED:
-        exceptionSupplier = () -> new UnauthorizedException(getMessage());
-        break;
-      case NOT_FOUND:
-        exceptionSupplier = () -> new NotFoundException(getMessage());
-        break;
-      case ERROR_OCCURRED:
-        exceptionSupplier = () -> new ErrorOccurredException(getMessage());
-        break;
-    }
-    return exceptionSupplier;
+    return switch (getResultStatus()) {
+      case UNPROCESSABLE -> () -> new UnprocessableException(getMessage());
+      case UNAUTHORIZED -> () -> new UnauthorizedException(getMessage());
+      case NOT_FOUND -> () -> new NotFoundException(getMessage());
+      case ERROR_OCCURRED -> () -> new ErrorOccurredException(getMessage());
+      default -> RuntimeException::new;
+    };
   }
 
   private static <T> Result<T> resultOf(ResultStatus resultStatus, String message) {
@@ -597,18 +553,13 @@ public interface Result<T> {
   }
 
   private static <T> Result<T> resultOf(ResultStatus resultStatus, String message, T content) {
-    switch (resultStatus) {
-      case SUCCESS:
-        return Result.success(content);
-      case UNAUTHORIZED:
-        return Result.unauthorized(message);
-      case NOT_FOUND:
-        return Result.notFound(message);
-      case ERROR_OCCURRED:
-        return Result.errorOccurred(message);
-      default:
-        return Result.unprocessable(message);
-    }
+    return switch (resultStatus) {
+      case SUCCESS -> Result.success(content);
+      case UNAUTHORIZED -> Result.unauthorized(message);
+      case NOT_FOUND -> Result.notFound(message);
+      case ERROR_OCCURRED -> Result.errorOccurred(message);
+      default -> Result.unprocessable(message);
+    };
   }
 
 }

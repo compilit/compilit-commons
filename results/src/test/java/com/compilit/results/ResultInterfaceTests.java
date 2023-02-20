@@ -231,7 +231,7 @@ public class ResultInterfaceTests {
     var errorMessage2 = "I am error2";
     var errorResult1 = Result.errorOccurred(errorMessage1);
     var errorResult2 = Result.errorOccurred(errorMessage2);
-    var actual = Result.combine(errorResult1).with(errorResult2).merge();
+    var actual = Result.merge(errorResult1, errorResult2);
     assertThat(actual.getMessage()).isNotEqualTo(errorMessage1);
     assertThat(actual.getMessage()).isNotEqualTo(errorMessage2);
     assertThat(actual.getMessage()).contains(errorMessage1);

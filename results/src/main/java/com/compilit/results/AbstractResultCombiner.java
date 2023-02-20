@@ -3,7 +3,7 @@ package com.compilit.results;
 import java.util.ArrayList;
 import java.util.List;
 
-class AbstractResultCombiner<T> {
+abstract class AbstractResultCombiner<T> {
 
   protected final List<T> resultList = new ArrayList<>();
   protected final List<String> messages = new ArrayList<>();

@@ -1,4 +1,4 @@
-# compilit-results
+# results
 
 Simple library to encapsulate and propagate processing results. Inspired by Results in the Rust
 programming
@@ -25,7 +25,7 @@ Get this dependency with the latest version
 ```xml
 
 <dependency>
-  <artifactId>compilit-results</artifactId>
+  <artifactId>results</artifactId>
   <groupId>com.compilit</groupId>
 </dependency>
 ```
