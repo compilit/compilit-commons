@@ -6,7 +6,7 @@
 
   <dependencies>
     <dependency>
-      <artifactId>validation</artifactId>
+      <artifactId>validation-core</artifactId>
       <groupId>com.compilit</groupId>
     </dependency>
 
@@ -16,14 +16,14 @@
   </description>
   <modelVersion>4.0.0</modelVersion>
 
-  <name>Compilit domain primitives</name>
+  <name>Compilit - domain primitives</name>
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>${revision}</version>
+    <version>0.1.0</version>
   </parent>
   <url>https://github.com/compilit-framework/domain-primitives</url>
 
-  <version>${revision}</version>
+  <version>0.1.0</version>
 
 </project>

@@ -38,7 +38,7 @@ public interface NumberPredicateProvider {
    * @param first the first (inclusive) constraint. Can be either the high constraint or the low constraint.
    * @return a ChainingPredicate to add the second constraint.
    */
-  default ConstraintAppender<Integer, Predicate<Integer>> isAnIntegerBetween(final int first) {
+  default ConstraintFinisher<Integer, Predicate<Integer>> isAnIntegerBetween(final int first) {
     return NumberPredicate.isAnIntegerBetween(first);
   }
 

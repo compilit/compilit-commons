@@ -6,9 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.compilit.results.assertions.ResultAssertions;
 import com.compilit.results.testutil.TestValue;
 import java.util.ArrayList;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ResultTests {

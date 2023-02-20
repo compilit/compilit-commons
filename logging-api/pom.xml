@@ -11,10 +11,10 @@
   </dependencies>
 
   <modelVersion>4.0.0</modelVersion>
-  <name>Compilit logging API</name>
+  <name>Compilit - logging API</name>
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>${revision}</version>
+    <version>0.1.0</version>
   </parent>
 </project>

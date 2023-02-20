@@ -2,12 +2,81 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.compilit</groupId>
   <artifactId>compilit-framework</artifactId>
+  <version>0.1.0</version>
+  <name>Compilit - framework pom</name>
+  <url>https://github.com/compilit/framework</url>
+  <description>The framework consists of several useful implementations of often needed techniques and technologies
+  </description>
+  <packaging>pom</packaging>
+
+  <developers>
+    <developer>
+      <email>info@compilit.com</email>
+      <id>harveytherabbit</id>
+      <name>Bastiën Bonsel</name>
+    </developer>
+  </developers>
+
+  <properties>
+    <assertj.version>3.24.1</assertj.version>
+    <commons-lang3.version>3.12.0</commons-lang3.version>
+    <jacoco.version>0.8.6</jacoco.version>
+    <jakarta.json-api.version>2.1.1</jakarta.json-api.version>
+    <jdk.version>17</jdk.version>
+    <junit.jupiter.version>5.9.2</junit.jupiter.version>
+    <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+    <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
+    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+    <maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
+    <maven-sonar-plugin.version>3.9.1.2184</maven-sonar-plugin.version>
+    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
+    <maven.compiler.source>${jdk.version}</maven.compiler.source>
+    <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+    <maven.compiler.target>${jdk.version}</maven.compiler.target>
+    <mockito.version>4.0.0</mockito.version>
+    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-boot-dependencies.version>3.0.1</spring-boot-dependencies.version>
+  </properties>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/compilit-framework.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-framework.git</developerConnection>
+    <url>https://github.com/compilit/compilit-framework</url>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://github.com/compilit/compilit-framework/blob/main/LICENSE</url>
+    </license>
+  </licenses>
+
+  <modules>
+    <module>results</module>
+    <module>domain-primitives</module>
+    <module>cryptography-api</module>
+    <module>cryptography-core</module>
+    <module>cqers-mediator-api</module>
+    <module>cqers-mediator-core</module>
+    <module>cqers-mediator-spring</module>
+    <module>validation-api</module>
+    <module>validation-core</module>
+    <module>functions-api</module>
+    <module>functions</module>
+    <module>logging-api</module>
+    <module>logging-spring</module>
+    <module>cryptography-spring</module>
+  </modules>
 
   <build>
-
     <plugins>
-
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
@@ -17,7 +86,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <version>${maven-surefire-plugin.version}</version>
       </plugin>
-
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
         <executions>
@@ -32,7 +100,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <version>${maven-deploy-plugin.version}</version>
       </plugin>
-
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
@@ -51,7 +118,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <version>${maven-release-plugin.version}</version>
       </plugin>
-
       <plugin>
         <artifactId>nexus-staging-maven-plugin</artifactId>
         <configuration>
@@ -63,7 +129,6 @@
         <groupId>org.sonatype.plugins</groupId>
         <version>${nexus-staging-maven-plugin.version}</version>
       </plugin>
-
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
         <executions>
@@ -83,7 +148,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <version>${maven-source-plugin.version}</version>
       </plugin>
-
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
@@ -100,10 +164,9 @@
         <groupId>org.apache.maven.plugins</groupId>
         <version>${maven-javadoc-plugin.version}</version>
       </plugin>
-
     </plugins>
-
   </build>
+
   <dependencies>
     <!-- test dependencies -->
     <dependency>
@@ -124,23 +187,20 @@
       <scope>test</scope>
       <version>${junit.jupiter.version}</version>
     </dependency>
-
     <!-- Java extensions -->
     <dependency>
       <artifactId>jakarta.annotation-api</artifactId>
       <groupId>jakarta.annotation</groupId>
     </dependency>
-
     <!--third party dependencies -->
     <dependency>
       <artifactId>commons-lang3</artifactId>
       <groupId>org.apache.commons</groupId>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
-
     <dependencies>
-
       <dependency>
         <artifactId>spring-boot-dependencies</artifactId>
         <groupId>org.springframework.boot</groupId>
@@ -148,97 +208,96 @@
         <type>pom</type>
         <version>${spring-boot-dependencies.version}</version>
       </dependency>
-
       <dependency>
         <artifactId>domain-primitives</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
         <artifactId>results</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
         <artifactId>logging-api</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
-        <artifactId>logging-aop</artifactId>
+        <artifactId>logging-spring</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
         <artifactId>functions-api</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
         <artifactId>functions</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
         <artifactId>cryptography-api</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
-        <artifactId>cryptography</artifactId>
+        <artifactId>cryptography-core</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
-        <artifactId>json-patch-api</artifactId>
+        <artifactId>cryptography-spring</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
-      </dependency>
-      <dependency>
-        <artifactId>json-patch</artifactId>
-        <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
         <artifactId>cqers-mediator-api</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
-        <artifactId>cqers-mediator</artifactId>
+        <artifactId>cqers-mediator-core</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
+      </dependency>
+      <dependency>
+        <artifactId>cqers-mediator-core</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>0.1.0</version>
+        <type>test-jar</type>
+      </dependency>
+      <dependency>
+        <artifactId>cqers-mediator-spring</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
         <artifactId>validation-api</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
       <dependency>
-        <artifactId>validation</artifactId>
+        <artifactId>validation-core</artifactId>
         <groupId>com.compilit</groupId>
-        <version>${revision}</version>
+        <version>0.1.0</version>
       </dependency>
-<!--third party dependencies -->
+      <!--third party dependencies -->
       <dependency>
         <artifactId>commons-lang3</artifactId>
         <groupId>org.apache.commons</groupId>
         <version>${commons-lang3.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven-jar-plugin.version}</version>
+      </dependency>
     </dependencies>
-
   </dependencyManagement>
-  <!--  <version>${revision}${sha1}${changelist}</version>-->
-  <description>The framework consists of several useful implementations of often needed techniques and technologies
-  </description>
 
-  <developers>
-    <developer>
-      <email>harvey.rabbit@protonmail.com</email>
-      <id>harveytherabbit</id>
-      <name>Bastiën Bonsel</name>
-    </developer>
-  </developers>
   <distributionManagement>
     <repository>
       <id>ossrh</id>
@@ -249,41 +308,8 @@
       <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
-  <groupId>com.compilit</groupId>
-
-  <licenses>
-    <license>
-      <name>MIT</name>
-      <url>https://github.com/compilit-framework/compilit-framework/blob/main/LICENSE</url>
-    </license>
-  </licenses>
-
-  <modelVersion>4.0.0</modelVersion>
-  <modules>
-    <module>results</module>
-    <module>domain-primitives</module>
-    <module>cryptography-api</module>
-    <module>cryptography</module>
-    <module>json-patch-api</module>
-    <module>json-patch</module>
-    <module>cqers-mediator-api</module>
-    <module>cqers-mediator</module>
-    <module>validation-api</module>
-    <module>validation</module>
-    <module>functions-api</module>
-    <module>functions</module>
-    <module>logging-api</module>
-    <module>logging-aspects</module>
-    <module>cqers-mediator-events</module>
-    <module>cqers-mediator-spring</module>
-  </modules>
-
-  <name>Compilit framework pom</name>
-
-  <packaging>pom</packaging>
 
   <profiles>
-
     <profile>
       <build>
         <plugins>
@@ -316,7 +342,6 @@
       </build>
       <id>report-code-quality</id>
     </profile>
-
     <profile>
       <activation>
         <property>
@@ -348,45 +373,6 @@
       </build>
       <id>release-sign-artifacts</id>
     </profile>
-
   </profiles>
 
-  <properties>
-    <assertj.version>3.24.1</assertj.version>
-    <commons-lang3.version>3.12.0</commons-lang3.version>
-    <jacoco.version>0.8.6</jacoco.version>
-    <jakarta.json-api.version>2.1.1</jakarta.json-api.version>
-    <jdk.version>17</jdk.version>
-
-    <junit.jupiter.version>5.9.2</junit.jupiter.version>
-    <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
-    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-    <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
-    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-    <maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
-    <maven-sonar-plugin.version>3.9.1.2184</maven-sonar-plugin.version>
-    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-    <maven.compiler.source>${jdk.version}</maven.compiler.source>
-
-    <maven.compiler.target>${jdk.version}</maven.compiler.target>
-    <mockito.version>4.0.0</mockito.version>
-    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-    <revision>0.1.0</revision>
-
-    <spring-boot-dependencies.version>3.0.1</spring-boot-dependencies.version>
-  </properties>
-
-  <scm>
-    <connection>scm:git@github.com:compilit/compilit-framework.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-framework.git</developerConnection>
-    <url>https://github.com/compilit-framework/compilit-framework</url>
-  </scm>
-
-  <url>https://github.com/compilit-framework/compilit-framework</url>
-
-  <version>${revision}</version>
 </project>

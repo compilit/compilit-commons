@@ -12,5 +12,5 @@ public interface ThrowingRunnable<E extends Exception> {
    *
    * @throws E the potential checked exception
    */
-  void run() throws E;
+  void run() throws Exception;
 }

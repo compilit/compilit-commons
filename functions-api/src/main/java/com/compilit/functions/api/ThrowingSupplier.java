@@ -14,5 +14,5 @@ public interface ThrowingSupplier<T, E extends Exception> {
    * @return the result of the supplier
    * @throws E the potential checked exception
    */
-  T get() throws E;
+  T get() throws Exception;
 }

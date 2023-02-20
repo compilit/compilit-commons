@@ -1,5 +1,7 @@
 package com.compilit.logging.api;
 
+import static com.compilit.logging.api.DefaultMessages.STARTING_METHOD;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,5 +14,5 @@ public @interface LogBefore {
 
   Level level() default Level.INFO;
 
-  String message() default "Starting method %s";
+  String message() default STARTING_METHOD;
 }

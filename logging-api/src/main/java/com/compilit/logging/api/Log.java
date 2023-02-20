@@ -1,6 +1,9 @@
 package com.compilit.logging.api;
 
-import static com.compilit.logging.api.Scope.ALL;
+import static com.compilit.logging.api.DefaultMessages.EXCEPTION_THROWN;
+import static com.compilit.logging.api.DefaultMessages.FINISHED_METHOD;
+import static com.compilit.logging.api.DefaultMessages.STARTING_METHOD;
+import static com.compilit.logging.api.LogScope.ALL;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,15 +15,15 @@ import org.slf4j.event.Level;
 @Target(ElementType.METHOD)
 public @interface Log {
 
-  Scope scope() default ALL;
+  LogScope scope() default ALL;
 
   Level level() default Level.INFO;
 
-  String before() default "Starting method %s";
+  String before() default STARTING_METHOD;
 
-  String after() default "Finished method %s";
+  String after() default FINISHED_METHOD;
 
-  String onException() default "Method %s threw an exception: %s";
+  String onException() default EXCEPTION_THROWN;
 
   boolean rethrow() default false;
 }

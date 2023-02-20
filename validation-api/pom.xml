@@ -8,10 +8,10 @@
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>${revision}</version>
+    <version>0.1.0</version>
   </parent>
 
-  <name>Compilit validation API</name>
+  <name>Compilit - validation API</name>
   <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>

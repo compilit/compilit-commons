@@ -1,6 +1,6 @@
 package com.compilit.validation.api.predicates;
 
-import com.compilit.validation.api.ConstraintAppender;
+import com.compilit.validation.api.ConstraintFinisher;
 import java.util.function.Predicate;
 
 public final class DecimalNumberPredicate {
@@ -30,8 +30,8 @@ public final class DecimalNumberPredicate {
    * @param first the first (inclusive) constraint. Can be either the high constraint or the low constraint.
    * @return a ChainingPredicate to add the second constraint.
    */
-  public static ConstraintAppender<Double, Predicate<Double>> isADecimalNumberBetween(final double first) {
-    return new NumberConstraintAppender<>(first);
+  public static ConstraintFinisher<Double, Predicate<Double>> isADecimalNumberBetween(final double first) {
+    return new NumberConstraintFinisher<>(first);
   }
 
   /**

@@ -390,6 +390,7 @@ public interface Result<T> {
   static <T> Result<T> resultOf(Supplier<T> supplier) {
     try {
       var result = supplier.get();
+      //todo: check if this works for both successful and failed results
       if (result instanceof Result<?> r)
         return Result.transform(r);
       return Result.success(result);

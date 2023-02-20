@@ -1,6 +1,6 @@
 package com.compilit.validation.api.predicates;
 
-import com.compilit.validation.api.ConstraintAppender;
+import com.compilit.validation.api.ConstraintFinisher;
 import java.util.function.Predicate;
 
 public final class StringPredicate extends ObjectPredicate<String> {
@@ -129,8 +129,8 @@ public final class StringPredicate extends ObjectPredicate<String> {
    * @param length the exact length of the String.
    * @return ChainingPredicate to continue adding rules.
    */
-  public static ConstraintAppender<Integer, Predicate<String>> hasALengthBetween(final int length) {
-    return new StringLengthConstraintAppender(length);
+  public static ConstraintFinisher<Integer, Predicate<String>> hasALengthBetween(final int length) {
+    return new StringLengthConstraintFinisher(length);
   }
 
 }

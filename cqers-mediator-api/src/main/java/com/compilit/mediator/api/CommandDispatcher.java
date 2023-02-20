@@ -9,7 +9,7 @@ package com.compilit.mediator.api;
 public interface CommandDispatcher {
 
   /**
-   * Dispatch the Command to the Mediator in order to handle it.
+   * Send the command into the mediator. If a matching handler is found, return the result of this handler.
    *
    * @param command The specific Command you wish to send to the Mediator.
    * @param <T>     The return type of the Command.

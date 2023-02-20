@@ -1,56 +1,51 @@
 package com.compilit.mediator;
 
 import com.compilit.mediator.api.CommandDispatcher;
+import com.compilit.mediator.api.CommandHandler;
 import com.compilit.mediator.api.EventEmitter;
+import com.compilit.mediator.api.EventHandler;
 import com.compilit.mediator.api.QueryDispatcher;
+import com.compilit.mediator.api.QueryHandler;
+import java.util.List;
+import java.util.StringJoiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.GenericApplicationContext;
 
 @Configuration
-class MediatorConfiguration {
+public class MediatorConfiguration {
 
   private static final Logger logger = LoggerFactory.getLogger(MediatorConfiguration.class);
 
   @Bean
-  CommandHandlerProvider createCommandHandlerProvider(GenericApplicationContext genericApplicationContext) {
-    logger.info("Registered CommandHandlers");
-    return new CommandHandlerProvider(genericApplicationContext);
+  CommandHandlerProvider createCommandHandlerProvider(List<CommandHandler<?,?>> commandHandlers) {
+    String message = createMessage(commandHandlers, "CommandHandlers");
+    logger.info(message);
+    return new CommandHandlerProvider(commandHandlers);
+  }
+  @Bean
+  QueryHandlerProvider createQueryHandlerProvider(List<QueryHandler<?,?>> queryHandlers) {
+    String message = createMessage(queryHandlers, "QueryHandlers");
+    logger.info(message);
+    return new QueryHandlerProvider(queryHandlers);
   }
 
   @Bean
-  QueryHandlerProvider createQueryHandlerProvider(GenericApplicationContext genericApplicationContext) {
-    logger.info("Registered QueryHandlers");
-    return new QueryHandlerProvider(genericApplicationContext);
+  EventHandlerProvider createEventHandlerProvider(List<EventHandler<?>> eventHandlers) {
+    String message = createMessage(eventHandlers, "EventHandlers");
+    logger.info(message);
+    return new EventHandlerProvider(eventHandlers);
   }
-
-  @Bean
-  EventHandlerProvider createEventHandlerProvider(GenericApplicationContext genericApplicationContext) {
-    logger.info("Registered EventHandlers");
-    return new EventHandlerProvider(genericApplicationContext);
-  }
-
-//  @Bean
-//  AnnotationBasedEventHandler annotationBasedEventHandler(EventHandlerProvider eventEmitter,
-//                                                          GenericApplicationContext genericApplicationContext) {
-//    logger.info("Registered AnnotationBasedEventHandler");
-//    var x = new AnnotationBasedEventHandler(eventEmitter);
-//    x.resolveEventHandlers(genericApplicationContext);
-//    return x;
-//  }
 
   @Bean
   Mediator createMediator(
     CommandHandlerProvider commandHandlerProvider,
     QueryHandlerProvider queryHandlerProvider,
     EventHandlerProvider eventHandlerProvider
-//    AnnotationBasedEventHandler annotationBasedEventHandler
   ) {
-    return new RequestMediator(commandHandlerProvider, queryHandlerProvider, eventHandlerProvider
-//                               annotationBasedEventHandler
-    );
+    return new RequestMediator(commandHandlerProvider, queryHandlerProvider, eventHandlerProvider);
   }
 
   @Bean
@@ -68,4 +63,21 @@ class MediatorConfiguration {
     return new MediatingEventEmitter(mediator);
   }
 
+  @Bean
+  InitializingBean createInstanceProvider(CommandDispatcher commandDispatcher, QueryDispatcher queryDispatcher, EventEmitter eventEmitter)
+    throws Exception {
+    return new Dispatchers(commandDispatcher, queryDispatcher, eventEmitter);
+  }
+
+  private static String createMessage(List<?> requestHandlers, String name) {
+    var handlers = toString(requestHandlers);
+    var messageBuilder = new StringJoiner("\n");
+    messageBuilder.add(String.format("Registered %s:", name));
+    handlers.forEach(handler -> messageBuilder.add(" - " + handler));
+    return messageBuilder.toString();
+  }
+
+  private static List<String> toString(List<?> objects) {
+    return objects.stream().map(o -> o.getClass().getName()).toList();
+  }
 }

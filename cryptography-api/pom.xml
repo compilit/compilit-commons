@@ -8,8 +8,8 @@
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>${revision}</version>
+    <version>0.1.0</version>
   </parent>
 
-  <name>Compilit cryptography API</name>
+  <name>Compilit - cryptography API</name>
 </project>

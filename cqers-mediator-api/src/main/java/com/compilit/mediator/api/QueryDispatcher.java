@@ -9,7 +9,7 @@ package com.compilit.mediator.api;
 public interface QueryDispatcher {
 
   /**
-   * Dispatch the Query to the Mediator in order to handle it.
+   * Send the query into the mediator. If a matching handler is found, return the result of this handler.
    *
    * @param query The specific Query to send to the Mediator.
    * @param <T>   The return type.

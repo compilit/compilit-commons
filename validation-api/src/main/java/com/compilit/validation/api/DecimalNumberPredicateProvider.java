@@ -9,7 +9,7 @@ public interface DecimalNumberPredicateProvider {
    * @param first the first (inclusive) constraint. Can be either the high constraint or the low constraint.
    * @return a ChainingPredicate to add the second constraint.
    */
-  default ConstraintAppender<Double, Predicate<Double>> isADecimalNumberBetween(final double first) {
+  default ConstraintFinisher<Double, Predicate<Double>> isADecimalNumberBetween(final double first) {
     return DecimalNumberPredicate.isADecimalNumberBetween(first);
   }
 

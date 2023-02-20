@@ -16,5 +16,5 @@ public interface ThrowingFunction<I, O, E extends Exception> {
    * @return the result of the function
    * @throws E the potential checked exception
    */
-  O apply(I input) throws E;
+  O apply(I input) throws Exception;
 }

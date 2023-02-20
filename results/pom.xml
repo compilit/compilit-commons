@@ -16,14 +16,14 @@
   </description>
   <modelVersion>4.0.0</modelVersion>
 
-  <name>Compilit results</name>
+  <name>Compilit - results</name>
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>${revision}</version>
+    <version>0.1.0</version>
   </parent>
   <url>https://github.com/compilit-framework/results</url>
 
-  <version>${revision}</version>
+  <version>0.1.0</version>
 
 </project>

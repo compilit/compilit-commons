@@ -1,6 +1,6 @@
 package com.compilit.validation.api.predicates;
 
-import com.compilit.validation.api.ConstraintAppender;
+import com.compilit.validation.api.ConstraintFinisher;
 import java.util.function.Predicate;
 
 public final class NumberPredicate {
@@ -58,8 +58,8 @@ public final class NumberPredicate {
    * @param first the first (inclusive) constraint. Can be either the high constraint or the low constraint.
    * @return a ChainingPredicate to add the second constraint.
    */
-  public static ConstraintAppender<Integer, Predicate<Integer>> isAnIntegerBetween(final int first) {
-    return new NumberConstraintAppender<>(first);
+  public static ConstraintFinisher<Integer, Predicate<Integer>> isAnIntegerBetween(final int first) {
+    return new NumberConstraintFinisher<>(first);
   }
 
   /**
