@@ -1,4 +1,4 @@
-package com.compilit.functions.api;
+package com.compilit.functions;
 
 /**
  * @param <T> The type you wish to return with the Supplier

@@ -1,4 +1,4 @@
-package com.compilit.functions.api;
+package com.compilit.functions;
 
 /**
  * @param <I> The type that goes into the Function

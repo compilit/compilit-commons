@@ -2,21 +2,30 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>validation-api</artifactId>
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>0.1.0</version>
+    <version>${revision}</version>
   </parent>
 
-  <name>Compilit - validation API</name>
+  <name>Compilit - Validation API</name>
+  <artifactId>validation-api</artifactId>
+  <description>The API for the corresponding Validation Core library.
+  </description>
+  <url>https://github.com/compilit-framework/validation-api</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/validation-api.git</connection>
+    <developerConnection>scm:git@github.com:compilit/validation-api.git</developerConnection>
+    <url>https://github.com/compilit-framework/validation-api</url>
+  </scm>
+
   <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
   </dependencies>
-
 </project>

@@ -2,7 +2,7 @@ package com.compilit.results;
 
 public class NotFoundException extends RuntimeException {
 
-  public NotFoundException(String message) {
+  NotFoundException(String message) {
     super(message);
   }
 }

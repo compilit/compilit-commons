@@ -5,25 +5,6 @@ An implementation of the Mediator/CQERS pattern using Spring.
 This library is an extension of the cqers-mediator-core/api package. It adds a convenient way to bootstrap all necessary
 objects into the Spring application context.
 
-The purpose of this library is to take away all the boilerplate code that is connected to
-implementing this pattern. This library works to achieve several goals:
-
-1. Make your application as loosely coupled as possible.
-2. Enforce CQRS.
-
-It does this by providing a simple API consisting of a CommandDispatcher, a QueryDispatcher and an
-EventEmitter. These are the only dependencies you'll ever need to inject in any of your
-classes/services that wish to interact with others. The internal Mediator will handle all of this
-interaction. The interaction takes place through the respecitive Commands Queries and Events which
-are internally connected to their CommandHandler, QueryHandler and EventHandler counterparts.
-
-This implementation was inspired by <a href="https://github.com/jkratz55/spring-mediatR">Spring
-MediatR</a>
-and <a href=https://github.com/jbogard/MediatR>MediatR for .NET</a>.
-
-I do not claim this is a better implementation than the aforementioned JVM implementation. Only the
-initial configuration is a bit easier/less verbose.
-
 # Installation
 
 First make sure you are in fact using Spring as your IOC supplier. This project depends on a provided spring-context

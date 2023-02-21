@@ -8,6 +8,17 @@ Say you have a method that could potentially throw an exception, and in that cas
 return either null or a default value, then this package would provide you with that functionality.
 The API is quite self-explanatory. Here is a little example, however.
 
+# Installation
+
+Get this dependency with the latest version
+
+```xml
+    <dependency>
+      <artifactId>functions</artifactId>
+      <groupId>com.compilit</groupId>
+    </dependency>
+```
+
 ### usage
 
 ```java

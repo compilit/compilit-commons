@@ -1,5 +1,7 @@
 package com.compilit.results;
 
+import static com.compilit.functions.FunctionResultGuards.orNull;
+
 import com.compilit.functions.FunctionResultGuards;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -428,15 +430,19 @@ public interface Result<T> {
   }
 
   /**
-   * Transforms an existing Result into another one while retaining the status. Works as an adapter. Content will be
-   * lost and therefor this function should only be used to transform an already failed result into something the client
-   * can use. Example: pass an Integer Result, but return a String Result.
+   * Transforms an existing Result into another one while retaining the status. Works as an adapter. If the contents of the incoming Result are incompatible with the expected Result the content will be
+   * lost.
    *
    * @param result the existing Result.
    * @param <T>    the content type of the new Result.
    * @return Result.
    */
   static <T> Result<T> transform(Result<?> result) {
+    if (result.hasContents()) {
+      T contents = orNull((Supplier<? extends T>) () -> (T) result.getContents().get());
+      if (contents != null)
+        return transform(result, contents);
+    }
     return transform(result, null);
   }
 

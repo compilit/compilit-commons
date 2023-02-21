@@ -40,3 +40,7 @@ build/
 **/.idea/
 /**/.idea/
 
+### Custom
+/.flattened-pom.xml
+/*/.flattened-pom.xml
+

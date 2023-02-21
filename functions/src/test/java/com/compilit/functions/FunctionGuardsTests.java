@@ -16,7 +16,6 @@ import static com.compilit.functions.TestFunctions.runtimeExceptionThrowingSuppl
 import static com.compilit.functions.TestFunctions.testFunction;
 import static com.compilit.functions.TestFunctions.testSupplier;
 
-import com.compilit.functions.api.ThrowingSupplier;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 

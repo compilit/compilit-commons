@@ -15,15 +15,17 @@ class ResultTests {
     var result = Result.success("test");
     assertThat(result.isEmpty()).isFalse();
     var actual = Result.<Integer>transform(result);
-    assertThat(actual.isEmpty()).isTrue();
-    assertThat(actual.isSuccessful()).isTrue();
+    ResultAssertions.assertThat(actual)
+                    .hasContent()
+                    .isValidSuccessResult();
   }
 
   @Test
   void fromResult_withoutContent_shouldReturnSameStatusWithoutContent() {
     var result = Result.success(TestValue.TEST_CONTENT);
     var actual = Result.<Integer>transform(result);
-    ResultAssertions.assertThat(actual).isEmpty()
+    ResultAssertions.assertThat(actual)
+                    .hasContent()
                     .isValidSuccessResult();
   }
 

@@ -3,16 +3,23 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>com.compilit</groupId>
     <artifactId>compilit-framework</artifactId>
-    <version>0.1.0</version>
+    <version>${revision}</version>
   </parent>
 
+  <name>Compilit - Cryptography Spring extension</name>
   <artifactId>cryptography-spring</artifactId>
-  <version>0.1.0</version>
-  <name>Compilit - Cryptography Spring</name>
   <description>An extension of the core cryptography package to easily bootstrap the services</description>
+  <url>https://github.com/compilit-framework/cryptography-spring</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/cryptography-spring.git</connection>
+    <developerConnection>scm:git@github.com:compilit/cryptography-spring.git</developerConnection>
+    <url>https://github.com/compilit-framework/cryptography-spring</url>
+  </scm>
 
   <dependencies>
     <dependency>

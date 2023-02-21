@@ -2,7 +2,26 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>compilit-framework</artifactId>
+    <groupId>com.compilit</groupId>
+    <version>${revision}</version>
+  </parent>
+
+  <name>Compilit - Results</name>
   <artifactId>results</artifactId>
+  <description>A small package that enables you to encapsulate and propagate processing/validation
+    results with their corresponding message and status.
+  </description>
+  <url>https://github.com/compilit-framework/results</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/results.git</connection>
+    <developerConnection>scm:git@github.com:compilit/results.git</developerConnection>
+    <url>https://github.com/compilit-framework/results</url>
+  </scm>
 
   <dependencies>
     <dependency>
@@ -10,20 +29,5 @@
       <groupId>com.compilit</groupId>
     </dependency>
   </dependencies>
-
-  <description>A small package that enables you to encapsulate and propagate processing/validation
-    results with their corresponding message and status.
-  </description>
-  <modelVersion>4.0.0</modelVersion>
-
-  <name>Compilit - results</name>
-  <parent>
-    <artifactId>compilit-framework</artifactId>
-    <groupId>com.compilit</groupId>
-    <version>0.1.0</version>
-  </parent>
-  <url>https://github.com/compilit-framework/results</url>
-
-  <version>0.1.0</version>
 
 </project>

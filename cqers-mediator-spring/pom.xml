@@ -7,11 +7,19 @@
   <parent>
     <groupId>com.compilit</groupId>
     <artifactId>compilit-framework</artifactId>
-    <version>0.1.0</version>
+    <version>${revision}</version>
   </parent>
 
+  <name>Compilit - CQ(E)RS Mediator Spring extension</name>
   <artifactId>cqers-mediator-spring</artifactId>
-  <version>0.1.0</version>
+  <description>An extension for Spring to easily bootstrap the CQ(E)RS Mediator library</description>
+  <url>https://github.com/compilit-framework/cqers-mediator-spring</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/cqers-mediator-spring.git</connection>
+    <developerConnection>scm:git@github.com:compilit/cqers-mediator-spring.git</developerConnection>
+    <url>https://github.com/compilit-framework/cqers-mediator-spring</url>
+  </scm>
 
   <dependencies>
     <dependency>

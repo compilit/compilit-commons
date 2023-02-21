@@ -1,4 +1,4 @@
-package com.compilit.functions.api;
+package com.compilit.functions;
 
 /**
  * @param <E> The possible (checked) exception which can be thrown from the Runnable

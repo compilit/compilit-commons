@@ -3,8 +3,7 @@
 The first version of this package only adds a few simple annotations which, if you are using Spring AOP, will add a few
 default or custom logging statements to each annotated method.
 The necessary spring-boot-starter-aop dependency has scope "provided", since I want to make sure nobody actually blindly
-takes in
-this package without realizing you'd pull in the entire spring-boot-starter-aop dependency. So you are only able to use
+takes in this package without realizing you'd pull in the entire spring-boot-starter-aop dependency. So you are only able to use
 this library of this dependency is already on your classpath.
 
 # Installation
@@ -14,7 +13,7 @@ Get this dependency with the latest version
 ```xml
 
 <dependency>
-  <artifactId>domain-primitives</artifactId>
+  <artifactId>logging-spring</artifactId>
   <groupId>com.compilit</groupId>
 </dependency>
 ```
@@ -28,21 +27,21 @@ import api.com.compilit.logging.Log;
 import api.com.compilit.logging.LogAfter;
 import api.com.compilit.logging.LogBefore;
 import api.com.compilit.logging.Log;
+import com.compilit.logging.api.LogOnException;
 
 class Example {
 
   @Log //does everything the other annotations do combined
   @LogBefore //logs a message before the method is executed
   @LogAfter // logs a message after the method has executed successfully
-  @Log
-    // logs a message if an exception occurred
+  @LogOnException // logs a message if an exception occurred
   void someMethod() {
     (...)
   }
 }
 ```
 
-Each annotation provides a default message a log level, which can be altered as desired:
+Each annotation provides a default message and a log level, which can be altered as desired:
 
 ```java
 
@@ -60,7 +59,7 @@ class Example {
 
 # Exception handling
 
-The @Log annotation will catch any uncaught exception thrown by your methods and log the desired, if you wish
+The @LogOnException annotation will catch any uncaught exception thrown by your methods and log the desired, if you wish
 to handle the exception yourself after logging the exception, you can add the "rethrow = true" params to the annotation:
 
 ```java
@@ -68,7 +67,7 @@ to handle the exception yourself after logging the exception, you can add the "r
 
 class Example {
 
-  @Log(message = "This message will be logged and then the exception will be rethrown", rethrow = true)
+  @LogOnException(message = "This message will be logged and then the exception will be rethrown", rethrow = true)
   void someMethod() {
     throw new RuntimeException();
   }

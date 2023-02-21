@@ -2,9 +2,6 @@ package com.compilit.functions;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
-import com.compilit.functions.api.ThrowingFunction;
-import com.compilit.functions.api.ThrowingRunnable;
-import com.compilit.functions.api.ThrowingSupplier;
 
 class TestFunctions {
   static final String TEST_VALUE = "test";

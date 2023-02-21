@@ -2,14 +2,22 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>cryptography-api</artifactId>
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>0.1.0</version>
+    <version>${revision}</version>
   </parent>
 
-  <name>Compilit - cryptography API</name>
+  <name>Compilit - Cryptography API</name>
+  <artifactId>cryptography-api</artifactId>
+  <description>A simple api for basic cryptographic operations</description>
+  <url>https://github.com/compilit-framework/cryptography-api</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/cryptography-api.git</connection>
+    <developerConnection>scm:git@github.com:compilit/cryptography-api.git</developerConnection>
+    <url>https://github.com/compilit-framework/cryptography-api</url>
+  </scm>
 </project>

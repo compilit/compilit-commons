@@ -2,10 +2,26 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>compilit-framework</artifactId>
+    <groupId>com.compilit</groupId>
+    <version>${revision}</version>
+  </parent>
+
+  <name>Compilit -Validation core</name>
   <artifactId>validation-core</artifactId>
+  <description>A small package that enables validation of (business) rules through a fluent API.</description>
+  <url>https://github.com/compilit-framework/validation-core</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/validation-core.git</connection>
+    <developerConnection>scm:git@github.com:compilit/validation-core.git</developerConnection>
+    <url>https://github.com/compilit-framework/validation-core</url>
+  </scm>
 
   <dependencies>
-
     <dependency>
       <artifactId>validation-api</artifactId>
       <groupId>com.compilit</groupId>
@@ -15,18 +31,4 @@
       <groupId>org.slf4j</groupId>
     </dependency>
   </dependencies>
-
-  <description>A small package that enables validation of (business) rules through a fluent API.</description>
-  <modelVersion>4.0.0</modelVersion>
-
-  <name>Compilit - validation</name>
-  <parent>
-    <artifactId>compilit-framework</artifactId>
-    <groupId>com.compilit</groupId>
-    <version>0.1.0</version>
-  </parent>
-  <url>https://github.com/compilit-framework/validation</url>
-
-  <version>0.1.0</version>
-
 </project>

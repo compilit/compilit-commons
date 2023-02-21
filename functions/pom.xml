@@ -2,26 +2,25 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>functions</artifactId>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.compilit</groupId>
-      <artifactId>functions-api</artifactId>
-    </dependency>
-  </dependencies>
-
-  <description>A package providing some useful but simple functions for dealing with null values, exceptions and fuzzy
-    matching
-  </description>
-  <modelVersion>4.0.0</modelVersion>
+<modelVersion>4.0.0</modelVersion>
 
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>0.1.0</version>
+    <version>${revision}</version>
   </parent>
-  <name>Compilit - functions</name>
+
+  <name>Compilit - Functions</name>
+  <artifactId>functions</artifactId>
+  <description>A package providing some useful but simple functions for dealing with null values, exceptions and fuzzy
+    matching
+  </description>
   <url>https://github.com/compilit-framework/functions</url>
-  <version>0.1.0</version>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/functions.git</connection>
+    <developerConnection>scm:git@github.com:compilit/functions.git</developerConnection>
+    <url>https://github.com/compilit-framework/functions</url>
+  </scm>
+
 </project>

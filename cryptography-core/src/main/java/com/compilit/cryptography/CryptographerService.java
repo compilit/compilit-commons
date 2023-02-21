@@ -1,6 +1,7 @@
 package com.compilit.cryptography;
 
 import com.compilit.cryptography.api.Cryptographer;
+import java.io.Serializable;
 import javax.crypto.SecretKey;
 
 /**
@@ -8,16 +9,30 @@ import javax.crypto.SecretKey;
  */
 class CryptographerService implements Cryptographer {
 
-  private final int keyLength;
-  private final int iterationCount;
+  private final CryptographerConfiguration cryptographerConfiguration;
 
-  CryptographerService(int keyLength, int iterationCount) {
-    this.keyLength = keyLength;
-    this.iterationCount = iterationCount;
+  /**
+   * Create a default instance of the CryptographerService.
+   * Uses a key length of 256 and an iteration count of 65536
+   */
+  CryptographerService(CryptographerConfiguration cryptographerConfiguration) {
+    this.cryptographerConfiguration = cryptographerConfiguration;
+  }
+
+
+  @Override
+  public <T extends Serializable> byte[] encrypt(String algorithm, T valueToEncrypt, byte[] salt, SecretKey key) {
+    return CryptoFunctions.encrypt(algorithm, valueToEncrypt, salt, key);
+  }
+
+  @Override
+  public <T extends Serializable> T decrypt(String algorithm, byte[] encryptedValue, String secret) {
+    return CryptoFunctions.decrypt(algorithm, encryptedValue, secret, cryptographerConfiguration.keyLength(), cryptographerConfiguration.iterationCount());
   }
 
   @Override
   public SecretKey generateKey(String secret, byte[] salt) {
-    return Cryptographer.super.generateKey(secret, salt, keyLength, iterationCount);
+    return CryptoFunctions.generateKey(secret, salt, cryptographerConfiguration.keyLength(), cryptographerConfiguration.iterationCount());
   }
+
 }

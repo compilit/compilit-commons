@@ -8,7 +8,7 @@ Get this dependency with the latest version
 
 ```xml
     <dependency>
-      <artifactId>cryptography</artifactId>
+      <artifactId>cryptography-core</artifactId>
       <groupId>com.compilit</groupId>
     </dependency>
 ```

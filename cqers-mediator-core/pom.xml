@@ -7,15 +7,19 @@
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>0.1.0</version>
+    <version>${revision}</version>
   </parent>
 
-  <artifactId>cqers-mediator-core</artifactId>
-  <version>0.1.0</version>
   <name>Compilit - CQ(E)RS mediator Core</name>
+  <artifactId>cqers-mediator-core</artifactId>
   <description>An implementation of the mediator pattern while applying CQRS with added Events</description>
   <url>https://github.com/compilit-framework/cqers-mediator-core</url>
 
+  <scm>
+    <connection>scm:git@github.com:compilit/cqers-mediator-core.git</connection>
+    <developerConnection>scm:git@github.com:compilit/cqers-mediator-core.git</developerConnection>
+    <url>https://github.com/compilit-framework/cqers-mediator-core</url>
+  </scm>
 
   <dependencies>
     <dependency>
@@ -33,7 +37,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.2</version>
         <executions>
           <execution>
             <goals>

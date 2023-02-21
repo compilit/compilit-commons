@@ -7,13 +7,18 @@
   <parent>
     <artifactId>compilit-framework</artifactId>
     <groupId>com.compilit</groupId>
-    <version>0.1.0</version>
+    <version>${revision}</version>
   </parent>
 
-  <artifactId>cqers-mediator-api</artifactId>
-  <version>0.1.0</version>
   <name>Compilit - CQ(E)RS mediator API</name>
-  <description>The API the mediator pattern while applying CQRS with added Events</description>
+  <artifactId>cqers-mediator-api</artifactId>
+  <description>The API for the corresponding CQ(E)RS Mediator Core library</description>
   <url>https://github.com/compilit-framework/cqers-mediator-api</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/cqers-mediator-api.git</connection>
+    <developerConnection>scm:git@github.com:compilit/cqers-mediator-api.git</developerConnection>
+    <url>https://github.com/compilit-framework/cqers-mediator-api</url>
+  </scm>
 
 </project>

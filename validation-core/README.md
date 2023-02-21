@@ -9,7 +9,7 @@ Get this dependency with the latest version.
 ```xml
 
 <dependency>
-    <artifactId>validation</artifactId>
+    <artifactId>validation-core</artifactId>
     <groupId>com.compilit</groupId>
 </dependency>
 ```

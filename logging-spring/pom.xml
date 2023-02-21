@@ -2,9 +2,27 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>logging-spring</artifactId>
-  <dependencies>
+  <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <artifactId>compilit-framework</artifactId>
+    <groupId>com.compilit</groupId>
+    <version>${revision}</version>
+  </parent>
+
+  <name>Compilit - Logging Spring extension</name>
+  <artifactId>logging-spring</artifactId>
+  <description>A package which will allow you to add simple (non-structured) log statements to your methods
+  </description>
+  <url>https://github.com/compilit-framework/logging-spring</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/logging-spring.git</connection>
+    <developerConnection>scm:git@github.com:compilit/logging-spring.git</developerConnection>
+    <url>https://github.com/compilit-framework/logging-spring</url>
+  </scm>
+
+  <dependencies>
     <dependency>
       <artifactId>spring-boot-starter-aop</artifactId>
       <groupId>org.springframework.boot</groupId>
@@ -14,11 +32,12 @@
       <artifactId>logging-api</artifactId>
       <groupId>com.compilit</groupId>
     </dependency>
+
+    <!-- Test dependencies   -->
     <dependency>
       <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
       <scope>test</scope>
-      <version>${logback-classic.version}</version>
     </dependency>
     <dependency>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -26,19 +45,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <name>Compilit - logging aspects</name>
-  <description>A package which will allow you to add simple (non-structured) log statements to your methods
-  </description>
-
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>compilit-framework</artifactId>
-    <groupId>com.compilit</groupId>
-    <version>0.1.0</version>
-  </parent>
-  <properties>
-    <logback-classic.version>1.4.5</logback-classic.version>
-  </properties>
-  <url>https://github.com/compilit-framework/logging-aop</url>
 </project>
