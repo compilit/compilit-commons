@@ -11,17 +11,20 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class CryptographerServiceTest {
 
-  private final String secret = RandomStringUtils.randomAscii(32);
+  private static final String secret = RandomStringUtils.randomAscii(32);
 
   public static Stream<Arguments> testCases() {
     return Stream.of(
-      Arguments.arguments(new CryptographerConfiguration(KeyLength.BITS_128,
+      Arguments.arguments(new CryptographerConfiguration(secret,
+                                                         KeyLength.BITS_128,
                                                          1000
       )),
-      Arguments.arguments(new CryptographerConfiguration(KeyLength.BITS_192,
+      Arguments.arguments(new CryptographerConfiguration(secret,
+                                                         KeyLength.BITS_192,
                                                          1000
       )),
-      Arguments.arguments(new CryptographerConfiguration(KeyLength.BITS_256,
+      Arguments.arguments(new CryptographerConfiguration(secret,
+                                                         KeyLength.BITS_256,
                                                          1000
       ))
     );
@@ -32,9 +35,9 @@ class CryptographerServiceTest {
   void encryptAndDecrypt_shouldEncryptAndDecryptValue(CryptographerConfiguration cryptographerConfiguration) {
     var cryptographerService = new CryptographerService(cryptographerConfiguration);
     String valueToEncrypt = "IamSomeSortOfSecretApparently";
-    byte[] encryptedValue = cryptographerService.encrypt(valueToEncrypt, secret);
+    byte[] encryptedValue = cryptographerService.encrypt(valueToEncrypt);
     assertThat(valueToEncrypt.getBytes()).isNotEqualTo(encryptedValue);
-    String decryptedValue = cryptographerService.decrypt(encryptedValue, secret);
+    String decryptedValue = cryptographerService.decrypt(encryptedValue);
     assertThat(valueToEncrypt).isEqualTo(decryptedValue);
   }
 

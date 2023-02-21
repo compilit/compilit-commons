@@ -107,7 +107,10 @@ public final class FunctionResultGuards {
 
 
   /**
+   * Apply the function and in case of an exception, return the default value
+   *
    * @param function a potentially throwing function
+   * @param <I>      the input type
    * @param <O>      the return type
    * @return either result of the function or the given default value
    */

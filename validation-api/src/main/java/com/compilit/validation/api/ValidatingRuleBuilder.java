@@ -1,5 +1,9 @@
 package com.compilit.validation.api;
 
+/**
+ * Part if the Fluent API to create a "validation", which is used to validate an object against certain predefined Rules.
+ * This is the ending part of the API, after which the validation takes place.
+ */
 public interface ValidatingRuleBuilder {
 
   /**

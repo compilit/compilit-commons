@@ -319,11 +319,6 @@
         <version>${commons-lang3.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>${maven-jar-plugin.version}</version>
-      </dependency>
-      <dependency>
         <artifactId>logback-classic</artifactId>
         <groupId>ch.qos.logback</groupId>
         <scope>test</scope>
@@ -331,7 +326,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <distributionManagement>
     <repository>
       <id>ossrh</id>

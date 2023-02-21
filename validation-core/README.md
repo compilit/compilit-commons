@@ -1,6 +1,7 @@
 # validation
 
-A small package that enables validation of (business) rules through a fluent API.
+A small package that enables validation of (business) rules through a fluent API. The core idea behind it is to be able
+to write code that is readable/understandable by the domain experts, which might not be programmers.
 
 # Installation
 
@@ -9,8 +10,8 @@ Get this dependency with the latest version.
 ```xml
 
 <dependency>
-    <artifactId>validation-core</artifactId>
-    <groupId>com.compilit</groupId>
+  <artifactId>validation-core</artifactId>
+  <groupId>com.compilit</groupId>
 </dependency>
 ```
 
@@ -35,8 +36,11 @@ class Example {
   Rule<String> rule = defineThatIt(contains("test")).otherwiseReport("It does not contain 'test'");
   boolean result = verifyThat("test").compliesWith(rule).validate(); //A basic Predicate validation.
 
-  Rule.WithDualInput<String> rule = defineThatIt(isA(String.class).where((it, argument) -> it.equals(argument))).otherwiseReport("It does not equal given argument");
-  boolean result = verifyThat("test").compliesWith(rule).whileApplying("some argument").validate(); //A basic BiPredicate validation, which is why the 'whileApplying' method is inserted.
+  Rule.WithDualInput<String> rule = defineThatIt(isA(String.class).where((it, argument) -> it.equals(argument))).otherwiseReport(
+    "It does not equal given argument");
+  boolean result = verifyThat("test").compliesWith(rule)
+                                     .whileApplying("some argument")
+                                     .validate(); //A basic BiPredicate validation, which is why the 'whileApplying' method is inserted.
 
 }
 ```
@@ -50,11 +54,14 @@ class Example {
 
   Rule<String> rule = defineThatIt(hasALengthOf(4)).otherwiseReport("It does not have a length of '4'");
 
-  Rule<String> rule = defineThatIt(isA(String.class).where(it -> it.contains("test"))).otherwiseReport("It does not contain 'test'");
+  Rule<String> rule = defineThatIt(isA(String.class).where(it -> it.contains("test"))).otherwiseReport(
+    "It does not contain 'test'");
 
-  Rule<TestObject> rule = defineThatIt(isA(TestObject.class).where(it -> it.hasSomeProperty())).otherwiseReport("It doesn't have some property");
+  Rule<TestObject> rule = defineThatIt(isA(TestObject.class).where(it -> it.hasSomeProperty())).otherwiseReport(
+    "It doesn't have some property");
 
-  Rule<TestObject> rule = defineThatIt(isA(TestObject.class).that(TestObject::isAwesome)).otherwiseReport("It is not awesome");
+  Rule<TestObject> rule = defineThatIt(isA(TestObject.class).that(TestObject::isAwesome)).otherwiseReport(
+    "It is not awesome");
 
   Rule<String> rule = defineThatIt(isAlphabetic()).otherwiseReport("It is not alphabetic");
 
@@ -109,10 +116,10 @@ class Example {
 
   boolean verify() {
     return verifyThat("test")
-            .compliesWith(rule1)
-            .and(rule2)
-            .and(etc)
-            .orElseThrow(message -> new RuntimeException(message));
+      .compliesWith(rule1)
+      .and(rule2)
+      .and(etc)
+      .orElseThrow(message -> new RuntimeException(message));
   }
 }
 ```
@@ -125,9 +132,9 @@ class Example {
 
   boolean verify() {
     return verifyThat("test")
-            .compliesWith(rule)
-            .andThen(() -> someAction())
-            .orElseThrow(message -> new RuntimeException(message));
+      .compliesWith(rule)
+      .andThen(() -> someAction())
+      .orElseThrow(message -> new RuntimeException(message));
   }
 
 }
@@ -143,9 +150,11 @@ Just to be clear, here is an example of how one would define custom, more comple
 ```java
 class Example {
 
-  private final Rule<TestObject> rule = defineThatIt(isA(CustomObject.class).that(hasSomeAmazingProperties())).otherwiseReport("It doesn't have some amazing properties");
+  private final Rule<TestObject> rule = defineThatIt(isA(CustomObject.class).that(hasSomeAmazingProperties())).otherwiseReport(
+    "It doesn't have some amazing properties");
   //or even simpler (but maybe not as clear), because in the end, it's just a Predicate or BiPredicate...
-  private final Rule<TestObject> rule = defineThatIt(hasSomeAmazingProperties()).otherwiseReport("It doesn't have some amazing properties");
+  private final Rule<TestObject> rule = defineThatIt(hasSomeAmazingProperties()).otherwiseReport(
+    "It doesn't have some amazing properties");
 
   private Predicate<CustomObject> hasSomeAmazingProperties() {
     return input -> {
@@ -155,9 +164,9 @@ class Example {
 
   boolean verify() {
     return verifyThat(value)
-            .compliesWith(rule)
-            .andThen(() -> performThisAction())
-            .orElseThrow(new Exception());
+      .compliesWith(rule)
+      .andThen(() -> performThisAction())
+      .orElseThrow(new Exception());
   }
 
 }

@@ -26,13 +26,13 @@ class CryptographerService implements Cryptographer {
   }
 
   @Override
-  public <T extends Serializable> T decrypt(String algorithm, byte[] encryptedValue, String secret) {
-    return CryptoFunctions.decrypt(algorithm, encryptedValue, secret, cryptographerConfiguration.keyLength(), cryptographerConfiguration.iterationCount());
+  public <T extends Serializable> T decrypt(String algorithm, byte[] encryptedValue) {
+    return CryptoFunctions.decrypt(algorithm, encryptedValue, cryptographerConfiguration.secret(), cryptographerConfiguration.keyLength(), cryptographerConfiguration.iterationCount());
   }
 
   @Override
-  public SecretKey generateKey(String secret, byte[] salt) {
-    return CryptoFunctions.generateKey(secret, salt, cryptographerConfiguration.keyLength(), cryptographerConfiguration.iterationCount());
+  public SecretKey generateKey(byte[] salt) {
+    return CryptoFunctions.generateKey(cryptographerConfiguration.secret(), salt, cryptographerConfiguration.keyLength(), cryptographerConfiguration.iterationCount());
   }
 
 }

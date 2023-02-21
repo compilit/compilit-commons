@@ -1,5 +1,6 @@
 package com.compilit.validation;
 
+import com.compilit.validation.api.Messages;
 import com.compilit.validation.api.Rule;
 import com.compilit.validation.api.Validatable;
 import java.util.ArrayList;
@@ -9,18 +10,14 @@ import java.util.function.Consumer;
 
 class Subject<T> implements Validatable {
 
-  static final String DEFAULT_MESSAGE = "Nothing to report";
-  static final String BROKEN_RULE_PREFIX = "Broken rule: ";
-
   private final T value;
   private final boolean hasDualInput;
-
   private final List<Rule<T>> ruleDefinitions = new ArrayList<>();
   private final List<Rule.WithDualInput<T>> dualInputRuleDefinitions = new ArrayList<>();
   private final List<Consumer<T>> intermediateActions = new ArrayList<>();
 
   private Object argument;
-  private String message = DEFAULT_MESSAGE;
+  private String message = Messages.DEFAULT_MESSAGE;
 
   Subject(Rule<T> ruleDefinition, final T value) {
     this.ruleDefinitions.add(ruleDefinition);
@@ -91,7 +88,7 @@ class Subject<T> implements Validatable {
     var isValid = true;
     for (final var ruleDefinition : ruleDefinitions) {
       if (!ruleDefinition.test(value)) {
-        stringBuilder.append(BROKEN_RULE_PREFIX).append(ruleDefinition.getMessage()).append("\n");
+        stringBuilder.append(Messages.BROKEN_RULE_PREFIX).append(ruleDefinition.getMessage()).append("\n");
         isValid = false;
       }
     }
@@ -102,7 +99,7 @@ class Subject<T> implements Validatable {
     var isValid = true;
     for (final var biRuleDefinition : dualInputRuleDefinitions) {
       if (!biRuleDefinition.test(value, argument)) {
-        stringBuilder.append(BROKEN_RULE_PREFIX)
+        stringBuilder.append(Messages.BROKEN_RULE_PREFIX)
                      .append(biRuleDefinition.getMessage())
                      .append("\n");
         isValid = false;

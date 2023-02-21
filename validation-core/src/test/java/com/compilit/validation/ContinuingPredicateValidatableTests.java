@@ -1,6 +1,6 @@
 package com.compilit.validation;
 
-import static com.compilit.validation.Subject.DEFAULT_MESSAGE;
+import static com.compilit.validation.api.Messages.DEFAULT_MESSAGE;
 
 import com.compilit.validation.api.Rule;
 import java.util.ArrayList;

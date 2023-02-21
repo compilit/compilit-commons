@@ -1,12 +1,12 @@
 package com.compilit.validation;
 
 import static com.compilit.validation.Definitions.defineThatIt;
-import static com.compilit.validation.Subject.DEFAULT_MESSAGE;
 import static com.compilit.validation.Verifications.verifyThat;
 import static com.compilit.validation.Verifications.verifyThatIt;
 import static com.compilit.validation.api.predicates.ObjectPredicate.isA;
 import static com.compilit.validation.api.predicates.StringPredicate.*;
 
+import com.compilit.validation.api.Messages;
 import com.compilit.validation.api.Rule;
 import com.compilit.validation.api.predicates.StringPredicate;
 import org.assertj.core.api.Assertions;
@@ -131,7 +131,7 @@ class ApiUsageExampleTests extends AbstractTestWithContext {
       FAIL_MESSAGE);
 
     Assertions.assertThatNoException().isThrownBy(() -> verifyThat(new TestObject()).compliesWith(rule)
-                                                                                    .whileApplying(DEFAULT_MESSAGE)
+                                                                                    .whileApplying(Messages.DEFAULT_MESSAGE)
                                                                                     .and(rule2)
                                                                                     .andThen(super::interact)
                                                                                     .orElseThrow(RuntimeException::new));
@@ -163,7 +163,7 @@ class ApiUsageExampleTests extends AbstractTestWithContext {
       FAIL_MESSAGE);
     var input = new TestObject();
     Assertions.assertThatNoException().isThrownBy(() -> verifyThat(input).compliesWith(rule)
-                                                                         .whileApplying(DEFAULT_MESSAGE)
+                                                                         .whileApplying(Messages.DEFAULT_MESSAGE)
                                                                          .and(rule2)
                                                                          .andThen(x -> {
                                                                            Assertions.assertThat(x).isEqualTo(input);
@@ -203,7 +203,7 @@ class ApiUsageExampleTests extends AbstractTestWithContext {
     Assertions.assertThatNoException().isThrownBy(
       () -> Assertions.assertThat(verifyThat(input)
                                     .compliesWith(rule)
-                                    .whileApplying(DEFAULT_MESSAGE)
+                                    .whileApplying(Messages.DEFAULT_MESSAGE)
                                     .and(rule2)
                                     .andThen(x -> {
                                       Assertions.assertThat(x).isEqualTo(input);
@@ -239,7 +239,7 @@ class ApiUsageExampleTests extends AbstractTestWithContext {
       FAIL_MESSAGE);
     var input = new TestObject();
     Assertions.assertThat(verifyThatIt().isA(TestObject.class).where((x, y) -> x.getMessage().equals(y))
-                                        .and(rule2).test(input, DEFAULT_MESSAGE)).isTrue();
+                                        .and(rule2).test(input, Messages.DEFAULT_MESSAGE)).isTrue();
   }
 
   @Test
@@ -261,11 +261,11 @@ class ApiUsageExampleTests extends AbstractTestWithContext {
     Assertions.assertThat(verifyThatIt().isA(TestObject.class)
                                         .where((x, y) -> x.getMessage().equals(y))
                                         .and(rule2)
-                                        .test(input, DEFAULT_MESSAGE)).isTrue();
+                                        .test(input, Messages.DEFAULT_MESSAGE)).isTrue();
     Assertions.assertThat(verifyThatIt().isAn(TestObject.class)
                                         .where((x, y) -> x.getMessage().equals(y))
                                         .and(rule2)
-                                        .test(input, DEFAULT_MESSAGE)).isTrue();
+                                        .test(input, Messages.DEFAULT_MESSAGE)).isTrue();
     Assertions.assertThat(verifyThatIt().isNotEqualTo(TestObject.class).test(input)).isTrue();
     Assertions.assertThat(verifyThatIt().isEqualTo(input).test(input)).isTrue();
     Assertions.assertThat(verifyThatIt().isADecimalNumberEqualTo(.0).test(.0)).isTrue();
@@ -314,7 +314,7 @@ class ApiUsageExampleTests extends AbstractTestWithContext {
   @Test
   void validateUsingPassedPredicateUseCase_validInput_shouldReturnTrue() {
     var input = new TestObject();
-    var result = verifyThat(input, DEFAULT_MESSAGE, isA(TestObject.class)
+    var result = verifyThat(input, Messages.DEFAULT_MESSAGE, isA(TestObject.class)
       .where((x, y) -> x.getMessage().equals(y))).otherwiseReport(FAIL_MESSAGE);
     Assertions.assertThat(result).isTrue();
   }

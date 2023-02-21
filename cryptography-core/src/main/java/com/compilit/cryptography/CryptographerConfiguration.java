@@ -8,5 +8,5 @@ import com.compilit.cryptography.api.KeyLength;
  *                       to crack te encryption, but the slower the algorithm becomes. It is recommended to not go under
  *                       1000 iterations.
  */
-public record CryptographerConfiguration(KeyLength keyLength, int iterationCount) {
+public record CryptographerConfiguration(String secret, KeyLength keyLength, int iterationCount) {
 }

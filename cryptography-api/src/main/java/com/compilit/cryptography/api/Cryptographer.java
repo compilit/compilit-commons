@@ -15,23 +15,21 @@ public interface Cryptographer {
    * Encrypt the given value based on the presented users secret.
    *
    * @param valueToEncrypt the value you wish to encrypt.
-   * @param secret         the secret which will be used for encryption.
    * @return the encrypted value in the form of a byte array.
    */
-  default <T extends Serializable> byte[] encrypt(T valueToEncrypt, String secret) {
-    return encrypt(valueToEncrypt, secret, generateNonce());
+  default <T extends Serializable> byte[] encrypt(T valueToEncrypt) {
+    return encrypt(valueToEncrypt, generateNonce());
   }
 
   /**
    * Encrypt the given value based on the presented users secret.
    *
    * @param valueToEncrypt the value you wish to encrypt.
-   * @param secret         the user whose secret will be used for encryption.
    * @param salt           the salt you wish to use for the encryption instead of the
    * @return the encrypted value in the form of a String.
    */
-  default <T extends Serializable> byte[] encrypt(T valueToEncrypt, String secret, byte[] salt) {
-    return encrypt(getAlgorithm(), valueToEncrypt, salt, generateKey(secret, salt));
+  default <T extends Serializable> byte[] encrypt(T valueToEncrypt, byte[] salt) {
+    return encrypt(getAlgorithm(), valueToEncrypt, salt, generateKey(salt));
   }
 
   /**
@@ -54,38 +52,32 @@ public interface Cryptographer {
 
   /**
    * @param encryptedValue the value that will be decrypted.
-   * @param secret         the secret which will be used for the decryption.
    * @return the decrypted value.
    */
   default <T extends Serializable> T decrypt(
-    String encryptedValue,
-    String secret
+    String encryptedValue
   ) {
-    return decrypt(encryptedValue.getBytes(), secret);
+    return decrypt(encryptedValue.getBytes());
   }
 
   /**
    * @param encryptedValue the value that will be decrypted.
-   * @param secret         the secret which will be used for the decryption.
    * @return the decrypted value.
    */
   default <T extends Serializable> T decrypt(
-    byte[] encryptedValue,
-    String secret
+    byte[] encryptedValue
   ) {
-    return decrypt(getAlgorithm(), encryptedValue, secret);
+    return decrypt(getAlgorithm(), encryptedValue);
   }
 
   /**
    * @param algorithm      algorithm which needs to be used for the decryption instead of the
    * @param encryptedValue the value that will be decrypted.
-   * @param secret         the users secret which will be used for the decryption.
    * @return the decrypted value.
    */
   <T extends Serializable> T decrypt(
     String algorithm,
-    byte[] encryptedValue,
-    String secret
+    byte[] encryptedValue
   );
 
   /**
@@ -109,9 +101,8 @@ public interface Cryptographer {
    * JDK's don't have the 'Unlimited Strength Jurisdiction Policy' enabled by  keyLengths longer than 256 won't
    * work. If you wish to use longer keys, you'll need to enable the Unlimited Strength Jurisdiction Policy.
    *
-   * @param secret         the secret which will be used in combination with the salt to generate the key.
    * @param salt           the salt which will be used in combination with the secret to generate the key.
    * @return a SecretKey which can be used to encrypt data.
    */
-  SecretKey generateKey(String secret, byte[] salt);
+  SecretKey generateKey(byte[] salt);
 }

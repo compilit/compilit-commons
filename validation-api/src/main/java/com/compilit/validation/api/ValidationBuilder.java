@@ -2,6 +2,11 @@ package com.compilit.validation.api;
 
 import java.util.Collection;
 
+/**
+ * Part if the Fluent API to create a "validation", which is used to validate an object against certain predefined Rules
+ *
+ * @param <T> The type which is under validation
+ */
 public interface ValidationBuilder<T> {
 
   /**

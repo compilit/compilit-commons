@@ -31,9 +31,16 @@
       <artifactId>cryptography-core</artifactId>
     </dependency>
     <dependency>
-      <artifactId>spring-context</artifactId>
-      <groupId>org.springframework</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+      <groupId>org.springframework.boot</groupId>
       <scope>provided</scope>
+    </dependency>
+
+    <!-- Test dependencies -->
+    <dependency>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
