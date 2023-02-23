@@ -10,18 +10,24 @@ import java.util.Collection;
 public interface ValidationBuilder<T> {
 
   /**
+   * Take the rule, and add it to the validation builder for validation against the input.
+   *
    * @param rule the rule which the value needs to comply with.
    * @return the Validatable to add more rules.
    */
   ContinuingValidationBuilder<T> compliesWith(Rule<T> rule);
 
   /**
+   * Take multiple rules, and add it to the validation builder for validation against the input.
+   *
    * @param rules the rules which the value needs to comply with.
    * @return the Validatable to add more rules.
    */
   ContinuingValidationBuilder<T> compliesWith(Collection<Rule<T>> rules);
 
   /**
+   * Take the rule, and add it to the validation builder for validation against the inputs.
+   *
    * @param rule the rule which the value needs to comply with.
    * @return the Validatable to add more rules.
    */

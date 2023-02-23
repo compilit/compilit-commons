@@ -1,5 +1,10 @@
 package com.compilit.results;
 
+/**
+ * A generic interface for combining multiple results.
+ *
+ * @param <T> The result contents type
+ */
 public interface ResultCombiner<T> {
 
   /**

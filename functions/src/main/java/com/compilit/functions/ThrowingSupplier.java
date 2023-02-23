@@ -1,6 +1,8 @@
 package com.compilit.functions;
 
 /**
+ * A functional interface that is equal to the Supplier interface, but which throws a checked exception.
+ *
  * @param <T> The type you wish to return with the Supplier
  * @param <E> The possible (checked) exception which can be thrown from the Supplier
  */

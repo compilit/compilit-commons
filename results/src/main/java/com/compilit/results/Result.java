@@ -115,6 +115,8 @@ public interface Result<T> {
   }
 
   /**
+   * Get the nullable contents of the result and apply the provided mapping function.
+   *
    * @param mappingFunction, the operation you wish to apply to the contents
    * @param <R>,             the return type
    * @return the contents of the result by applying a mapping function.
@@ -124,6 +126,8 @@ public interface Result<T> {
   }
 
   /**
+   * If the result was successful, run the runnable.
+   *
    * @param runnable, the operation you wish to perform on a success result
    * @return AlternativeRoute to specify a Runnable for any other situation
    */
@@ -216,6 +220,8 @@ public interface Result<T> {
   }
 
   /**
+   * If the result was not successful, return the provided result.
+   *
    * @param onUnsuccessfulResult the default result to return
    * @return the desired default in case of an unsuccessful result
    */
@@ -224,6 +230,8 @@ public interface Result<T> {
   }
 
   /**
+   * If the result was not successful, return the provided result supplier.
+   *
    * @param supplier the default result supplier to return
    * @return the desired default in case of an unsuccessful result in the form of a Supplier
    */

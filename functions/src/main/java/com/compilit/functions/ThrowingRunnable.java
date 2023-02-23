@@ -1,6 +1,7 @@
 package com.compilit.functions;
 
 /**
+ * A functional interface that is equal to the Runnable interface, but which throws a checked exception.
  * @param <E> The possible (checked) exception which can be thrown from the Runnable
  */
 @FunctionalInterface

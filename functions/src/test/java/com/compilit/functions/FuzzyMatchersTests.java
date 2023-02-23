@@ -48,14 +48,6 @@ public class FuzzyMatchersTests {
   }
 
   @ParameterizedTest
-  @MethodSource("validTestCasesGetCharSequenceMinimalMatchingPercentage")
-  void getCharSequenceMatchPercentage_testCase_shouldReturnExpectedValue(String value,
-                                                                         String otherValue,
-                                                                         float minimalMatchingPercentage) {
-    assertThat(FuzzyMatchers.getCharSequenceMatchPercentage(value, otherValue)).isEqualTo(minimalMatchingPercentage);
-  }
-
-  @ParameterizedTest
   @MethodSource("invalidTestCases")
   void fuzzyMatchesPredicate_noMatch_shouldReturnFalse(String value, String otherValue) {
     assertThat(FuzzyMatchers.fuzzyMatches(value).test(otherValue)).isFalse();
@@ -106,7 +98,14 @@ public class FuzzyMatchersTests {
       Arguments.arguments("test", "test", 100f),
       Arguments.arguments("1234567890", "12345678", 10f),
       Arguments.arguments("0123456789", "1234567890", 10f),
-      Arguments.arguments("Almost correct", "Almast correct", 10f)
+      Arguments.arguments("Almost correct", "Almast correct", 10f),
+      Arguments.arguments("test", "testtest", 50f),
+      Arguments.arguments("1234567890", "123456789", 90f),
+      Arguments.arguments("test", "test", 100f),
+      Arguments.arguments("1234567890", "12345678", 80f),
+      Arguments.arguments("0123456789", "1234567890", 90f),
+      Arguments.arguments("abcd", "abde", 50f),
+      Arguments.arguments("Almost correct", "Almast correct", 92.85714f)
     );
   }
 
@@ -118,17 +117,6 @@ public class FuzzyMatchersTests {
       Arguments.arguments("1234567890", "12345678", 80f),
       Arguments.arguments("0123456789", "1234567890", 100f),
       Arguments.arguments("Almost correct", "Almast correct", 100f)
-    );
-  }
-
-  private static Stream<Arguments> validTestCasesGetCharSequenceMinimalMatchingPercentage() {
-    return Stream.of(
-      Arguments.arguments("test", "testtest", 100f),
-      Arguments.arguments("1234567890", "123456789", 100f),
-      Arguments.arguments("test", "test", 100f),
-      Arguments.arguments("1234567890", "12345678", 100f),
-      Arguments.arguments("0123456789", "1234567890", 100f),
-      Arguments.arguments("Almost correct", "Almast correct", 92.85714f)
     );
   }
 

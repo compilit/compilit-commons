@@ -1,5 +1,8 @@
 package com.compilit.results;
 
+/**
+ * A status enum for all results.
+ */
 public enum ResultStatus {
   /**
    * Status for all successful results.

@@ -1,13 +1,14 @@
 package com.compilit.functions;
 
+import static com.compilit.functions.FunctionGuards.orDefault;
+
 import java.util.function.Predicate;
 
 /**
  * These functions are used to apply fuzzy matching to Strings. Meaning that the values need to partially match conform
- * the given percentage. It does this in three ways: 1. It will check if there are sequences of characters matching
- * between the two values. 2. It will check if the total amount of matching characters. 3. It will check the length of
- * both values. All of these checks have to match for at least the given match percentage, or 80%, which is the
- * default.
+ * the given percentage. It will check if there are sequences of characters matching between the two values. For any
+ * non-matching sequence, the respective sequence value will be subtracted from the matching percentage. This percentage
+ * to match for at least the given match percentage, or 80%, which is the default.
  */
 public final class FuzzyMatchers {
 
@@ -116,37 +117,8 @@ public final class FuzzyMatchers {
     if (oneValueIsNullOrEmpty(value, otherValue)) {
       return false;
     }
-    float lengthMatchPercentage = getLengthMatchPercentage(value, otherValue);
-    float charMatchPercentage = getCharMatchPercentage(value, otherValue);
     float charSequenceMatchPercentage = getCharSequenceMatchPercentage(value, otherValue);
-    return charSequenceMatchPercentage >= minimalMatchingPercentage
-      && charMatchPercentage >= minimalMatchingPercentage
-      && lengthMatchPercentage >= minimalMatchingPercentage;
-  }
-
-  /**
-   * @param value      the first String you wish to compare to the other
-   * @param otherValue the other String you wish to compare to the first
-   * @return a float representing the percentage of the matching sequences between the two Strings
-   */
-  public static float getCharSequenceMatchPercentage(
-    String value,
-    String otherValue
-  ) {
-    float shortestValueLength = Math.min(value.length(), otherValue.length());
-    float longestValueLength = Math.max(value.length(), otherValue.length());
-    float percentageDivider = MAX_PERCENTAGE / longestValueLength;
-    float charSequenceMatchPercentage = MAX_PERCENTAGE;
-    var currentSequence = new StringBuilder();
-    for (int index = 0; index < shortestValueLength; index++) {
-      if (!value.contains(currentSequence)) {
-        charSequenceMatchPercentage -= percentageDivider;
-        currentSequence = new StringBuilder();
-      } else {
-        currentSequence.append(otherValue.charAt(index));
-      }
-    }
-    return charSequenceMatchPercentage;
+    return charSequenceMatchPercentage >= minimalMatchingPercentage;
   }
 
   /**
@@ -205,6 +177,33 @@ public final class FuzzyMatchers {
 
   private static int subtract(String x, String y) {
     return x.length() - y.length();
+  }
+
+  private static float getCharSequenceMatchPercentage(
+    String value,
+    String otherValue
+  ) {
+    int shortestValueLength = Math.min(value.length(), otherValue.length());
+    int longestValueLength = Math.max(value.length(), otherValue.length());
+    float sequenceValue = MAX_PERCENTAGE / longestValueLength;
+    float charSequenceMatchPercentage = MAX_PERCENTAGE;
+    var currentSequence = new StringBuilder();
+    for (int index = 0; index < shortestValueLength; index++) {
+      currentSequence.append(otherValue.charAt(index));
+      if (!value.contains(currentSequence)) {
+        charSequenceMatchPercentage -= sequenceValue;
+        currentSequence = new StringBuilder();
+      }
+    }
+    for (int index = shortestValueLength; index < longestValueLength; index++) {
+      final int tmpIndex = index;
+      currentSequence.append(orDefault(() -> String.valueOf(value.charAt(tmpIndex)), ""));
+      if (!otherValue.contains(currentSequence)) {
+        charSequenceMatchPercentage -= sequenceValue;
+        currentSequence = new StringBuilder();
+      }
+    }
+    return charSequenceMatchPercentage;
   }
 
 }

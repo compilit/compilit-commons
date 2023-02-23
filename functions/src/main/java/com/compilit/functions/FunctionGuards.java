@@ -12,6 +12,8 @@ public final class FunctionGuards {
   private FunctionGuards() {}
 
   /**
+   * Try to get the result of the supplier but return null on any exception.
+   *
    * @param supplier a potentially throwing supplier
    * @param <T>      the return type
    * @return either the result of the supplier or null
@@ -21,16 +23,19 @@ public final class FunctionGuards {
   }
 
   /**
+   * Try to get the result of the supplier but return null on any exception.
+   *
    * @param throwingSupplier a potentially checked exception throwing supplier
    * @param <T>              the return type
-   * @param <E>              the checked exception
+   * @param <E>              the checked exception type
    * @return either the wanted value as a String or the given default value
    */
-  public static <T, E extends Exception> Supplier<T> orNull(ThrowingSupplier<T, E> throwingSupplier) {
-    return orDefault(throwingSupplier, null);
+  public static <T, E extends Exception> Supplier<T> orNullThrowing(ThrowingSupplier<T, E> throwingSupplier) {
+    return orDefaultThrowing(throwingSupplier, null);
   }
 
   /**
+   * Try to get the result of the function but return null on any exception.
    * @param function a potentially throwing supplier
    * @param <I>      the input type
    * @param <O>      the return type
@@ -41,17 +46,22 @@ public final class FunctionGuards {
   }
 
   /**
+   * Try to get the result of the function but return null on any exception.
+   *
    * @param function a potentially throwing supplier
    * @param <I>      the input type
    * @param <O>      the return type
+   * @param <E>      the checked exception type
    * @return either the result of the supplier value or null
    */
-  public static <I, O, E extends Exception> Function<I, O> orNull(ThrowingFunction<I, O, E> function) {
-    return orDefault(function, null);
+  public static <I, O, E extends Exception> Function<I, O> orNullThrowing(ThrowingFunction<I, O, E> function) {
+    return orDefaultThrowing(function, null);
   }
 
 
   /**
+   * Try to get the result of the supplier but return the default value on any exception.
+   *
    * @param supplier     a potentially throwing supplier
    * @param defaultValue the default value to return in case of an exception
    * @param <T>          the return type
@@ -64,19 +74,21 @@ public final class FunctionGuards {
     return () -> {
       try {
         return supplier.get();
-      } catch (Exception e) {
+      } catch (Exception ignored) {
         return defaultValue;
       }
     };
   }
 
   /**
+   * Try to get the result of the supplier but return the default value on any exception.
+   *
    * @param supplier     a potentially throwing supplier
    * @param defaultValue the default value to return in case of an exception
    * @param <T>          the return type
    * @return either the result of the supplier or the given default value
    */
-  public static <T, E extends Exception> Supplier<T> orDefault(
+  public static <T, E extends Exception> Supplier<T> orDefaultThrowing(
     ThrowingSupplier<T, E> supplier,
     T defaultValue
   ) {
@@ -90,11 +102,13 @@ public final class FunctionGuards {
   }
 
   /**
+   * Try to get the result of the function but return the default value on any exception.
+   *
    * @param function a potentially throwing function
    * @param <O>      the return type
    * @return either result of the function or the given default value
    */
-  public static <I, O, E extends Exception> Function<I, O> orDefault(
+  public static <I, O, E extends Exception> Function<I, O> orDefaultThrowing(
     ThrowingFunction<I, O, E> function,
     O defaultValue
   ) {
@@ -109,7 +123,10 @@ public final class FunctionGuards {
 
 
   /**
+   * Try to get the result of the function but return the default value on any exception.
+   *
    * @param function a potentially throwing function
+   * @param <I>      the input type
    * @param <O>      the return type
    * @return either result of the function or the given default value
    */

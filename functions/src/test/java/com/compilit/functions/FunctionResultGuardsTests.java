@@ -35,7 +35,7 @@ public class FunctionResultGuardsTests {
 
   @Test
   void orNull_checkedException_shouldReturnNull() {
-    assertThat(orNull(checkedExceptionThrowingSupplier())).isNull();
+    assertThat(FunctionResultGuards.orNullThrowing(checkedExceptionThrowingSupplier())).isNull();
   }
 
   @Test
@@ -62,7 +62,7 @@ public class FunctionResultGuardsTests {
 
   @Test
   void orNull_throwingSupplier_shouldReturnNull() {
-    var result = orNull(checkedExceptionThrowingSupplier());
+    var result = FunctionResultGuards.orNullThrowing(checkedExceptionThrowingSupplier());
     assertThat(result).isNull();
   }
 
@@ -74,12 +74,12 @@ public class FunctionResultGuardsTests {
 
   @Test
   void orDefault_throwingFunction_shouldReturnDefault() {
-    assertThat(orDefault(checkedExceptionThrowingFunction(), 1, "-1")).isEqualTo("-1");
+    assertThat(FunctionResultGuards.orDefaultThrowing(checkedExceptionThrowingFunction(), 1, "-1")).isEqualTo("-1");
   }
 
   @Test
   void orDefault_throwingFunction_shouldReturnNull() {
-    var result = orDefault(checkedExceptionThrowingSupplier(), null);
+    var result = FunctionResultGuards.orDefaultThrowing(checkedExceptionThrowingSupplier(), null);
     assertThat(result).isNull();
   }
 

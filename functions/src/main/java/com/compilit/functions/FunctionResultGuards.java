@@ -26,8 +26,8 @@ public final class FunctionResultGuards {
    * @param <E>              the checked exception
    * @return either the wanted value as a String or the given default value
    */
-  public static <T, E extends Exception> T orNull(ThrowingSupplier<T, E> throwingSupplier) {
-    return orDefault(throwingSupplier, null);
+  public static <T, E extends Exception> T orNullThrowing(ThrowingSupplier<T, E> throwingSupplier) {
+    return orDefaultThrowing(throwingSupplier, null);
   }
 
   /**
@@ -46,11 +46,11 @@ public final class FunctionResultGuards {
    * @param <O>      the return type
    * @return either the result of the supplier value or null
    */
-  public static <I, O, E extends Exception> O orNull(
+  public static <I, O, E extends Exception> O orNullThrowing(
     ThrowingFunction<I, O, E> function,
     I value
   ) {
-    return orDefault(function, value, null);
+    return orDefaultThrowing(function, value, null);
   }
 
 
@@ -77,7 +77,7 @@ public final class FunctionResultGuards {
    * @param <T>          the return type
    * @return either the result of the supplier or the given default value
    */
-  public static <T, E extends Exception> T orDefault(
+  public static <T, E extends Exception> T orDefaultThrowing(
     ThrowingSupplier<T, E> supplier,
     T defaultValue
   ) {
@@ -93,7 +93,7 @@ public final class FunctionResultGuards {
    * @param <O>      the return type
    * @return either result of the function or the given default value
    */
-  public static <I, O, E extends Exception> O orDefault(
+  public static <I, O, E extends Exception> O orDefaultThrowing(
     ThrowingFunction<I, O, E> function,
     I value,
     O defaultValue

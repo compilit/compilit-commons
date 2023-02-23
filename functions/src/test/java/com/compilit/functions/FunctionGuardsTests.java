@@ -36,7 +36,7 @@ public class FunctionGuardsTests {
 
   @Test
   void orNull_checkedException_shouldReturnNull() {
-    assertThat(orNull(checkedExceptionThrowingSupplier()).get()).isNull();
+    assertThat(FunctionGuards.orNullThrowing(checkedExceptionThrowingSupplier()).get()).isNull();
   }
 
   @Test
@@ -64,13 +64,13 @@ public class FunctionGuardsTests {
 
   @Test
   void orNull_nonThrowingFunction_shouldReturnFunction() {
-    var function = orNull((ThrowingSupplier<?, ? extends Exception>) () -> String.valueOf(1));
+    var function = FunctionGuards.orNullThrowing((ThrowingSupplier<?, ? extends Exception>) () -> String.valueOf(1));
     assertThat(function.get()).isEqualTo("1");
   }
 
   @Test
   void orNull_throwingFunction_shouldReturnNull() {
-    var function = orNull(checkedExceptionThrowingSupplier());
+    var function = FunctionGuards.orNullThrowing(checkedExceptionThrowingSupplier());
     assertThat(function.get()).isNull();
   }
 
@@ -83,13 +83,13 @@ public class FunctionGuardsTests {
 
   @Test
   void orDefault_throwingFunction_shouldReturnDefault() {
-    var function = orDefault(checkedExceptionThrowingFunction(), "-1");
+    var function = FunctionGuards.orDefaultThrowing(checkedExceptionThrowingFunction(), "-1");
     assertThat(function.apply(1)).isEqualTo("-1");
   }
 
   @Test
   void orDefault_throwingFunction_shouldReturnNull() {
-    var function = orDefault(checkedExceptionThrowingSupplier(), null);
+    var function = FunctionGuards.orDefaultThrowing(checkedExceptionThrowingSupplier(), null);
     assertThat(function.get()).isNull();
   }
 

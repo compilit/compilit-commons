@@ -7,12 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * A domain primitive adds specific constrains to a simple primitive. These constraints should be domain-specific. Hence the name.
+ * @param <T> The primitive type which this domain primitive wraps around
+ */
 public abstract class DomainPrimitive<T> {
 
   private final T value;
   private final String name;
 
   private final List<Rule<T>> rules = new ArrayList<>();
+
 
   /**
    * @param value          the value of the domain primitive.
@@ -27,6 +32,7 @@ public abstract class DomainPrimitive<T> {
   /**
    * @param value the value of the domain primitive
    * @param name  the actual name of the domain primitive. Usually the name of the extending class.
+   * @param rules          the rules you wish to define for the given value
    */
   @SafeVarargs
   protected DomainPrimitive(T value, String name, Rule<T>... rules) {
