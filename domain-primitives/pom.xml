@@ -2,7 +2,23 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>compilit-commons</artifactId>
+    <groupId>com.compilit</groupId>
+    <version>${revision}</version>
+  </parent>
+
+  <name>Compilit - Domain primitives</name>
   <artifactId>domain-primitives</artifactId>
+  <description>A small package that takes away some boilerplate code when creating your own domain primitives.
+  </description>
+  <url>https://github.com/compilit/compilit-commons/tree/main/domain-primitives</url>
+
+  <scm>
+    <url>https://github.com/compilit/compilit-commons/tree/main/cryptography-spring</url>
+  </scm>
 
   <dependencies>
     <dependency>
@@ -10,17 +26,5 @@
       <groupId>com.compilit</groupId>
     </dependency>
   </dependencies>
-
-  <description>A small package that takes away some boilerplate code when creating your own domain primitives.
-  </description>
-  <modelVersion>4.0.0</modelVersion>
-
-  <name>Compilit - Domain primitives</name>
-  <parent>
-    <artifactId>compilit-commons</artifactId>
-    <groupId>com.compilit</groupId>
-    <version>${revision}</version>
-  </parent>
-  <url>https://github.com/compilit/compilit-commons/domain-primitives</url>
 
 </project>

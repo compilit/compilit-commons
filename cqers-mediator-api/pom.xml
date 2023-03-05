@@ -13,12 +13,10 @@
   <name>Compilit - CQ(E)RS mediator API</name>
   <artifactId>cqers-mediator-api</artifactId>
   <description>The API for the corresponding CQ(E)RS Mediator Core library</description>
-  <url>https://github.com/compilit/compilit-commons/cqers-mediator-api</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/cqers-mediator-api</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/cqers-mediator-api.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/cqers-mediator-api.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/cqers-mediator-api</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/cqers-mediator-api</url>
   </scm>
 
 </project>

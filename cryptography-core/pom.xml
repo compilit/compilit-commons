@@ -14,12 +14,10 @@
   <name>Compilit - Cryptography</name>
   <artifactId>cryptography-core</artifactId>
   <description>A package which provides an intuitive and simple API for encryption/decryption</description>
-  <url>https://github.com/compilit/compilit-commons/cryptography-core</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/cryptography-core</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/cryptography-core.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/cryptography-core.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/cryptography-core</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/cryptography-core</url>
   </scm>
 
   <dependencies>

@@ -13,12 +13,10 @@
   <name>Compilit - CQ(E)RS mediator Core</name>
   <artifactId>cqers-mediator-core</artifactId>
   <description>An implementation of the mediator pattern while applying CQRS with added Events</description>
-  <url>https://github.com/compilit/compilit-commons/cqers-mediator-core</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/cqers-mediator-core</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/cqers-mediator-core.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/cqers-mediator-core.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/cqers-mediator-core</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/cqers-mediator-core</url>
   </scm>
 
   <dependencies>

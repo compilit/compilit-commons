@@ -13,12 +13,10 @@
   <name>Compilit - Cryptography Spring extension</name>
   <artifactId>cryptography-spring</artifactId>
   <description>An extension of the core cryptography package to easily bootstrap the services</description>
-  <url>https://github.com/compilit/compilit-commons/cryptography-spring</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/cryptography-spring</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/cryptography-spring.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/cryptography-spring.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/cryptography-spring</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/cryptography-spring</url>
   </scm>
 
   <dependencies>

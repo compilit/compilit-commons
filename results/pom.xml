@@ -15,12 +15,10 @@
   <description>A small package that enables you to encapsulate and propagate processing/validation
     results with their corresponding message and status.
   </description>
-  <url>https://github.com/compilit/compilit-commons/results</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/results</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/results.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/results.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/results</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/results</url>
   </scm>
 
   <dependencies>

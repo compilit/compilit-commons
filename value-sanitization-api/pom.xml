@@ -12,12 +12,10 @@
   <name>Compilit - Value sanitization API</name>
   <artifactId>value-sanitization-api</artifactId>
   <description>The API for the corresponding value sanitization core package</description>
-  <url>https://github.com/compilit/compilit-commons/value-sanitization-api</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/value-sanitization-api</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/value-sanitization-api.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/value-sanitization-api.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/value-sanitization-api</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/value-sanitization-api</url>
   </scm>
 
 </project>

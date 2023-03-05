@@ -14,12 +14,10 @@
   <artifactId>validation-api</artifactId>
   <description>The API for the corresponding Validation Core library.
   </description>
-  <url>https://github.com/compilit/compilit-commons/validation-api</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/validation-api</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/validation-api.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/validation-api.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/validation-api</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/validation-api</url>
   </scm>
 
   <dependencies>

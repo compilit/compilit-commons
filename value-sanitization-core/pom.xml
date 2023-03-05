@@ -12,11 +12,9 @@
   <name>Compilit - Value sanitization Core</name>
   <artifactId>value-sanitization-core</artifactId>
   <description>A simple package to help clean up the input of your application</description>
-  <url>https://github.com/compilit/compilit-commons/value-sanitization-core</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/value-sanitization-core</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/value-sanitization-core.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/value-sanitization-core.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/value-sanitization-core</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/value-sanitization-core</url>
   </scm>
 </project>

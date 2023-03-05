@@ -13,12 +13,10 @@
   <name>Compilit - Validation Core</name>
   <artifactId>validation-core</artifactId>
   <description>A small package that enables validation of (business) rules through a fluent API.</description>
-  <url>https://github.com/compilit/compilit-commons/validation-core</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/validation-core</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/validation-core.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/validation-core.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/validation-core</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/validation-core</url>
   </scm>
 
   <dependencies>

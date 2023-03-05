@@ -13,11 +13,9 @@
   <artifactId>fuzzy-matching</artifactId>
   <description>A package containing several functions to apply fuzzy matching
   </description>
-  <url>https://github.com/compilit/compilit-commons/fuzzy-matching</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/fuzzy-matching</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/fuzzy-matching.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/fuzzy-matching.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/fuzzy-matching</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/fuzzy-matching</url>
   </scm>
 </project>

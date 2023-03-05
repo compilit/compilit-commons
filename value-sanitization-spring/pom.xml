@@ -12,12 +12,10 @@
   <name>Compilit - Value sanitization Spring</name>
   <artifactId>value-sanitization-spring</artifactId>
   <description>A Spring extension for the value sanitization core and api package</description>
-  <url>https://github.com/compilit/compilit-commons/value-sanitization-spring</url>
+  <url>https://github.com/compilit/compilit-commons/tree/main/value-sanitization-spring</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/value-sanitization-spring.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/value-sanitization-spring.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/value-sanitization-spring</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/value-sanitization-spring</url>
   </scm>
 
   <dependencies>
