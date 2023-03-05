@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>compilit-framework</artifactId>
+    <artifactId>compilit-commons</artifactId>
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
@@ -15,17 +15,17 @@
   <description>A small package that enables you to encapsulate and propagate processing/validation
     results with their corresponding message and status.
   </description>
-  <url>https://github.com/compilit-framework/results</url>
+  <url>https://github.com/compilit/compilit-commons/results</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/results.git</connection>
-    <developerConnection>scm:git@github.com:compilit/results.git</developerConnection>
-    <url>https://github.com/compilit-framework/results</url>
+    <connection>scm:git@github.com:compilit/compilit-commons/results.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons/results.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/results</url>
   </scm>
 
   <dependencies>
     <dependency>
-      <artifactId>functions</artifactId>
+      <artifactId>value-guards</artifactId>
       <groupId>com.compilit</groupId>
     </dependency>
   </dependencies>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.compilit</groupId>
+    <artifactId>compilit-commons</artifactId>
+    <version>0.1.0</version>
+  </parent>
+
+  <name>Compilit - Fuzzy matching</name>
+  <artifactId>fuzzy-matching</artifactId>
+  <description>A package containing several functions to apply fuzzy matching
+  </description>
+  <url>https://github.com/compilit/compilit-commons/fuzzy-matching</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/compilit-commons/fuzzy-matching.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons/fuzzy-matching.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/fuzzy-matching</url>
+  </scm>
+</project>

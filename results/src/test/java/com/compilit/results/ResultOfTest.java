@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import org.junit.jupiter.api.Test;
 
-public class ResultOfTest {
+class ResultOfTest {
 
   @Test
   void resultOf_notFoundException_shouldReturnNotFoundResult() {

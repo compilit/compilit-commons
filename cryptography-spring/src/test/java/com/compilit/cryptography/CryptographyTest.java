@@ -8,10 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootTest(classes = {TestApplication.class, CryptographyConfiguration.class})
-public class CryptographyTest {
+class CryptographyTest {
 
   @Autowired
-  ClassUnderTest testClass;
+  EncryptionTestHelper testClass;
 
   @Autowired
   ApplicationContext applicationContext;

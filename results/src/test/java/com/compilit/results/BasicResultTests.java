@@ -7,7 +7,7 @@ import com.compilit.results.testutil.TestValue;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class BasicResultTests {
+class BasicResultTests {
 
   @Test
   void success_shouldReturnSuccessResult() {

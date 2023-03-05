@@ -30,7 +30,7 @@ public class Dispatchers implements InitializingBean {
   }
 
   @Override
-  public void afterPropertiesSet() throws Exception {
+  public void afterPropertiesSet() {
     instance = this;
   }
 
@@ -42,7 +42,7 @@ public class Dispatchers implements InitializingBean {
    * @param <R>   the return type
    * @return the return value in the form of R
    */
-  public synchronized static <T extends Query<R>, R> R resolve(T query) {
+  public static synchronized <T extends Query<R>, R> R resolve(T query) {
     return instance.queryDispatcher.dispatch(query);
   }
 
@@ -54,19 +54,18 @@ public class Dispatchers implements InitializingBean {
    * @param <R>     the return type
    * @return the return value in the form of R
    */
-  public synchronized static <T extends Command<R>, R> R apply(T command) {
+  public static synchronized <T extends Command<R>, R> R apply(T command) {
     return instance.commandDispatcher.dispatch(command);
   }
 
   /**
-   * Send the event into the mediator.
-   * If matching handlers are found, apply all these handlers to the event. In a way, all these handlers are
-   * 'subscribed' to this event.
+   * Send the event into the mediator. If matching handlers are found, apply all these handlers to the event. In a way,
+   * all these handlers are 'subscribed' to this event.
    *
    * @param event the event you wish to emit.
    * @param <T>   the specific type of event.
    */
-  public synchronized static <T extends Event> void emit(T event) {
+  public static synchronized <T extends Event> void emit(T event) {
     instance.eventEmitter.emit(event);
   }
 

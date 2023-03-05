@@ -4,17 +4,20 @@ import static com.compilit.validation.Definitions.defineThatIt;
 import static com.compilit.validation.Verifications.verifyThat;
 import static com.compilit.validation.Verifications.verifyThatIt;
 import static com.compilit.validation.api.predicates.ObjectPredicate.isA;
-import static com.compilit.validation.api.predicates.StringPredicate.*;
+import static com.compilit.validation.api.predicates.StringPredicate.contains;
+import static com.compilit.validation.api.predicates.StringPredicate.hasALengthBetween;
+import static com.compilit.validation.api.predicates.StringPredicate.isAlphabetic;
+import static com.compilit.validation.api.predicates.StringPredicate.isNotNumeric;
 
 import com.compilit.validation.api.Messages;
 import com.compilit.validation.api.Rule;
-import com.compilit.validation.api.predicates.StringPredicate;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import testutil.AbstractTestWithContext;
 import testutil.TestObject;
 
+//todo: remove or refactor
 class ApiUsageExampleTests extends AbstractTestWithContext {
 
   private static final String FAIL_MESSAGE = "I am error";

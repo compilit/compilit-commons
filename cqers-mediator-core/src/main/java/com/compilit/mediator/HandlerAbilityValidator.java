@@ -1,21 +1,22 @@
 package com.compilit.mediator;
 
-import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.function.Predicate;
 import com.compilit.mediator.api.CommandHandler;
 import com.compilit.mediator.api.EventHandler;
 import com.compilit.mediator.api.QueryHandler;
 import com.compilit.mediator.api.Request;
 import com.compilit.mediator.api.RequestHandler;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.function.Predicate;
 
 final class HandlerAbilityValidator {
 
   private static final String EVENT_PATTERN = ".*<%s>";
   private static final String REQUEST_PATTERN = ".*<%s,.*>";
+
   private HandlerAbilityValidator() {}
 
-  public static Predicate<RequestHandler<?,?>> handlersMatchingRequest(Class<? extends Request>  requestClass) {
+  static Predicate<RequestHandler<?, ?>> handlersMatchingRequest(Class<? extends Request> requestClass) {
     return requestHandler -> {
       var requestHandlerClass = requestHandler.getClass();
       var commandHandlerName = CommandHandler.class.getName();
@@ -39,8 +40,8 @@ final class HandlerAbilityValidator {
   }
 
   private static Predicate<String> namesContainingOneOf(String commandHandlerName,
-                                                      String queryHandlerName,
-                                                      String eventHandlerName) {
+                                                        String queryHandlerName,
+                                                        String eventHandlerName) {
     return interfaceName -> interfaceName.contains(commandHandlerName)
       || interfaceName.contains(queryHandlerName)
       || interfaceName.contains(eventHandlerName);

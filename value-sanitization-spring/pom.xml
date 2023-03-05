@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.compilit</groupId>
+    <artifactId>compilit-commons</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <name>Compilit - Value sanitization Spring</name>
+  <artifactId>value-sanitization-spring</artifactId>
+  <description>A Spring extension for the value sanitization core and api package</description>
+  <url>https://github.com/compilit/compilit-commons/value-sanitization-spring</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/compilit-commons/value-sanitization-spring.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons/value-sanitization-spring.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/value-sanitization-spring</url>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.compilit</groupId>
+      <artifactId>value-sanitization-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.compilit</groupId>
+      <artifactId>value-sanitization-core</artifactId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-aop</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Test dependencies -->
+    <dependency>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

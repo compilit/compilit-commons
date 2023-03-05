@@ -1,12 +1,22 @@
 package com.compilit.validation.api.predicates;
 
-import static com.compilit.validation.Definitions.*;
-import static com.compilit.validation.Verifications.*;
-import static com.compilit.validation.api.predicates.StringPredicate.*;
+import static com.compilit.validation.Definitions.defineThatIt;
+import static com.compilit.validation.Verifications.verifyThat;
+import static com.compilit.validation.api.predicates.StringPredicate.contains;
+import static com.compilit.validation.api.predicates.StringPredicate.containsOnly;
+import static com.compilit.validation.api.predicates.StringPredicate.doesNotContain;
+import static com.compilit.validation.api.predicates.StringPredicate.hasALengthBetween;
+import static com.compilit.validation.api.predicates.StringPredicate.hasALengthOf;
+import static com.compilit.validation.api.predicates.StringPredicate.isAlphabetic;
+import static com.compilit.validation.api.predicates.StringPredicate.isEqualTo;
+import static com.compilit.validation.api.predicates.StringPredicate.isNotAlphabetic;
+import static com.compilit.validation.api.predicates.StringPredicate.isNotNull;
+import static com.compilit.validation.api.predicates.StringPredicate.isNotNullEmptyOrBlank;
+import static com.compilit.validation.api.predicates.StringPredicate.isNotNumeric;
+import static com.compilit.validation.api.predicates.StringPredicate.isNullEmptyOrBlank;
+import static com.compilit.validation.api.predicates.StringPredicate.isNumeric;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import com.compilit.validation.Definitions;
-import com.compilit.validation.Verifications;
 import com.compilit.validation.api.Rule;
 import java.util.List;
 import java.util.function.Supplier;
@@ -23,7 +33,10 @@ class StringPredicateBuilderTests {
   public static Stream<Arguments> validTestCases() {
     return Stream.of(
       arguments(defineThatIt(isEqualTo(TestValue.TEST_CONTENT)).otherwiseReport("failure"), TestValue.TEST_CONTENT),
-      arguments(defineThatIt(contains(TestValue.TEST_CONTENT, TestValue.TEST_CONTENT)).otherwiseReport("failure"), TestValue.TEST_CONTENT),
+      arguments(
+        defineThatIt(contains(TestValue.TEST_CONTENT, TestValue.TEST_CONTENT)).otherwiseReport("failure"),
+        TestValue.TEST_CONTENT
+      ),
       arguments(defineThatIt(doesNotContain("?")).otherwiseReport("failure"), TestValue.TEST_CONTENT),
       arguments(
         defineThatIt(hasALengthOf(TestValue.TEST_CONTENT.length()).and(contains("t"))).otherwiseReport("failure"),
@@ -49,7 +62,10 @@ class StringPredicateBuilderTests {
       arguments(defineThatIt(isEqualTo("?")).otherwiseReport("failure"), TestValue.TEST_CONTENT),
       arguments(defineThatIt(contains("?", "bla")).otherwiseReport("failure"), TestValue.TEST_CONTENT),
       arguments(defineThatIt(contains("?")).otherwiseReport("failure"), TestValue.TEST_CONTENT),
-      arguments(defineThatIt(doesNotContain(TestValue.TEST_CONTENT, TestValue.TEST_CONTENT)).otherwiseReport("failure"), TestValue.TEST_CONTENT),
+      arguments(
+        defineThatIt(doesNotContain(TestValue.TEST_CONTENT, TestValue.TEST_CONTENT)).otherwiseReport("failure"),
+        TestValue.TEST_CONTENT
+      ),
       arguments(defineThatIt(hasALengthOf(123).and(contains("t"))).otherwiseReport("failure"), TestValue.TEST_CONTENT),
       arguments(defineThatIt(hasALengthBetween(100).and(200)).otherwiseReport("failure"), TestValue.TEST_CONTENT),
       arguments(defineThatIt(isNotAlphabetic()).otherwiseReport("failure"), TestValue.TEST_CONTENT),

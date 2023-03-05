@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>compilit-framework</artifactId>
+    <artifactId>compilit-commons</artifactId>
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
@@ -14,12 +14,12 @@
   <artifactId>logging-spring</artifactId>
   <description>A package which will allow you to add simple (non-structured) log statements to your methods
   </description>
-  <url>https://github.com/compilit-framework/logging-spring</url>
+  <url>https://github.com/compilit/compilit-commons/logging-spring</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/logging-spring.git</connection>
-    <developerConnection>scm:git@github.com:compilit/logging-spring.git</developerConnection>
-    <url>https://github.com/compilit-framework/logging-spring</url>
+    <connection>scm:git@github.com:compilit/compilit-commons/logging-spring.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons/logging-spring.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/logging-spring</url>
   </scm>
 
   <dependencies>

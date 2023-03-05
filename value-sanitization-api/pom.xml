@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.compilit</groupId>
+    <artifactId>compilit-commons</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <name>Compilit - Value sanitization API</name>
+  <artifactId>value-sanitization-api</artifactId>
+  <description>The API for the corresponding value sanitization core package</description>
+  <url>https://github.com/compilit/compilit-commons/value-sanitization-api</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/compilit-commons/value-sanitization-api.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons/value-sanitization-api.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/value-sanitization-api</url>
+  </scm>
+
+</project>

@@ -1,4 +1,4 @@
-# Compilit framework
+# Compilit commons
 
 These libraries are all written by me whenever I encountered some boilerplate or (mildly) complex code which I knew I
 had to write again sometime. They are well-tested and production-ready and contain minimal documentation to get you

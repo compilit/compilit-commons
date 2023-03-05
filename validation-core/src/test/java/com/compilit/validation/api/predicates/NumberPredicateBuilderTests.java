@@ -1,14 +1,20 @@
 package com.compilit.validation.api.predicates;
 
-import static com.compilit.validation.Definitions.*;
-import static com.compilit.validation.Verifications.*;
-import static com.compilit.validation.api.predicates.NumberPredicate.*;
+import static com.compilit.validation.Definitions.defineThatIt;
+import static com.compilit.validation.Verifications.verifyThat;
+import static com.compilit.validation.api.predicates.NumberPredicate.isAnIntegerBetween;
+import static com.compilit.validation.api.predicates.NumberPredicate.isAnIntegerContaining;
+import static com.compilit.validation.api.predicates.NumberPredicate.isAnIntegerEqualTo;
+import static com.compilit.validation.api.predicates.NumberPredicate.isAnIntegerNotContaining;
+import static com.compilit.validation.api.predicates.NumberPredicate.isAnIntegerNotEqualTo;
+import static com.compilit.validation.api.predicates.NumberPredicate.isAnIntegerWithAmountOfDigits;
+import static com.compilit.validation.api.predicates.NumberPredicate.isNotNull;
 
-import com.compilit.validation.Definitions;
 import com.compilit.validation.Verifications;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+//todo: refactor
 class NumberPredicateBuilderTests {
 
   @Test

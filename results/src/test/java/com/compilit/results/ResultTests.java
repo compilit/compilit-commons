@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.compilit.results.assertions.ResultAssertions;
 import com.compilit.results.testutil.TestValue;
-import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 class ResultTests {
@@ -41,7 +40,8 @@ class ResultTests {
 
     ResultAssertions.assertThat(actual).isValidSuccessResult()
                     .hasContent();
-    assertThat(actual.getContents(x -> x.orElse(new ArrayList<>())).size()).isEqualTo(3);
+
+    assertThat(actual.getContents().orElseThrow()).hasSize(3);
   }
 
   @Test
@@ -63,7 +63,7 @@ class ResultTests {
     var contentsOne = TestValue.TEST_CONTENT + 1;
     var contentsTwo = TestValue.TEST_CONTENT + 2;
     var contentsThree = TestValue.TEST_CONTENT + 3;
-    var resultOne = Result.<String>success(contentsOne);
+    var resultOne = Result.success(contentsOne);
     var resultTwo = Result.success(contentsTwo);
     var resultThree = Result.success(contentsThree);
     var actual = resultOne.mergeWith(resultTwo, resultThree);

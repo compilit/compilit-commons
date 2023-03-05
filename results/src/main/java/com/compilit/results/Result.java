@@ -1,8 +1,8 @@
 package com.compilit.results;
 
-import static com.compilit.functions.FunctionResultGuards.orNull;
+import static com.compilit.guards.ValueGuards.orNull;
 
-import com.compilit.functions.FunctionResultGuards;
+import com.compilit.guards.ValueGuards;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -64,6 +64,9 @@ public interface Result<T> {
   /**
    * throw the specified exception with the result message if the result was unsuccessful.
    *
+   * @param <E>               the type of exception.
+   * @param exceptionSupplier the supplier which supplies the exception you wish to throw in case of an unsuccessful
+   *                          result.
    * @return a successful result
    */
   default <E extends RuntimeException> Result<T> orElseThrow(Supplier<E> exceptionSupplier) {
@@ -237,7 +240,7 @@ public interface Result<T> {
    */
   default Result<T> orElse(Supplier<Result<T>> supplier) {
     if (isUnsuccessful()) {
-      return FunctionResultGuards.orDefault(supplier, errorOccurred(Messages.UNSUCCESSFUL_RESULT));
+      return ValueGuards.orDefault(supplier, errorOccurred(Messages.UNSUCCESSFUL_RESULT));
     }
     return this;
   }
@@ -258,7 +261,7 @@ public interface Result<T> {
    * If the result was successful and has contents, performs the given consumer on the contents, otherwise performs the
    * given runnable.
    *
-   * @param consumer      the consumer to be performed on the contents, if a value is present
+   * @param consumer the consumer to be performed on the contents, if a value is present
    * @param runnable the runnable to be performed, if no value is present
    */
   default void onSuccessOrElse(Consumer<? super T> consumer, Runnable runnable) {
@@ -267,6 +270,23 @@ public interface Result<T> {
     } else {
       runnable.run();
     }
+  }
+
+  /**
+   * Merge the current result with other results and get a list of all contents of the passed results if all results
+   * were successful. Returns a SuccessResult if, and only if all other results were successful. In case of a summed up
+   * unsuccessful result, the message will contain the error message of each underlying unsuccessful result
+   *
+   * @param result  the result you wish to sum with others.
+   * @param results the additional results you wish to sum with others.
+   * @return Result containing a List of T.
+   */
+  default Result<List<T>> mergeWith(Result<T> result, Result<T>... results) {
+    var resultList = new ArrayList<Result<T>>();
+    resultList.add(this);
+    resultList.addAll(Arrays.asList(results));
+    ContinuedResultCombiner<T> resultCombiner = getContinuedResultCombiner(result, resultList);
+    return resultCombiner.merge();
   }
 
   /**
@@ -401,8 +421,9 @@ public interface Result<T> {
     try {
       var result = supplier.get();
       //todo: check if this works for both successful and failed results
-      if (result instanceof Result<?> r)
+      if (result instanceof Result<?> r) {
         return Result.transform(r);
+      }
       return Result.success(result);
     } catch (NotFoundException notFoundException) {
       return Result.notFound(notFoundException.getMessage());
@@ -410,7 +431,7 @@ public interface Result<T> {
       return Result.unauthorized(unauthorizedException.getMessage());
     } catch (UnprocessableException unprocessableException) {
       return Result.unprocessable(unprocessableException.getMessage());
-    } catch (Throwable defaultException) {
+    } catch (Exception defaultException) {
       return Result.errorOccurred(defaultException.getMessage());
     }
   }
@@ -438,8 +459,8 @@ public interface Result<T> {
   }
 
   /**
-   * Transforms an existing Result into another one while retaining the status. Works as an adapter. If the contents of the incoming Result are incompatible with the expected Result the content will be
-   * lost.
+   * Transforms an existing Result into another one while retaining the status. Works as an adapter. If the contents of
+   * the incoming Result are incompatible with the expected Result the content will be lost.
    *
    * @param result the existing Result.
    * @param <T>    the content type of the new Result.
@@ -448,8 +469,9 @@ public interface Result<T> {
   static <T> Result<T> transform(Result<?> result) {
     if (result.hasContents()) {
       T contents = orNull((Supplier<? extends T>) () -> (T) result.getContents().get());
-      if (contents != null)
+      if (contents != null) {
         return transform(result, contents);
+      }
     }
     return transform(result, null);
   }
@@ -487,26 +509,10 @@ public interface Result<T> {
   }
 
   /**
-   * Merge the current result with other results and get a list of all contents of the passed results if all results were successful. Returns a SuccessResult if, and
-   * only if all other results were successful. In case of a summed up unsuccessful result, the message will contain the
-   * error message of each underlying unsuccessful result
-
-   * @param result  the result you wish to sum with others.
-   * @param results the additional results you wish to sum with others.
-   * @return Result containing a List of T.
-   */
-  default Result<List<T>> mergeWith(Result<T> result, Result<T>... results) {
-    var resultList = new ArrayList<Result<T>>();
-    resultList.add(this);
-    resultList.addAll(Arrays.asList(results));
-    ContinuedResultCombiner<T> resultCombiner = getContinuedResultCombiner(result, resultList);
-    return resultCombiner.merge();
-  }
-
-  /**
    * Get a list of all contents of the passed results if all results were successful. Returns a SuccessResult if, and
    * only if all other results were successful. In case of a summed up unsuccessful result, the message will contain the
    * error message of each underlying unsuccessful result
+   *
    * @param <T>     the content type of the result.
    * @param result  the result you wish to sum with others.
    * @param results the additional results you wish to sum with others.
@@ -534,24 +540,6 @@ public interface Result<T> {
     return resultCombiner.sum();
   }
 
-  private static <T> ContinuedResultCombiner<T> getContinuedResultCombiner(Result<T> result, Result<T>[] results) {
-    return getContinuedResultCombiner(result, Arrays.asList(results));
-  }
-
-  private static <T> ContinuedResultCombiner<T> getContinuedResultCombiner(Result<T> result, List<Result<T>> results) {
-    var resultList = new ArrayList<>(results);
-    var resultCombiner = Result.combine(Result.<T>success()).with(result);
-    for (var r : resultList) {
-      resultCombiner.and(r);
-    }
-    return resultCombiner;
-  }
-
-  private static <T> ResultCombiner<T> combine(Result<T> result) {
-    return new ResultToListCombiner<>(result);
-  }
-
-
   private Supplier<RuntimeException> resolveExceptionSupplier() {
     return switch (getResultStatus()) {
       case UNPROCESSABLE -> () -> new UnprocessableException(getMessage());
@@ -560,6 +548,23 @@ public interface Result<T> {
       case ERROR_OCCURRED -> () -> new ErrorOccurredException(getMessage());
       default -> RuntimeException::new;
     };
+  }
+
+  private static <T> ContinuedResultCombiner<T> getContinuedResultCombiner(Result<T> result, Result<T>[] results) {
+    return getContinuedResultCombiner(result, Arrays.asList(results));
+  }
+
+  private static <T> ContinuedResultCombiner<T> getContinuedResultCombiner(Result<T> result, List<Result<T>> results) {
+    var resultList = new ArrayList<>(results);
+    var resultCombiner = Result.combine(Result.<T>success()).with(result);
+    for (var r : resultList) {
+      resultCombiner = resultCombiner.and(r);
+    }
+    return resultCombiner;
+  }
+
+  private static <T> ResultCombiner<T> combine(Result<T> result) {
+    return new ResultToListCombiner<>(result);
   }
 
   private static <T> Result<T> resultOf(ResultStatus resultStatus, String message) {

@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>compilit-framework</artifactId>
+    <artifactId>compilit-commons</artifactId>
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
@@ -13,12 +13,12 @@
   <name>Compilit - CQ(E)RS mediator Core</name>
   <artifactId>cqers-mediator-core</artifactId>
   <description>An implementation of the mediator pattern while applying CQRS with added Events</description>
-  <url>https://github.com/compilit-framework/cqers-mediator-core</url>
+  <url>https://github.com/compilit/compilit-commons/cqers-mediator-core</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/cqers-mediator-core.git</connection>
-    <developerConnection>scm:git@github.com:compilit/cqers-mediator-core.git</developerConnection>
-    <url>https://github.com/compilit-framework/cqers-mediator-core</url>
+    <connection>scm:git@github.com:compilit/compilit-commons/cqers-mediator-core.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons/cqers-mediator-core.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/cqers-mediator-core</url>
   </scm>
 
   <dependencies>

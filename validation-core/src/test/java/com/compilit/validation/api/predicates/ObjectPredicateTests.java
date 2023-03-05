@@ -1,11 +1,14 @@
 package com.compilit.validation.api.predicates;
 
-import static com.compilit.validation.Definitions.*;
-import static com.compilit.validation.Verifications.*;
-import static com.compilit.validation.api.predicates.ObjectPredicate.*;
+import static com.compilit.validation.Definitions.defineThatIt;
+import static com.compilit.validation.Verifications.verifyThat;
+import static com.compilit.validation.api.predicates.ObjectPredicate.contains;
+import static com.compilit.validation.api.predicates.ObjectPredicate.isA;
+import static com.compilit.validation.api.predicates.ObjectPredicate.isAn;
+import static com.compilit.validation.api.predicates.ObjectPredicate.isEqualTo;
+import static com.compilit.validation.api.predicates.ObjectPredicate.isNotEqualTo;
+import static com.compilit.validation.api.predicates.ObjectPredicate.isNotNull;
 
-import com.compilit.validation.Definitions;
-import com.compilit.validation.Verifications;
 import java.util.ArrayList;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

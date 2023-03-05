@@ -8,7 +8,7 @@ import com.compilit.domainprimitives.testutil.TestValue;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public final class DomainPrimitiveTests {
+final class DomainPrimitiveTests {
 
   @Test
   void equals_shouldReturnTrue() {
@@ -34,11 +34,13 @@ public final class DomainPrimitiveTests {
 
     Assertions.assertThat(primitive).isEqualTo(object);
 
-    Assertions.assertThat(actualDomainPrimitive).isEqualTo(primitive);
-    Assertions.assertThat(actualDomainPrimitive).isEqualTo(object);
+    Assertions.assertThat(actualDomainPrimitive)
+              .isEqualTo(primitive)
+              .isEqualTo(object);
 
-    Assertions.assertThat(actualOtherDomainPrimitive).isEqualTo(primitive);
-    Assertions.assertThat(actualOtherDomainPrimitive).isEqualTo(object);
+    Assertions.assertThat(actualOtherDomainPrimitive)
+              .isEqualTo(primitive)
+              .isEqualTo(object);
 
     Assertions.assertThat(actualDomainPrimitive).isEqualTo(actualOtherDomainPrimitive);
   }
@@ -46,7 +48,7 @@ public final class DomainPrimitiveTests {
   @Test
   void getValue_shouldReturnDomainPrimitiveValue() {
     var domainPrimitive = new TestDomainPrimitive<>(TestValue.TEST_CONTENT);
-    assertEquals(domainPrimitive.getValue(), TestValue.TEST_CONTENT);
+    assertEquals(TestValue.TEST_CONTENT, domainPrimitive.getValue());
   }
 
   @Test

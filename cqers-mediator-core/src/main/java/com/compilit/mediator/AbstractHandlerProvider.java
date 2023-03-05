@@ -4,13 +4,13 @@ import static com.compilit.mediator.ExceptionMessages.handlerNotFoundMessage;
 import static com.compilit.mediator.ExceptionMessages.multipleHandlersRegisteredMessage;
 import static com.compilit.mediator.HandlerAbilityValidator.handlersMatchingRequest;
 
-import java.util.function.UnaryOperator;
 import com.compilit.mediator.api.Request;
 import com.compilit.mediator.api.RequestHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.UnaryOperator;
 
 abstract class AbstractHandlerProvider {
 
@@ -23,7 +23,7 @@ abstract class AbstractHandlerProvider {
   }
 
   protected <H extends RequestHandler<T, R>, T extends Request, R> List<H> findMatchingHandlers(Class<? extends Request> requestClass,
-                                                                                                List<? extends RequestHandler<?,?>> requestHandlers) {
+                                                                                                List<? extends RequestHandler<?, ?>> requestHandlers) {
 
     return (List<H>) requestHandlers.stream()
                                     .filter(handlersMatchingRequest(requestClass))

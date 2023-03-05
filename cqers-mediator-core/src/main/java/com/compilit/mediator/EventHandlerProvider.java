@@ -1,10 +1,10 @@
 package com.compilit.mediator;
 
-import java.util.function.UnaryOperator;
 import com.compilit.mediator.api.Event;
 import com.compilit.mediator.api.EventHandler;
-import java.util.List;
 import com.compilit.mediator.api.RequestHandler;
+import java.util.List;
+import java.util.function.UnaryOperator;
 
 
 final class EventHandlerProvider extends AbstractHandlerProvider {
@@ -14,6 +14,14 @@ final class EventHandlerProvider extends AbstractHandlerProvider {
   EventHandlerProvider(List<? extends EventHandler<?>> eventHandlers) {
     super();
     this.eventHandlers = eventHandlers;
+  }
+
+  @Override
+  protected <T extends RequestHandler<?, ?>> UnaryOperator<List<T>> validateResult(String requestName) {
+    return list -> {
+      onEmptyListThrowException(list, requestName);
+      return list;
+    };
   }
 
   List<EventHandler<Event>> getEventHandlers(Event event) {
@@ -34,13 +42,5 @@ final class EventHandlerProvider extends AbstractHandlerProvider {
       eventHandlers
     );
     return this.<EventHandler<T>>validateResult(requestName).apply(handlers);
-  }
-
-  @Override
-  protected <T extends RequestHandler<?,?>> UnaryOperator<List<T>> validateResult(String requestName) {
-   return list -> {
-     onEmptyListThrowException(list, requestName);
-     return list;
-   };
   }
 }

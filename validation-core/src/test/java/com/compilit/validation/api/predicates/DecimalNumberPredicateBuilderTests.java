@@ -1,7 +1,14 @@
 package com.compilit.validation.api.predicates;
 
 import static com.compilit.validation.Definitions.defineThatIt;
-import static com.compilit.validation.api.predicates.DecimalNumberPredicate.*;
+import static com.compilit.validation.api.predicates.DecimalNumberPredicate.isADecimalNumberBetween;
+import static com.compilit.validation.api.predicates.DecimalNumberPredicate.isADecimalNumberContaining;
+import static com.compilit.validation.api.predicates.DecimalNumberPredicate.isADecimalNumberContainingOnly;
+import static com.compilit.validation.api.predicates.DecimalNumberPredicate.isADecimalNumberEqualTo;
+import static com.compilit.validation.api.predicates.DecimalNumberPredicate.isADecimalNumberNotContaining;
+import static com.compilit.validation.api.predicates.DecimalNumberPredicate.isADecimalNumberNotEqualTo;
+import static com.compilit.validation.api.predicates.DecimalNumberPredicate.isNotNull;
+import static com.compilit.validation.api.predicates.DecimalNumberPredicate.isNull;
 
 import com.compilit.validation.Verifications;
 import com.compilit.validation.api.Rule;

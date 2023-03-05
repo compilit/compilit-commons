@@ -20,13 +20,14 @@ public class MediatorConfiguration {
   private static final Logger logger = LoggerFactory.getLogger(MediatorConfiguration.class);
 
   @Bean
-  CommandHandlerProvider createCommandHandlerProvider(List<CommandHandler<?,?>> commandHandlers) {
+  CommandHandlerProvider createCommandHandlerProvider(List<CommandHandler<?, ?>> commandHandlers) {
     String message = createMessage(commandHandlers, "CommandHandlers");
     logger.info(message);
     return new CommandHandlerProvider(commandHandlers);
   }
+
   @Bean
-  QueryHandlerProvider createQueryHandlerProvider(List<QueryHandler<?,?>> queryHandlers) {
+  QueryHandlerProvider createQueryHandlerProvider(List<QueryHandler<?, ?>> queryHandlers) {
     String message = createMessage(queryHandlers, "QueryHandlers");
     logger.info(message);
     return new QueryHandlerProvider(queryHandlers);
@@ -64,8 +65,9 @@ public class MediatorConfiguration {
   }
 
   @Bean
-  InitializingBean createInstanceProvider(CommandDispatcher commandDispatcher, QueryDispatcher queryDispatcher, EventEmitter eventEmitter)
-    throws Exception {
+  InitializingBean createInstanceProvider(CommandDispatcher commandDispatcher,
+                                          QueryDispatcher queryDispatcher,
+                                          EventEmitter eventEmitter) {
     return new Dispatchers(commandDispatcher, queryDispatcher, eventEmitter);
   }
 

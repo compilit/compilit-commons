@@ -1,11 +1,20 @@
 package com.compilit.validation.api.predicates;
 
-import static com.compilit.validation.Definitions.*;
-import static com.compilit.validation.Verifications.*;
-import static com.compilit.validation.api.predicates.CollectionPredicate.*;
+import static com.compilit.validation.Definitions.defineThatIt;
+import static com.compilit.validation.Verifications.verifyThat;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isACollectionContaining;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isACollectionContainingAll;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isACollectionNotContaining;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isACollectionNotContainingAll;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isAListContaining;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isAListContainingAll;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isAListNotContaining;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isAListNotContainingAll;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isAnEmptyCollectionOf;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isAnEmptyList;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isNotAnEmptyCollection;
+import static com.compilit.validation.api.predicates.CollectionPredicate.isNotAnEmptyList;
 
-import com.compilit.validation.Definitions;
-import com.compilit.validation.Verifications;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

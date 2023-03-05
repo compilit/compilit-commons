@@ -1,12 +1,12 @@
 package com.compilit.mediator;
 
-import java.util.List;
 import com.compilit.mediator.api.Command;
 import com.compilit.mediator.api.CommandHandler;
 import com.compilit.mediator.api.Event;
 import com.compilit.mediator.api.EventHandler;
 import com.compilit.mediator.api.Query;
 import com.compilit.mediator.api.QueryHandler;
+import java.util.List;
 
 final class RequestMediator implements Mediator {
 

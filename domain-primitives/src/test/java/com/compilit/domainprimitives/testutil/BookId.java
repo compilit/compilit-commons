@@ -4,8 +4,8 @@ import static com.compilit.validation.Definitions.defineThatIt;
 import static com.compilit.validation.api.predicates.ObjectPredicate.isA;
 import static com.compilit.validation.api.predicates.StringPredicate.isNotNullEmptyOrBlank;
 
-import com.compilit.validation.api.Rule;
 import com.compilit.domainprimitives.DomainPrimitive;
+import com.compilit.validation.api.Rule;
 import java.util.function.Predicate;
 
 public class BookId extends DomainPrimitive<String> {

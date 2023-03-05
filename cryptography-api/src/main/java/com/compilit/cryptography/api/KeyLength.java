@@ -5,11 +5,11 @@ public enum KeyLength {
   BITS_192(192),
   BITS_256(256);
 
-  private final int keyLength;
+  private final int value;
 
-  KeyLength(int keyLength) {this.keyLength = keyLength;}
+  KeyLength(int value) {this.value = value;}
 
-  public int getKeyLength() {
-    return keyLength;
+  public int getValue() {
+    return value;
   }
 }

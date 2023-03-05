@@ -1,6 +1,10 @@
 package com.compilit.cryptography;
 
-import static com.compilit.cryptography.CryptographyCoreDefaults.*;
+import static com.compilit.cryptography.CryptographyCoreDefaults.IV_LENGTH;
+import static com.compilit.cryptography.CryptographyCoreDefaults.NONCE_LENGTH;
+import static com.compilit.cryptography.CryptographyCoreDefaults.SALT_LENGTH;
+import static com.compilit.cryptography.CryptographyCoreDefaults.SECRET_KEY_FACTORY_ALGORITHM;
+import static com.compilit.cryptography.CryptographyCoreDefaults.SECRET_KEY_SPEC_ALGORITHM;
 import static org.apache.commons.lang3.SerializationUtils.deserialize;
 import static org.apache.commons.lang3.SerializationUtils.serialize;
 
@@ -106,7 +110,7 @@ public final class CryptoFunctions {
         secret.toCharArray(),
         salt,
         iterationCount,
-        keyLength.getKeyLength()
+        keyLength.getValue()
       );
       var key = factory.generateSecret(keySpec).getEncoded();
       return new SecretKeySpec(key, SECRET_KEY_SPEC_ALGORITHM);

@@ -98,10 +98,10 @@ public interface Cryptographer {
 
   /**
    * Generate a key based on the given arguments. Caution should be used when supplying your own keyLength. Since most
-   * JDK's don't have the 'Unlimited Strength Jurisdiction Policy' enabled by  keyLengths longer than 256 won't
-   * work. If you wish to use longer keys, you'll need to enable the Unlimited Strength Jurisdiction Policy.
+   * JDK's don't have the 'Unlimited Strength Jurisdiction Policy' enabled by  keyLengths longer than 256 won't work. If
+   * you wish to use longer keys, you'll need to enable the Unlimited Strength Jurisdiction Policy.
    *
-   * @param salt           the salt which will be used in combination with the secret to generate the key.
+   * @param salt the salt which will be used in combination with the secret to generate the key.
    * @return a SecretKey which can be used to encrypt data.
    */
   SecretKey generateKey(byte[] salt);

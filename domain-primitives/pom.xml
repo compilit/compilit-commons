@@ -17,10 +17,10 @@
 
   <name>Compilit - Domain primitives</name>
   <parent>
-    <artifactId>compilit-framework</artifactId>
+    <artifactId>compilit-commons</artifactId>
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
-  <url>https://github.com/compilit-framework/domain-primitives</url>
+  <url>https://github.com/compilit/compilit-commons/domain-primitives</url>
 
 </project>

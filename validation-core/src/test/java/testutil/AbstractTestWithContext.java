@@ -10,7 +10,7 @@ public abstract class AbstractTestWithContext {
 
   public synchronized boolean interactAndReturn() {
     testContext.interact();
-    return true;
+    return hasBeenInteractedWith();
   }
 
   public synchronized void reset() {

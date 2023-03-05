@@ -107,7 +107,7 @@ it is successful. This means you can chain result methods through a fluent API. 
 
 ```java
 class ExampleClass {
-  (...)
+  //(...)
 
   Result<String> getResult(Long id) {
     return respository.findById(id)
@@ -129,7 +129,7 @@ Personally I'd advise the following approach:
 import com.compilit.results.Result;
 
 class ExampleClass {
-  (...)
+  //(...)
 
   Result<String> getResult(Long id) {
     return Result.resultOf(() -> {

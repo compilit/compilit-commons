@@ -66,7 +66,7 @@ All components which a user of the API can to interact with:
 - <b>Command:</b> a writing operation which is handled by a single handler. It provides a return
   value option to return
   an Id of a created entity for example. Or you could return
-  a <a href="https://github.com/compilit-framework/results">Result</a>. This return value should
+  a <a href="https://github.com/compilit/compilit-commons/results">Result</a>. This return value should
   never be
   filled by a reading operation.
 - <b>CommandHandler:</b> the handler for a specific Command.

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>compilit-commons</artifactId>
+    <groupId>com.compilit</groupId>
+    <version>${revision}</version>
+  </parent>
+
+  <name>Compilit - Value guards</name>
+  <artifactId>value-guards</artifactId>
+  <description>A package providing some useful but simple functions for dealing with null values and exceptions
+  </description>
+  <url>https://github.com/compilit/compilit-commons/value-guards</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/compilit-commons/value-guards.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons/value-guards.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/value-guards</url>
+  </scm>
+
+</project>

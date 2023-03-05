@@ -1,6 +1,7 @@
 package com.compilit.validation.api.predicates;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -95,7 +96,7 @@ public class CollectionPredicate {
    * @param list list to be checked for containment in this collection
    */
   public static <T> Predicate<List<T>> isAListContainingAll(List<T> list) {
-    return x -> x.containsAll(list);
+    return x -> new HashSet<>(x).containsAll(list);
   }
 
   /**

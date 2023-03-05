@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.compilit</groupId>
-  <artifactId>compilit-framework</artifactId>
+  <artifactId>compilit-commons</artifactId>
   <version>${revision}</version>
-  <name>Compilit - framework pom</name>
-  <url>https://github.com/compilit/framework</url>
-  <description>The framework consists of several useful implementations of often needed techniques and technologies
+  <name>Compilit - commons pom</name>
+  <url>https://github.com/compilit/commons</url>
+  <description>The library consists of several useful implementations of often needed techniques and technologies
   </description>
   <packaging>pom</packaging>
 
@@ -21,6 +21,19 @@
     </developer>
   </developers>
 
+  <scm>
+    <connection>scm:git@github.com:compilit/compilit-commons.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons</url>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://github.com/compilit/compilit-commons/LICENSE</url>
+    </license>
+  </licenses>
+
   <properties>
     <revision>0.1.0</revision>
     <jdk.version>17</jdk.version>
@@ -28,7 +41,7 @@
     <maven.compiler.target>${jdk.version}</maven.compiler.target>
     <assertj.version>3.24.1</assertj.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
-    <jacoco.version>0.8.6</jacoco.version>
+    <jacoco.version>0.8.8</jacoco.version>
     <jakarta.json-api.version>2.1.1</jakarta.json-api.version>
     <junit.jupiter.version>5.9.2</junit.jupiter.version>
     <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
@@ -48,22 +61,12 @@
     <logback-classic.version>1.4.5</logback-classic.version>
   </properties>
 
-  <scm>
-    <connection>scm:git@github.com:compilit/compilit-framework.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-framework.git</developerConnection>
-    <url>https://github.com/compilit/compilit-framework</url>
-  </scm>
-
-  <licenses>
-    <license>
-      <name>MIT</name>
-      <url>https://github.com/compilit/compilit-framework/LICENSE</url>
-    </license>
-  </licenses>
-
   <modules>
     <module>results</module>
     <module>domain-primitives</module>
+    <module>value-guards</module>
+    <module>value-sanitization-core</module>
+    <module>fuzzy-matching</module>
     <module>cryptography-api</module>
     <module>cryptography-core</module>
     <module>cryptography-spring</module>
@@ -72,9 +75,10 @@
     <module>cqers-mediator-spring</module>
     <module>validation-api</module>
     <module>validation-core</module>
-    <module>functions</module>
     <module>logging-api</module>
     <module>logging-spring</module>
+    <module>value-sanitization-api</module>
+    <module>value-sanitization-spring</module>
   </modules>
 
   <build>
@@ -262,7 +266,27 @@
         <version>${revision}</version>
       </dependency>
       <dependency>
-        <artifactId>functions</artifactId>
+        <artifactId>value-guards</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>fuzzy-matching</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>value-sanitization-api</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>value-sanitization-core</artifactId>
+        <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <artifactId>value-sanitization-spring</artifactId>
         <groupId>com.compilit</groupId>
         <version>${revision}</version>
       </dependency>

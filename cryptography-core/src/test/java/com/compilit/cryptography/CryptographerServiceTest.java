@@ -15,17 +15,20 @@ class CryptographerServiceTest {
 
   public static Stream<Arguments> testCases() {
     return Stream.of(
-      Arguments.arguments(new CryptographerConfiguration(secret,
-                                                         KeyLength.BITS_128,
-                                                         1000
+      Arguments.arguments(new CryptographerConfiguration(
+        secret,
+        KeyLength.BITS_128,
+        1000
       )),
-      Arguments.arguments(new CryptographerConfiguration(secret,
-                                                         KeyLength.BITS_192,
-                                                         1000
+      Arguments.arguments(new CryptographerConfiguration(
+        secret,
+        KeyLength.BITS_192,
+        1000
       )),
-      Arguments.arguments(new CryptographerConfiguration(secret,
-                                                         KeyLength.BITS_256,
-                                                         1000
+      Arguments.arguments(new CryptographerConfiguration(
+        secret,
+        KeyLength.BITS_256,
+        1000
       ))
     );
   }

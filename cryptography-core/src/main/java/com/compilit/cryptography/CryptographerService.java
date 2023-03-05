@@ -12,8 +12,7 @@ class CryptographerService implements Cryptographer {
   private final CryptographerConfiguration cryptographerConfiguration;
 
   /**
-   * Create a default instance of the CryptographerService.
-   * Uses a key length of 256 and an iteration count of 65536
+   * Create a default instance of the CryptographerService. Uses a key length of 256 and an iteration count of 65536
    */
   CryptographerService(CryptographerConfiguration cryptographerConfiguration) {
     this.cryptographerConfiguration = cryptographerConfiguration;
@@ -27,12 +26,23 @@ class CryptographerService implements Cryptographer {
 
   @Override
   public <T extends Serializable> T decrypt(String algorithm, byte[] encryptedValue) {
-    return CryptoFunctions.decrypt(algorithm, encryptedValue, cryptographerConfiguration.secret(), cryptographerConfiguration.keyLength(), cryptographerConfiguration.iterationCount());
+    return CryptoFunctions.decrypt(
+      algorithm,
+      encryptedValue,
+      cryptographerConfiguration.secret(),
+      cryptographerConfiguration.keyLength(),
+      cryptographerConfiguration.iterationCount()
+    );
   }
 
   @Override
   public SecretKey generateKey(byte[] salt) {
-    return CryptoFunctions.generateKey(cryptographerConfiguration.secret(), salt, cryptographerConfiguration.keyLength(), cryptographerConfiguration.iterationCount());
+    return CryptoFunctions.generateKey(
+      cryptographerConfiguration.secret(),
+      salt,
+      cryptographerConfiguration.keyLength(),
+      cryptographerConfiguration.iterationCount()
+    );
   }
 
 }

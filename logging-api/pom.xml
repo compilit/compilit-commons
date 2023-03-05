@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>compilit-framework</artifactId>
+    <artifactId>compilit-commons</artifactId>
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
   </parent>
@@ -13,12 +13,12 @@
   <name>Compilit - Logging API</name>
   <artifactId>logging-api</artifactId>
   <description>A set of basis logging annotations which, when implemented, can help you manage your logging statements</description>
-  <url>https://github.com/compilit-framework/logging-api</url>
+  <url>https://github.com/compilit/compilit-commons/logging-api</url>
 
   <scm>
-    <connection>scm:git@github.com:compilit/logging-api.git</connection>
-    <developerConnection>scm:git@github.com:compilit/logging-api.git</developerConnection>
-    <url>https://github.com/compilit-framework/logging-api</url>
+    <connection>scm:git@github.com:compilit/compilit-commons/logging-api.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons/logging-api.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/logging-api</url>
   </scm>
 
   <dependencies>

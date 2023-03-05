@@ -3,15 +3,15 @@ package com.compilit.mediator;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import com.compilit.mediator.api.Command;
 import com.compilit.mediator.api.CommandDispatcher;
 import com.compilit.mediator.api.Event;
 import com.compilit.mediator.api.EventEmitter;
 import com.compilit.mediator.api.Query;
 import com.compilit.mediator.api.QueryDispatcher;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class DispatchersTest {
 

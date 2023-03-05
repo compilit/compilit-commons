@@ -54,11 +54,11 @@ public class TestApplicationContext {
 
   private static void registerHandlerProviders(GenericApplicationContext genericApplicationContext) {
     var commandHandlers = Arrays.stream(genericApplicationContext.getBeanNamesForType(CommandHandler.class)).map(
-      genericApplicationContext::getBean).map(x -> (CommandHandler<?,?>)x).toList();
+      genericApplicationContext::getBean).map(x -> (CommandHandler<?, ?>) x).toList();
     var queryHandlers = Arrays.stream(genericApplicationContext.getBeanNamesForType(QueryHandler.class)).map(
-      genericApplicationContext::getBean).map(x -> (QueryHandler<?,?>)x).toList();
+      genericApplicationContext::getBean).map(x -> (QueryHandler<?, ?>) x).toList();
     var eventHandlers = Arrays.stream(genericApplicationContext.getBeanNamesForType(EventHandler.class)).map(
-      genericApplicationContext::getBean).map(x -> (EventHandler<?>)x).toList();
+      genericApplicationContext::getBean).map(x -> (EventHandler<?>) x).toList();
     genericApplicationContext.registerBean(
       CommandHandlerProvider.class,
       () -> new CommandHandlerProvider(commandHandlers)

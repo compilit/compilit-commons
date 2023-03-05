@@ -1,7 +1,7 @@
 package com.compilit.logging;
 
-import static com.compilit.logging.ClassUnderTest.ERROR_MESSAGE;
-import static com.compilit.logging.ClassUnderTest.MESSAGE;
+import static com.compilit.logging.LogTestHelper.ERROR_MESSAGE;
+import static com.compilit.logging.LogTestHelper.MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import ch.qos.logback.classic.Level;
@@ -16,11 +16,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @EnableAspectJAutoProxy
 @SpringBootTest
-public class LogTest {
+class LogTest {
 
-  private final Logger logger = (Logger) LoggerFactory.getLogger(ClassUnderTest.class);
+  private final Logger logger = (Logger) LoggerFactory.getLogger(LogTestHelper.class);
   @Autowired
-  ClassUnderTest testClass;
+  LogTestHelper testClass;
   private MemoryAppender memoryAppender;
 
   @BeforeEach

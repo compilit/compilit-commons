@@ -4,6 +4,7 @@ import com.compilit.cryptography.api.KeyLength;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
 @EnableCryptography
 @SpringBootApplication
 public class TestApplication {
@@ -13,8 +14,8 @@ public class TestApplication {
   }
 
   @Bean
-  ClassUnderTest createClassUnderTest() {
-    return new ClassUnderTest();
+  EncryptionTestHelper createEncryptionTestHelper() {
+    return new EncryptionTestHelper();
   }
 
   @Bean

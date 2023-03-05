@@ -22,13 +22,13 @@ final class RuleValidationBuilder<T> implements ValidationBuilder<T> {
 
   @Override
   public ContinuingValidationBuilder<T> compliesWith(final Collection<Rule<T>> rules) {
-    var subject = new Subject<T>(rules, value);
+    var subject = new Subject<>(rules, value);
     return new ContinuingRuleValidationBuilder<>(subject);
   }
 
   @Override
   public ArgumentAdder<T> compliesWith(final Rule.WithDualInput<T> rule) {
-    var subject = new Subject<T>(rule, value);
+    var subject = new Subject<>(rule, value);
     return new DualInputArgumentAdder<>(subject);
   }
 

@@ -36,7 +36,7 @@ class Example {
   @LogAfter // logs a message after the method has executed successfully
   @LogOnException // logs a message if an exception occurred
   void someMethod() {
-    (...)
+    //(...)
   }
 }
 ```
@@ -52,7 +52,7 @@ class Example {
 
   @LogBefore(message = "This is a message which will be logged before method execution with log level WARN", level = Level.WARN)
   void someMethod() {
-    (...)
+    //(...)
   }
 }
 ```

@@ -9,9 +9,8 @@ package com.compilit.mediator.api;
 public interface EventEmitter {
 
   /**
-   * Send the event into the mediator.
-   * If matching handlers are found, apply all these handlers to the event. In a way, all these handlers are
-   * 'subscribed' to this event.
+   * Send the event into the mediator. If matching handlers are found, apply all these handlers to the event. In a way,
+   * all these handlers are 'subscribed' to this event.
    *
    * @param event  The specific Event you wish to emit to the Mediator.
    * @param events The extra Events you wish to emit to the Mediator.

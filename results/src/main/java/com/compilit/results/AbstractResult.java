@@ -43,13 +43,16 @@ abstract class AbstractResult<T> implements Result<T> {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof Result) {
-      var result = (Result) obj;
+    if (obj instanceof Result<?> result) {
       return resultStatus.equals(result.getResultStatus())
         && getMessage().equals(result.getMessage())
-        && getContents().equals(getContents());
+        && getContents().equals(result.getContents());
     }
     return false;
   }
 
+  @Override
+  public int hashCode() {
+    return getContents().map(Object::hashCode).orElse(0);
+  }
 }

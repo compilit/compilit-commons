@@ -13,7 +13,7 @@ import com.compilit.results.testutil.TestValue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.junit.jupiter.api.Test;
 
-public class ResultInterfaceTests {
+class ResultInterfaceTests {
 
   @Test
   void isEmpty_emptyResult_shouldReturnTrue() {
@@ -104,7 +104,7 @@ public class ResultInterfaceTests {
     var expected = "123";
     var result = Result.success(input);
     var actual = result.onSuccessMap(String::valueOf);
-    assertThat(actual.getContents().get()).isEqualTo(expected);
+    assertThat(actual.getContents()).contains(expected);
   }
 
   @Test
@@ -120,7 +120,7 @@ public class ResultInterfaceTests {
     var expected = "10";
     var result = Result.success(10);
     var actual = result.onSuccessMap(String::valueOf);
-    assertThat(actual.getContents().get()).isEqualTo(expected);
+    assertThat(actual.getContents()).contains(expected);
   }
 
   @Test
@@ -135,7 +135,7 @@ public class ResultInterfaceTests {
     var expected = "10";
     var result = Result.success(10);
     var actual = result.onSuccessMapOrElse(String::valueOf, () -> "defaultResult");
-    assertThat(actual.getContents().get()).isEqualTo(expected);
+    assertThat(actual.getContents()).contains(expected);
   }
 
   @Test

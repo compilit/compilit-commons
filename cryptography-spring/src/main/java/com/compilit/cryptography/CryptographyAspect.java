@@ -37,8 +37,9 @@ class CryptographyAspect {
         var arguments = joinPoint.getArgs();
         var alteredArguments = modifyArguments(arguments, encryptedValue);
         return joinPoint.proceed(alteredArguments);
+      } else {
+        logger.warn("Unable to encrypt value. Value has to be serializable");
       }
-      else logger.warn("Unable to encrypt value. Value has to be serializable");
     }
     return joinPoint.proceed();
   }
@@ -49,11 +50,11 @@ class CryptographyAspect {
     for (var valueToDecrypt : argumentsToDecrypt) {
       if (valueToDecrypt instanceof String encryptedString) {
         return applyDecryption(joinPoint, encryptedString.getBytes());
-      }
-      else if (valueToDecrypt instanceof byte[] encryptedBytes) {
+      } else if (valueToDecrypt instanceof byte[] encryptedBytes) {
         return applyDecryption(joinPoint, encryptedBytes);
+      } else {
+        logger.warn("Unable to decrypt value. Value has to be a String or byte-array");
       }
-      else logger.warn("Unable to decrypt value. Value has to be a String or byte-array");
     }
     return joinPoint.proceed();
   }
@@ -65,13 +66,15 @@ class CryptographyAspect {
     return joinPoint.proceed(alteredArguments);
   }
 
-  private static Object[] getArgumentsAnnotatedWith(ProceedingJoinPoint joinPoint, Class<? extends Annotation> annotation) {
+  private static Object[] getArgumentsAnnotatedWith(ProceedingJoinPoint joinPoint,
+                                                    Class<? extends Annotation> annotation) {
     MethodSignature methodSig = (MethodSignature) joinPoint.getSignature();
     var parameters = methodSig.getMethod().getParameters();
     List<Integer> argumentIndices = new ArrayList<>();
     for (int index = 0; index < parameters.length; index++) {
-      if (parameters[index].isAnnotationPresent(annotation))
+      if (parameters[index].isAnnotationPresent(annotation)) {
         argumentIndices.add(index);
+      }
     }
     var methodArguments = joinPoint.getArgs();
     var argumentsToDecrypt = new Object[argumentIndices.size()];
@@ -83,15 +86,15 @@ class CryptographyAspect {
 
   private static Object[] modifyArguments(Object[] arguments, Object alteredValue) {
     var alteredArguments = new Object[arguments.length];
-    var indexOfEncryptedValue = 0;
+    var indexOfValueToAlter = 0;
     for (int index = 0; index < alteredArguments.length; index++) {
       if (arguments[index].equals(alteredValue)) {
-        indexOfEncryptedValue = index;
+        indexOfValueToAlter = index;
       } else {
         alteredArguments[index] = arguments[index];
       }
     }
-    alteredArguments[indexOfEncryptedValue] = alteredValue;
+    alteredArguments[indexOfValueToAlter] = alteredValue;
     return alteredArguments;
   }
 }

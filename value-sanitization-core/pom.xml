@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.compilit</groupId>
+    <artifactId>compilit-commons</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <name>Compilit - Value sanitization Core</name>
+  <artifactId>value-sanitization-core</artifactId>
+  <description>A simple package to help clean up the input of your application</description>
+  <url>https://github.com/compilit/compilit-commons/value-sanitization-core</url>
+
+  <scm>
+    <connection>scm:git@github.com:compilit/compilit-commons/value-sanitization-core.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons/value-sanitization-core.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/value-sanitization-core</url>
+  </scm>
+</project>

@@ -1,18 +1,27 @@
 package com.compilit.mediator;
 
-import java.util.function.UnaryOperator;
 import com.compilit.mediator.api.Command;
 import com.compilit.mediator.api.CommandHandler;
-import java.util.List;
 import com.compilit.mediator.api.RequestHandler;
+import java.util.List;
+import java.util.function.UnaryOperator;
 
 final class CommandHandlerProvider extends AbstractHandlerProvider {
 
-  private final List<? extends CommandHandler<?,?>> commandHandlers;
+  private final List<? extends CommandHandler<?, ?>> commandHandlers;
 
   CommandHandlerProvider(List<? extends CommandHandler<?, ?>> commandHandlers) {
     super();
     this.commandHandlers = commandHandlers;
+  }
+
+  @Override
+  protected <T extends RequestHandler<?, ?>> UnaryOperator<List<T>> validateResult(String requestName) {
+    return list -> {
+      onEmptyListThrowException(list, requestName);
+      onListSizeMoreThanOneThrowException(list, requestName);
+      return list;
+    };
   }
 
   <R> CommandHandler<Command<R>, R> getCommandHandler(Command<R> command) {
@@ -32,15 +41,5 @@ final class CommandHandlerProvider extends AbstractHandlerProvider {
       commandHandlers
     );
     return this.<CommandHandler<T, R>>validateResult(requestName).apply(handlers).get(FIRST_ENTRY);
-  }
-
-
-  @Override
-  protected <T extends RequestHandler<?,?>> UnaryOperator<List<T>> validateResult(String requestName) {
-    return list -> {
-      onEmptyListThrowException(list, requestName);
-      onListSizeMoreThanOneThrowException(list, requestName);
-      return list;
-    };
   }
 }
