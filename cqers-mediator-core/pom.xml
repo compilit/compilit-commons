@@ -8,6 +8,7 @@
     <artifactId>compilit-commons</artifactId>
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <name>Compilit - CQ(E)RS mediator Core</name>
@@ -15,9 +16,26 @@
   <description>An implementation of the mediator pattern while applying CQRS with added Events</description>
   <url>https://github.com/compilit/compilit-commons/tree/main/cqers-mediator-core</url>
 
+  <developers>
+    <developer>
+      <email>info@compilit.com</email>
+      <id>harveytherabbit</id>
+      <name>Bastiën Bonsel</name>
+    </developer>
+  </developers>
+
   <scm>
-    <url>https://github.com/compilit/compilit-commons/tree/main/cqers-mediator-core</url>
+    <connection>scm:git@github.com:compilit/compilit-commons.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/tree/main/compilit-commons</url>
   </scm>
+
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://github.com/compilit/compilit-commons/tree/main/LICENSE</url>
+    </license>
+  </licenses>
 
   <dependencies>
     <dependency>

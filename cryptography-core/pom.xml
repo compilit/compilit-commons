@@ -4,11 +4,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-
   <parent>
     <artifactId>compilit-commons</artifactId>
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <name>Compilit - Cryptography</name>
@@ -16,9 +16,26 @@
   <description>A package which provides an intuitive and simple API for encryption/decryption</description>
   <url>https://github.com/compilit/compilit-commons/tree/main/cryptography-core</url>
 
+  <developers>
+    <developer>
+      <email>info@compilit.com</email>
+      <id>harveytherabbit</id>
+      <name>Bastiën Bonsel</name>
+    </developer>
+  </developers>
+
   <scm>
-    <url>https://github.com/compilit/compilit-commons/tree/main/cryptography-core</url>
+    <connection>scm:git@github.com:compilit/compilit-commons.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/tree/main/compilit-commons</url>
   </scm>
+
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://github.com/compilit/compilit-commons/tree/main/LICENSE</url>
+    </license>
+  </licenses>
 
   <dependencies>
     <dependency>

@@ -12,6 +12,7 @@ public final class ValueGuards {
   private ValueGuards() {}
 
   /**
+   * Try to resolve the supplier but return null on any exception
    * @param supplier a potentially throwing supplier
    * @param <T>      the return type
    * @return either the result of the supplier or null
@@ -21,6 +22,7 @@ public final class ValueGuards {
   }
 
   /**
+   * Try to resolve the supplier but return null on any checked exception
    * @param throwingSupplier a potentially checked exception throwing supplier
    * @param <T>              the return type
    * @param <E>              the checked exception
@@ -31,6 +33,7 @@ public final class ValueGuards {
   }
 
   /**
+   * Try to resolve the function but return null on any exception
    * @param function a potentially throwing supplier
    * @param <I>      the input type
    * @param <O>      the return type
@@ -41,9 +44,12 @@ public final class ValueGuards {
   }
 
   /**
+   * Resolve the value of a throwing function. This can be either a checked- or runtime exception. If the function throws an exception, it will return null.
    * @param function a potentially throwing supplier
    * @param <I>      the input type
    * @param <O>      the return type
+   * @param <E>      the exception type
+   * @param value the input of the function
    * @return either the result of the supplier value or null
    */
   public static <I, O, E extends Exception> O orNullThrowing(
@@ -55,6 +61,7 @@ public final class ValueGuards {
 
 
   /**
+   * Try to resolve the result of the provided supplier and in case it throws any exception, it will return the provided default value.
    * @param supplier     a potentially throwing supplier
    * @param defaultValue the default value to return in case of an exception
    * @param <T>          the return type
@@ -72,9 +79,11 @@ public final class ValueGuards {
   }
 
   /**
+   * Try to resolve the result of the provided supplier and in case it throws any (checked) exception, it will return the provided default value.
    * @param supplier     a potentially throwing supplier
    * @param defaultValue the default value to return in case of an exception
    * @param <T>          the return type
+   * @param <E>          the exception type
    * @return either the result of the supplier or the given default value
    */
   public static <T, E extends Exception> T orDefaultThrowing(
@@ -89,10 +98,12 @@ public final class ValueGuards {
   }
 
   /**
+   * Try to resolve the result of the provided function and in case it throws any (checked) exception, it will return the provided default value.
    * @param function     a potentially throwing function
    * @param <I>          the input type
    * @param <O>          the return type
    * @param <E>          the exception type
+   * @param value the input value for the function
    * @param defaultValue the default value you wish to return in case of an exception.
    * @return either result of the function or the given default value
    */
@@ -115,6 +126,8 @@ public final class ValueGuards {
    * @param function a potentially throwing function
    * @param <I>      the input type
    * @param <O>      the return type
+   * @param value the input for the function
+   * @param defaultValue the default value you wish to return in case of an exception
    * @return either result of the function or the given default value
    */
   public static <I, O> O orDefault(

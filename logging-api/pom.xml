@@ -8,6 +8,7 @@
     <artifactId>compilit-commons</artifactId>
     <groupId>com.compilit</groupId>
     <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <name>Compilit - Logging API</name>
@@ -15,11 +16,26 @@
   <description>A set of basis logging annotations which, when implemented, can help you manage your logging statements</description>
   <url>https://github.com/compilit/compilit-commons/logging-api</url>
 
+  <developers>
+    <developer>
+      <email>info@compilit.com</email>
+      <id>harveytherabbit</id>
+      <name>Bastiën Bonsel</name>
+    </developer>
+  </developers>
+
   <scm>
-    <connection>scm:git@github.com:compilit/compilit-commons/logging-api.git</connection>
-    <developerConnection>scm:git@github.com:compilit/compilit-commons/logging-api.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons/logging-api</url>
+    <connection>scm:git@github.com:compilit/compilit-commons.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/tree/main/compilit-commons</url>
   </scm>
+
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://github.com/compilit/compilit-commons/tree/main/LICENSE</url>
+    </license>
+  </licenses>
 
   <dependencies>
     <dependency>

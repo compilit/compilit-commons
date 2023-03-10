@@ -39,6 +39,7 @@ public interface Result<T> {
   }
 
   /**
+   * Find out of the given result is in fact successful or not. A successful result does not imply that it has contents.
    * @return true if the ResultStatus does not equal SUCCESS.
    */
   default boolean isUnsuccessful() {
@@ -46,6 +47,7 @@ public interface Result<T> {
   }
 
   /**
+   * Get the contents of the result, which can in fact be null.
    * @return the nullable contents of the result.
    */
   default T getNullableContents() {
@@ -77,13 +79,15 @@ public interface Result<T> {
   }
 
   /**
-   * @return the contents of the result or throw a NoContentsException with the result message.
+   * Returns the contents of the result or throws a NoContentsException with the result message
+   * @return the contents of the result.
    */
   default T getContentsOrElseThrow() {
     return getContents().orElseThrow(resolveExceptionSupplier());
   }
 
   /**
+   * Returns the contents of the result or throws the specified RuntimeException.
    * @param <E>               any kind of RuntimeException you wish to throw if the contents are null.
    * @param exceptionSupplier the supplier which you can use to define the desired exception in case of an unsuccessful
    *                          result.
@@ -94,12 +98,13 @@ public interface Result<T> {
   }
 
   /**
+   * Get the contents of the result wrapped in an Optional
    * @return the optional contents of the result.
    */
   Optional<T> getContents();
 
   /**
-   * @return the message of the result if present.
+   * @return the message of the result.
    */
   String getMessage();
 

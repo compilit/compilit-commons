@@ -6,11 +6,11 @@
 
   <groupId>com.compilit</groupId>
   <artifactId>compilit-commons</artifactId>
-  <version>${revision}</version>
   <name>Compilit - commons pom</name>
-  <url>https://github.com/compilit/commons</url>
   <description>The library consists of several useful implementations of often needed techniques and technologies
   </description>
+  <url>https://github.com/compilit/compilit-commons</url>
+  <version>${revision}</version>
   <packaging>pom</packaging>
 
   <developers>
@@ -24,42 +24,15 @@
   <scm>
     <connection>scm:git@github.com:compilit/compilit-commons.git</connection>
     <developerConnection>scm:git@github.com:compilit/compilit-commons.git</developerConnection>
-    <url>https://github.com/compilit/compilit-commons</url>
+    <url>https://github.com/compilit/compilit-commons/tree/main/compilit-commons</url>
   </scm>
 
   <licenses>
     <license>
       <name>MIT</name>
-      <url>https://github.com/compilit/compilit-commons/LICENSE</url>
+      <url>https://github.com/compilit/compilit-commons/tree/main/LICENSE</url>
     </license>
   </licenses>
-
-  <properties>
-    <revision>0.1.0</revision>
-    <jdk.version>17</jdk.version>
-    <maven.compiler.source>${jdk.version}</maven.compiler.source>
-    <maven.compiler.target>${jdk.version}</maven.compiler.target>
-    <assertj.version>3.24.1</assertj.version>
-    <commons-lang3.version>3.12.0</commons-lang3.version>
-    <jacoco.version>0.8.8</jacoco.version>
-    <jakarta.json-api.version>2.1.1</jakarta.json-api.version>
-    <junit.jupiter.version>5.9.2</junit.jupiter.version>
-    <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
-    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-    <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
-    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-    <maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
-    <maven-sonar-plugin.version>3.9.1.2184</maven-sonar-plugin.version>
-    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-    <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
-    <mockito.version>4.0.0</mockito.version>
-    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring-boot-dependencies.version>3.0.1</spring-boot-dependencies.version>
-    <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
-    <logback-classic.version>1.4.5</logback-classic.version>
-  </properties>
 
   <modules>
     <module>results</module>
@@ -81,123 +54,31 @@
     <module>value-sanitization-spring</module>
   </modules>
 
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <reuseForks>false</reuseForks>
-        </configuration>
-        <!-- 2.22.0+ Needed for Junit 5 Maven integration -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>${maven-surefire-plugin.version}</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>deploy</goal>
-            </goals>
-            <id>default-deploy</id>
-            <phase>deploy</phase>
-          </execution>
-        </executions>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>${maven-deploy-plugin.version}</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
-          <localCheckout>true</localCheckout>
-          <mavenExecutorId>forked-path</mavenExecutorId>
-          <pushChanges>false</pushChanges>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <artifactId>maven-scm-provider-gitexe</artifactId>
-            <groupId>org.apache.maven.scm</groupId>
-            <version>${maven-scm-provider-gitexe.version}</version>
-          </dependency>
-        </dependencies>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>${maven-release-plugin.version}</version>
-      </plugin>
-      <plugin>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <configuration>
-          <autoReleaseAfterClose>true</autoReleaseAfterClose>
-          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-          <serverId>ossrh</serverId>
-        </configuration>
-        <extensions>true</extensions>
-        <groupId>org.sonatype.plugins</groupId>
-        <version>${nexus-staging-maven-plugin.version}</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <id>attach-sources</id>
-          </execution>
-          <execution>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <id>attach-javadoc</id>
-          </execution>
-        </executions>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>${maven-source-plugin.version}</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <encoding>UTF-8</encoding>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <id>attach-javadoc</id>
-          </execution>
-        </executions>
-        <groupId>org.apache.maven.plugins</groupId>
-        <version>${maven-javadoc-plugin.version}</version>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>flatten-maven-plugin</artifactId>
-        <version>${flatten-maven-plugin.version}</version>
-        <configuration>
-          <pomElements>
-            <name>keep</name>
-          </pomElements>
-        </configuration>
-        <executions>
-          <execution>
-            <id>flatten</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>flatten</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>flatten.clean</id>
-            <phase>clean</phase>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  <properties>
+    <jdk.version>17</jdk.version>
+    <maven.compiler.source>${jdk.version}</maven.compiler.source>
+    <maven.compiler.target>${jdk.version}</maven.compiler.target>
+    <revision>0.1.1</revision>
+    <assertj.version>3.24.1</assertj.version>
+    <commons-lang3.version>3.12.0</commons-lang3.version>
+    <jakarta.json-api.version>2.1.1</jakarta.json-api.version>
+    <junit.jupiter.version>5.9.2</junit.jupiter.version>
+    <mockito.version>4.0.0</mockito.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-boot-dependencies.version>3.0.4</spring-boot-dependencies.version>
+    <logback-classic.version>1.4.5</logback-classic.version>
+    <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+    <jacoco.version>0.8.8</jacoco.version>
+    <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+    <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
+    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+    <maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
+    <maven-sonar-plugin.version>3.9.1.2184</maven-sonar-plugin.version>
+    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
+    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+  </properties>
 
   <dependencies>
     <!-- test dependencies -->
@@ -350,16 +231,98 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <distributionManagement>
-    <repository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <reuseForks>false</reuseForks>
+        </configuration>
+        <!-- 2.22.0+ Needed for Junit 5 Maven integration -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-surefire-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>deploy</goal>
+            </goals>
+            <id>default-deploy</id>
+            <phase>deploy</phase>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-deploy-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+          <localCheckout>true</localCheckout>
+          <mavenExecutorId>forked-path</mavenExecutorId>
+          <pushChanges>false</pushChanges>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <groupId>org.apache.maven.scm</groupId>
+            <version>${maven-scm-provider-gitexe.version}</version>
+          </dependency>
+        </dependencies>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-release-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <configuration>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+          <serverId>ossrh</serverId>
+        </configuration>
+        <extensions>true</extensions>
+        <groupId>org.sonatype.plugins</groupId>
+        <version>${nexus-staging-maven-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <id>attach-sources</id>
+          </execution>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <id>attach-javadoc</id>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-source-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <id>attach-javadoc</id>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-javadoc-plugin.version}</version>
+      </plugin>
+    </plugins>
+  </build>
 
   <profiles>
     <profile>

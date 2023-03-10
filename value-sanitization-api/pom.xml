@@ -7,6 +7,7 @@
     <groupId>com.compilit</groupId>
     <artifactId>compilit-commons</artifactId>
     <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <name>Compilit - Value sanitization API</name>
@@ -14,8 +15,25 @@
   <description>The API for the corresponding value sanitization core package</description>
   <url>https://github.com/compilit/compilit-commons/tree/main/value-sanitization-api</url>
 
+  <developers>
+    <developer>
+      <email>info@compilit.com</email>
+      <id>harveytherabbit</id>
+      <name>Bastiën Bonsel</name>
+    </developer>
+  </developers>
+
   <scm>
-    <url>https://github.com/compilit/compilit-commons/tree/main/value-sanitization-api</url>
+    <connection>scm:git@github.com:compilit/compilit-commons.git</connection>
+    <developerConnection>scm:git@github.com:compilit/compilit-commons.git</developerConnection>
+    <url>https://github.com/compilit/compilit-commons/tree/main/compilit-commons</url>
   </scm>
+
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://github.com/compilit/compilit-commons/tree/main/LICENSE</url>
+    </license>
+  </licenses>
 
 </project>

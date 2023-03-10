@@ -81,6 +81,7 @@ public final class FunctionGuards {
    * @param supplier     a potentially throwing supplier
    * @param defaultValue the default value to return in case of an exception
    * @param <T>          the return type
+   * @param <E>          the exception type
    * @return either the result of the supplier or the given default value
    */
   public static <T, E extends Exception> Supplier<T> orDefaultThrowing(
@@ -94,7 +95,10 @@ public final class FunctionGuards {
    * Try to get the result of the function but return the default value on any exception.
    *
    * @param function a potentially throwing function
+   * @param <I>      the input type
    * @param <O>      the return type
+   * @param <E>          the exception type
+   * @param defaultValue the default value to return in case of an exception
    * @return either result of the function or the given default value
    */
   public static <I, O, E extends Exception> Function<I, O> orDefaultThrowing(
@@ -111,6 +115,7 @@ public final class FunctionGuards {
    * @param function a potentially throwing function
    * @param <I>      the input type
    * @param <O>      the return type
+   * @param defaultValue the default value to return in case of an exception
    * @return either result of the function or the given default value
    */
   public static <I, O> Function<I, O> orDefault(
