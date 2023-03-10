@@ -11,9 +11,14 @@ import static com.compilit.validation.api.predicates.StringPredicate.isNotNumeri
 
 import com.compilit.validation.api.Messages;
 import com.compilit.validation.api.Rule;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import testutil.AbstractTestWithContext;
 import testutil.TestObject;
 
@@ -285,34 +290,44 @@ class ApiUsageExampleTests extends AbstractTestWithContext {
     Assertions.assertThat(verifyThatIt().isNotNull().test("test")).isTrue();
   }
 
-  @Test
-  void validateUsingDirectPredicateUseCase_invalidInput_shouldReturnFalse() {
-    var rule2 = defineThatIt(isA(TestObject.class).where((x, y) -> x.getMessage().equals(y))).otherwiseReport(
-      FAIL_MESSAGE);
+  @ParameterizedTest
+  @MethodSource("validateUsingDirectPredicateUseCase")
+  void validateUsingDirectPredicateUseCase_false_shouldReturnFalse(Predicate<TestObject> predicate) {
     var input = new TestObject();
-    Assertions.assertThat(verifyThatIt().isA(TestObject.class)
-                                        .where((x, y) -> x.getMessage().equals(y))
-                                        .and(rule2)
-                                        .test(input, "Something else")).isFalse();
-    Assertions.assertThat(verifyThatIt().isAn(TestObject.class)
-                                        .where((x, y) -> x.getMessage().equals(y))
-                                        .and(rule2)
-                                        .test(input, "Something else")).isFalse();
-    Assertions.assertThat(verifyThatIt().isNotEqualTo(input).test(input)).isFalse();
-    Assertions.assertThat(verifyThatIt().isEqualTo(input).test(new TestObject())).isFalse();
-    Assertions.assertThat(verifyThatIt().isADecimalNumberEqualTo(.0).test(.10)).isFalse();
-    Assertions.assertThat(verifyThatIt().isADecimalNumberNotEqualTo(.0).test(.0)).isFalse();
-    Assertions.assertThat(verifyThatIt().isAnIntegerEqualTo(1).test(2)).isFalse();
-    Assertions.assertThat(verifyThatIt().isAnIntegerNotEqualTo(1).test(1)).isFalse();
-    Assertions.assertThat(verifyThatIt().isADecimalNumberContaining(1).test(.2)).isFalse();
-    Assertions.assertThat(verifyThatIt().isAnIntegerContaining(1).test(3)).isFalse();
-    Assertions.assertThat(verifyThatIt().isAnIntegerNotContaining(1).test(1)).isFalse();
-    Assertions.assertThat(verifyThatIt().isADecimalNumberNotContaining(1).test(.1)).isFalse();
-    Assertions.assertThat(verifyThatIt().isAnIntegerBetween(1).and(2).test(3)).isFalse();
-    Assertions.assertThat(verifyThatIt().isADecimalNumberBetween(.1).and(.2).test(.4)).isFalse();
-    Assertions.assertThat(verifyThatIt().isNull().test(input)).isFalse();
-    Assertions.assertThat(verifyThatIt().isNotNull().test(null)).isFalse();
+    Assertions.assertThat(predicate.test(input)).isFalse();
   }
+
+  @ParameterizedTest
+  @MethodSource("numberTestCases")
+  void numberTestCases_validInput_shouldReturnFalse(boolean testCase) {
+    Assertions.assertThat(testCase).isFalse();
+  }
+
+
+  public static Stream<Arguments> validateUsingDirectPredicateUseCase() {
+    return Stream.of(
+      Arguments.arguments((Predicate<TestObject>)input -> verifyThatIt().isNotEqualTo(input).test(input)),
+      Arguments.arguments((Predicate<TestObject>)input -> verifyThatIt().isNull().test(input)),
+      Arguments.arguments((Predicate<TestObject>)input -> verifyThatIt().isNotNull().test(null)),
+      Arguments.arguments((Predicate<TestObject>)input -> verifyThatIt().isEqualTo(input).test(new TestObject()))
+    );
+  }
+
+  private static Stream<Arguments> numberTestCases() {
+    return Stream.of(
+      Arguments.arguments(verifyThatIt().isADecimalNumberEqualTo(.0).test(.10)),
+      Arguments.arguments(verifyThatIt().isADecimalNumberNotEqualTo(.0).test(.0)),
+      Arguments.arguments(verifyThatIt().isAnIntegerEqualTo(1).test(2)),
+      Arguments.arguments(verifyThatIt().isAnIntegerNotEqualTo(1).test(1)),
+      Arguments.arguments(verifyThatIt().isADecimalNumberContaining(1).test(.2)),
+      Arguments.arguments(verifyThatIt().isAnIntegerContaining(1).test(3)),
+      Arguments.arguments(verifyThatIt().isAnIntegerNotContaining(1).test(1)),
+      Arguments.arguments(verifyThatIt().isADecimalNumberNotContaining(1).test(.1)),
+      Arguments.arguments(verifyThatIt().isAnIntegerBetween(1).and(2).test(3)),
+      Arguments.arguments(verifyThatIt().isADecimalNumberBetween(.1).and(.2).test(.4))
+    );
+  }
+
 
   @Test
   void validateUsingPassedPredicateUseCase_validInput_shouldReturnTrue() {

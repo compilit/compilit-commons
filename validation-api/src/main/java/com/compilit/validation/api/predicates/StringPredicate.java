@@ -2,6 +2,7 @@ package com.compilit.validation.api.predicates;
 
 import com.compilit.validation.api.ConstraintFinisher;
 import java.util.function.Predicate;
+import org.apache.commons.lang3.StringUtils;
 
 public final class StringPredicate extends ObjectPredicate<String> {
 
@@ -123,6 +124,15 @@ public final class StringPredicate extends ObjectPredicate<String> {
    */
   public static Predicate<String> isNotAlphabetic() {
     return new StringPredicate(x -> x.chars().anyMatch(Character::isDigit));
+  }
+
+  /**
+   * Adds a check if all characters are in fact numeric and/or alphabetic.
+   *
+   * @return Predicate to continue adding rules.
+   */
+  public static Predicate<String> isAlphaNumeric() {
+    return StringUtils::isAlphanumeric;
   }
 
   /**

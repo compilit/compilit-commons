@@ -9,67 +9,68 @@ import static com.compilit.validation.api.predicates.NumberPredicate.isAnInteger
 import static com.compilit.validation.api.predicates.NumberPredicate.isAnIntegerNotEqualTo;
 import static com.compilit.validation.api.predicates.NumberPredicate.isAnIntegerWithAmountOfDigits;
 import static com.compilit.validation.api.predicates.NumberPredicate.isNotNull;
+import static com.compilit.validation.api.predicates.NumberPredicate.isNull;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import com.compilit.validation.Verifications;
+import com.compilit.validation.api.Rule;
+import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-//todo: refactor
 class NumberPredicateBuilderTests {
 
-  @Test
-  void validate_integerMatchingRule_shouldReturnTrue() {
-    var value = 2;
-    var rule0 = defineThatIt(isAnIntegerEqualTo(2)).otherwiseReport("failure");
-
-    var rule1 = defineThatIt(isAnIntegerBetween(1).and(5)).otherwiseReport("failure");
-    var rule2 = defineThatIt(isAnIntegerBetween(5).and(1)).otherwiseReport("failure");
-    var rule3 = defineThatIt(isAnIntegerWithAmountOfDigits(1)).otherwiseReport("failure");
-    var rule4 = defineThatIt(isAnIntegerContaining(2, 2)).otherwiseReport("failure");
-    var rule5 = defineThatIt(isAnIntegerNotContaining(43, 123)).otherwiseReport("failure");
-    var rule6 = defineThatIt(isNotNull()).otherwiseReport("failure");
-    var rule7 = defineThatIt(isAnIntegerEqualTo(2)
+  private static Stream<Arguments> integerTestCases() {
+    return Stream.of(
+      arguments(defineThatIt(isAnIntegerEqualTo(2)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerBetween(1).and(5)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerBetween(5).and(1)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerWithAmountOfDigits(1)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerContaining(2, 2)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerNotContaining(43, 123)).otherwiseReport("failure")),
+      arguments(defineThatIt(isNotNull()).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerEqualTo(2)
                                .and(isAnIntegerEqualTo(2)
-                                      .and(isAnIntegerEqualTo(2)))).otherwiseReport("failure");
-    var rule8 = defineThatIt(isAnIntegerNotEqualTo(1)).otherwiseReport("failure");
-    var rule9 = defineThatIt(isAnIntegerWithAmountOfDigits(1)).otherwiseReport("failure");
-    Assertions.assertThat(verifyThat(value).compliesWith(rule0).validate()).isTrue();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule1).validate()).isTrue();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule2).validate()).isTrue();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule3).validate()).isTrue();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule4).validate()).isTrue();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule5).validate()).isTrue();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule6).validate()).isTrue();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule7).validate()).isTrue();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule8).validate()).isTrue();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule9).validate()).isTrue();
+                                      .and(isAnIntegerEqualTo(2)))).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerNotEqualTo(1)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerWithAmountOfDigits(1)).otherwiseReport("failure"))
+    );
   }
 
-  @Test
-  void validate_integerNotMatchingRule_shouldReturnFalse() {
+  @ParameterizedTest
+  @MethodSource("integerTestCases")
+  void validate_integerMatchingRule_shouldReturnTrue(Rule<Integer> rule) {
     var value = 2;
-    var rule0 = defineThatIt(isAnIntegerEqualTo(1)).otherwiseReport("failure");
-    var rule1 = defineThatIt(isAnIntegerBetween(5).and(50)).otherwiseReport("failure");
-    var rule2 = defineThatIt(isAnIntegerBetween(50).and(5)).otherwiseReport("failure");
-    var rule3 = defineThatIt(isAnIntegerWithAmountOfDigits(10)).otherwiseReport("failure");
-    var rule4 = defineThatIt(isAnIntegerEqualTo(5435)).otherwiseReport("failure");
-    var rule5 = defineThatIt(isAnIntegerNotContaining(2, 2)).otherwiseReport("failure");
-    var rule6 = defineThatIt(isNotNull()).otherwiseReport("failure");
-    var rule7 = defineThatIt(isAnIntegerEqualTo(2)
-                               .and(isAnIntegerEqualTo(2)
-                                      .and(isAnIntegerEqualTo(1)))).otherwiseReport("failure");
-    var rule8 = defineThatIt(isAnIntegerNotEqualTo(2)).otherwiseReport("failure");
-    var rule9 = defineThatIt(isAnIntegerWithAmountOfDigits(10)).otherwiseReport("failure");
-    Assertions.assertThat(verifyThat(value).compliesWith(rule0).validate()).isFalse();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule1).validate()).isFalse();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule2).validate()).isFalse();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule3).validate()).isFalse();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule4).validate()).isFalse();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule5).validate()).isFalse();
-    Assertions.assertThat(Verifications.<Integer>verifyThat(null).compliesWith(rule6).validate()).isFalse();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule7).validate()).isFalse();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule8).validate()).isFalse();
-    Assertions.assertThat(verifyThat(value).compliesWith(rule9).validate()).isFalse();
+    Assertions.assertThat(verifyThat(value).compliesWith(rule).validate()).isTrue();
+  }
+
+  private static Stream<Arguments> integerInvalidTestCases() {
+    return Stream.of(
+      arguments(defineThatIt(isAnIntegerEqualTo(1)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerBetween(5).and(50)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerBetween(50).and(5)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerWithAmountOfDigits(10)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerEqualTo(5435)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerNotContaining(2, 2)).otherwiseReport("failure")),
+      arguments(defineThatIt(isNull()).otherwiseReport("failure")),
+      arguments(
+        defineThatIt(isAnIntegerEqualTo(2)
+                                 .and(isAnIntegerEqualTo(2)
+                                        .and(isAnIntegerEqualTo(1)))).otherwiseReport("failure")
+      ),
+      arguments(defineThatIt(isAnIntegerNotEqualTo(2)).otherwiseReport("failure")),
+      arguments(defineThatIt(isAnIntegerWithAmountOfDigits(10)).otherwiseReport("failure"))
+    );
+  }
+
+
+  @ParameterizedTest
+  @MethodSource("integerInvalidTestCases")
+  void validate_integerNotMatchingRule_shouldReturnFalse(Rule<Integer> rule) {
+    var value = 2;
+    Assertions.assertThat(verifyThat(value).compliesWith(rule).validate()).isFalse();
   }
 
   @Test

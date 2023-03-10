@@ -17,7 +17,6 @@ public abstract class DomainPrimitive<T> {
 
   private final T value;
   private final String name;
-
   private final List<Rule<T>> rules = new ArrayList<>();
 
 
