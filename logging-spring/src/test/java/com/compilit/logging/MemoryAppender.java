@@ -5,6 +5,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 class MemoryAppender extends ListAppender<ILoggingEvent> {
@@ -16,6 +17,12 @@ class MemoryAppender extends ListAppender<ILoggingEvent> {
   public boolean contains(String string, Level level) {
     return this.list.stream()
                     .anyMatch(event -> event.toString().contains(string)
+                      && event.getLevel().equals(level));
+  }
+
+  public boolean contains(Predicate<String> stringPredicate, Level level) {
+    return this.list.stream()
+                    .anyMatch(event -> stringPredicate.test(event.toString())
                       && event.getLevel().equals(level));
   }
 

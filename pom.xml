@@ -52,6 +52,7 @@
     <module>logging-spring</module>
     <module>value-sanitization-api</module>
     <module>value-sanitization-spring</module>
+    <module>aop-utils</module>
   </modules>
 
   <properties>
@@ -130,6 +131,11 @@
       <dependency>
         <artifactId>results</artifactId>
         <groupId>com.compilit</groupId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.compilit</groupId>
+        <artifactId>aop-utils</artifactId>
         <version>${revision}</version>
       </dependency>
       <dependency>

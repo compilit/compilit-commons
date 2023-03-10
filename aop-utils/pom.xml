@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
-    <artifactId>compilit-commons</artifactId>
     <groupId>com.compilit</groupId>
+    <artifactId>compilit-commons</artifactId>
     <version>${revision}</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <name>Compilit - Logging Spring extension</name>
-  <artifactId>logging-spring</artifactId>
-  <description>A package which will allow you to add simple (non-structured) log statements to your methods
-  </description>
-  <url>https://github.com/compilit/compilit-commons/tree/main/logging-spring</url>
+  <artifactId>aop-utils</artifactId>
+  <name>Compilit - AOP utilities</name>
+  <description>An extension of Spring AOP, containing several useful convenience methods</description>
+  <url>https://github.com/compilit/compilit-commons/tree/main/aop-utils</url>
 
   <developers>
     <developer>
@@ -44,25 +41,6 @@
       <groupId>org.springframework.boot</groupId>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>com.compilit</groupId>
-      <artifactId>aop-utils</artifactId>
-    </dependency>
-    <dependency>
-      <artifactId>logging-api</artifactId>
-      <groupId>com.compilit</groupId>
-    </dependency>
-
-    <!-- Test dependencies   -->
-    <dependency>
-      <artifactId>logback-classic</artifactId>
-      <groupId>ch.qos.logback</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <groupId>org.springframework.boot</groupId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
+
 </project>

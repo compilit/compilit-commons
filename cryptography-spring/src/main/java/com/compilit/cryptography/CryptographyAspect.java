@@ -1,5 +1,7 @@
 package com.compilit.cryptography;
 
+import static com.compilit.reflection.AnnotationUtils.getArgumentsAnnotatedWith;
+
 import com.compilit.cryptography.api.Cryptographer;
 import com.compilit.cryptography.api.Decrypt;
 import com.compilit.cryptography.api.Decryptable;
@@ -30,8 +32,8 @@ class CryptographyAspect {
 
   @Around("@annotation(annotation)")
   public Object encryptArguments(ProceedingJoinPoint joinPoint, Encryptable annotation) throws Throwable {
-    Object[] argumentsToEncrypt = getArgumentsAnnotatedWith(joinPoint, Encrypt.class);
-    for (var valueToEncrypt : argumentsToEncrypt) {
+    var argumentsToEncrypt = getArgumentsAnnotatedWith(joinPoint, Encrypt.class);
+    for (var valueToEncrypt : argumentsToEncrypt.keySet()) {
       if (valueToEncrypt instanceof Serializable serializable) {
         var encryptedValue = cryptographer.encrypt(serializable);
         var arguments = joinPoint.getArgs();
@@ -46,8 +48,8 @@ class CryptographyAspect {
 
   @Around("@annotation(annotation)")
   public Object decryptArguments(ProceedingJoinPoint joinPoint, Decryptable annotation) throws Throwable {
-    Object[] argumentsToDecrypt = getArgumentsAnnotatedWith(joinPoint, Decrypt.class);
-    for (var valueToDecrypt : argumentsToDecrypt) {
+    var argumentsToDecrypt = getArgumentsAnnotatedWith(joinPoint, Decrypt.class);
+    for (var valueToDecrypt : argumentsToDecrypt.keySet()) {
       if (valueToDecrypt instanceof String encryptedString) {
         return applyDecryption(joinPoint, encryptedString.getBytes());
       } else if (valueToDecrypt instanceof byte[] encryptedBytes) {
@@ -64,24 +66,6 @@ class CryptographyAspect {
     var arguments = joinPoint.getArgs();
     var alteredArguments = modifyArguments(arguments, decryptedValue);
     return joinPoint.proceed(alteredArguments);
-  }
-
-  private static Object[] getArgumentsAnnotatedWith(ProceedingJoinPoint joinPoint,
-                                                    Class<? extends Annotation> annotation) {
-    MethodSignature methodSig = (MethodSignature) joinPoint.getSignature();
-    var parameters = methodSig.getMethod().getParameters();
-    List<Integer> argumentIndices = new ArrayList<>();
-    for (int index = 0; index < parameters.length; index++) {
-      if (parameters[index].isAnnotationPresent(annotation)) {
-        argumentIndices.add(index);
-      }
-    }
-    var methodArguments = joinPoint.getArgs();
-    var argumentsToDecrypt = new Object[argumentIndices.size()];
-    for (var index : argumentIndices) {
-      argumentsToDecrypt[index] = methodArguments[index];
-    }
-    return argumentsToDecrypt;
   }
 
   private static Object[] modifyArguments(Object[] arguments, Object alteredValue) {

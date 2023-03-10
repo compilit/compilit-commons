@@ -47,6 +47,10 @@
       <artifactId>cryptography-core</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.compilit</groupId>
+      <artifactId>aop-utils</artifactId>
+    </dependency>
+    <dependency>
       <artifactId>spring-boot-starter-aop</artifactId>
       <groupId>org.springframework.boot</groupId>
       <scope>provided</scope>

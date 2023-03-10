@@ -1,7 +1,10 @@
 package com.compilit.logging;
 
+import static com.compilit.reflection.AnnotationUtils.getArgumentsAnnotatedWith;
+
 import com.compilit.logging.api.Log;
 import com.compilit.logging.api.LogAfter;
+import com.compilit.logging.api.LogArg;
 import com.compilit.logging.api.LogBefore;
 import com.compilit.logging.api.LogOnException;
 import java.util.HashMap;
@@ -62,6 +65,7 @@ public class LogAspect {
   private static Object all(ProceedingJoinPoint joinPoint, Log annotation, Logger logger, String methodName)
     throws Throwable {
     try {
+      logOptionalAnnotatedArguments(logger, joinPoint);
       log(logger, createMessage(annotation.before(), methodName), annotation.level());
       var result = joinPoint.proceed();
       log(logger, createMessage(annotation.after(), methodName), annotation.level());
@@ -79,6 +83,7 @@ public class LogAspect {
                                   boolean rethrow)
     throws Throwable {
     try {
+      logOptionalAnnotatedArguments(logger, joinPoint);
       return joinPoint.proceed();
     } catch (Exception e) {
       logger.error(createMessage(message, methodName, e.getMessage()), e);
@@ -96,6 +101,7 @@ public class LogAspect {
                               Level level)
     throws Throwable {
     var result = joinPoint.proceed();
+    logOptionalAnnotatedArguments(logger, joinPoint);
     log(logger, createMessage(message, methodName), level);
     return result;
   }
@@ -106,8 +112,14 @@ public class LogAspect {
                                String methodName,
                                Level level)
     throws Throwable {
+    logOptionalAnnotatedArguments(logger, joinPoint);
     log(logger, createMessage(message, methodName), level);
     return joinPoint.proceed();
+  }
+
+  private static void logOptionalAnnotatedArguments(Logger logger, ProceedingJoinPoint joinPoint) {
+    Map<Object, LogArg> annotatedArgs = (Map<Object, LogArg>) getArgumentsAnnotatedWith(joinPoint, LogArg.class);
+    annotatedArgs.forEach((argument, annotation) -> log(logger, String.format(annotation.message(), argument), annotation.level()));
   }
 
   private static String createMessage(String message, String... args) {

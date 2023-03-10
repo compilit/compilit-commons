@@ -60,4 +60,12 @@ class LogTest {
     assertThat(memoryAppender.contains(MESSAGE, Level.INFO)).isTrue();
     assertThat(memoryAppender.countEventsForLogger(logger.getName())).isEqualTo(1);
   }
+
+  @Test
+  void log_arguments_shouldLogArguments() {
+    testClass.testArgLogger("test1", "test2");
+    assertThat(memoryAppender.contains(x -> x.contains("test1"), Level.INFO)).isTrue();
+    assertThat(memoryAppender.contains(x -> x.contains("test2"), Level.INFO)).isTrue();
+    assertThat(memoryAppender.countEventsForLogger(logger.getName())).isEqualTo(4);
+  }
 }
