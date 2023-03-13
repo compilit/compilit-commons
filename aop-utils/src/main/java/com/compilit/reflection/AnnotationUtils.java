@@ -12,38 +12,18 @@ public final class AnnotationUtils {
 
   private AnnotationUtils() {}
 
-//  public static Object[] getArgumentsAnnotatedWith(ProceedingJoinPoint joinPoint,
-//                                                    Class<? extends Annotation> annotation) {
-//    MethodSignature methodSig = (MethodSignature) joinPoint.getSignature();
-//    var parameters = methodSig.getMethod().getParameters();
-//    List<Integer> argumentIndices = new ArrayList<>();
-//    for (int index = 0; index < parameters.length; index++) {
-//      if (parameters[index].isAnnotationPresent(annotation)) {
-//        argumentIndices.add(index);
-//      }
-//    }
-//    var methodArguments = joinPoint.getArgs();
-//    var argumentsToDecrypt = new Object[argumentIndices.size()];
-//    for (var index : argumentIndices) {
-//      argumentsToDecrypt[index] = methodArguments[index];
-//    }
-//    return argumentsToDecrypt;
-//  }
-
-  public static Map<Object, ? extends Annotation> getArgumentsAnnotatedWith(ProceedingJoinPoint joinPoint,
-                                                                  Class<? extends Annotation> annotation) {
-
-    MethodSignature methodSig = (MethodSignature) joinPoint.getSignature();
+  public static <T extends Annotation> Map<Object, T> getArgumentsAnnotatedWith(ProceedingJoinPoint joinPoint,
+                                                                                Class<T> annotation) {
+    var methodSig = (MethodSignature) joinPoint.getSignature();
     var parameters = methodSig.getMethod().getParameters();
-    List<Integer> argumentIndices = new ArrayList<>();
+    var argumentIndices = new ArrayList<Integer>();
     for (int index = 0; index < parameters.length; index++) {
       if (parameters[index].isAnnotationPresent(annotation)) {
         argumentIndices.add(index);
       }
     }
     var methodArguments = joinPoint.getArgs();
-//    var arguments = new Object[argumentIndices.size()];
-    var arguments = new HashMap<Object, Annotation>();
+    var arguments = new HashMap<Object, T>();
     for (var index : argumentIndices) {
       arguments.put(methodArguments[index], parameters[index].getAnnotation(annotation));
     }

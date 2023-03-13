@@ -1,0 +1,3 @@
+compilit:
+  logging:
+    rethrow-exceptions: false
